@@ -1,0 +1,30 @@
+    <table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>UserName</th>
+            <th>ProfilePicture</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let Employee of Employees">
+            <td>{{Employee.firstName}}</td>
+            <td>{{Employee.lastName}}</td>
+            <td>{{Employee.email}}</td>
+            <td>{{Employee.userName}}</td>
+            <td>{{Employee.profilePicture}}</td>
+            <td><img class="images" src="C:\Users\ASUS\Desktop\Project\KinderGarten\KinderGartenManagment.Api\KinderGartenManagment.Api\Resources\Images\The Hustle.jpg"/></td>
+            <td>{{Employee.role}}</td>
+            <td>
+                <button type='button' class='btn btn-danger' (click)="Delete(Employee.userName)">
+                    Delete</button>
+                <button type='button' class='btn btn-success' (click)="Edit(Employee.userName)">
+                Edit</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
