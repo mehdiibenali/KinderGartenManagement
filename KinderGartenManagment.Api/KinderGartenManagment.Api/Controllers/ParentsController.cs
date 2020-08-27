@@ -41,6 +41,23 @@ namespace KinderGartenManagment.Api.Controllers
 
             return parent;
         }
+        [HttpGet("SearchByName/{parentsearch}")]
+        public async Task<ActionResult<IEnumerable<Parent>>> SearchByName(string parentsearch)
+        {
+            var result = await this._parentRepository.SearchByName(parentsearch);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+            
+        }
+        [HttpGet("ByEleveId/{eleveId}")]
+        public async Task<IEnumerable<Parent>> GetParentsByEleveId(int eleveId)
+        {
+            var resultListe = await _parentRepository.GetParentsByEleveId(eleveId);
+            return resultListe;
+        }
         [HttpPut("{id}")]
         public async Task<IActionResult> PutParent(int id, ParentViewModel parent)
         {
@@ -69,7 +86,7 @@ namespace KinderGartenManagment.Api.Controllers
                 await _parentRepository.SaveAsync();
                 return await _parentRepository.GetByIdAsync(p.Id);
             }
-            catch (Exception e)
+            catch (Exception e) 
             {
                 throw e;
             }

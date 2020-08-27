@@ -5,6 +5,7 @@ using KinderGartenManagment.Api.Context;
 using KinderGartenManagment.Api.Interfaces.Repositories;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace KinderGartenManagment.Api.Repositories
 {
@@ -17,12 +18,12 @@ namespace KinderGartenManagment.Api.Repositories
         }
         public async Task<IEnumerable<Eleve>> GetAll()
         {
-            return await _context.Eleves.ToListAsync();
+            return await _context.Eleves.Include(c => c.EleveParents).ToListAsync();
         }
 
         public async Task<Eleve> GetByIdAsync(int id)
         {
-            return await _context.Eleves.FindAsync(id);
+            return await _context.Eleves.Include(c => c.EleveGroupes).Include(c => c.EleveParents).FirstOrDefaultAsync(x=>x.Id == id) ;
         }
 
         public async Task InsertAsync(Eleve eleve)

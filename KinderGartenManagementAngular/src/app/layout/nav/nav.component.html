@@ -1,11 +1,33 @@
-<div class='row'>
-    <div class='col-9'></div>
-    <div class="col-3">
-        <div class="col-9">
-        </div>
-        <div class="col-3">
-        <button type='button' class='btn btn-success' (click)="Logout()">
-            Logout</button>
-        </div>
-    </div>
-</div>
+<table style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+    <tr>
+        <td width="1%"></td>
+        <td>
+            <a><i class="nb-menu"></i></a>
+        </td>
+        <td width="5%"></td>
+        <td>
+            <table>
+                <tr>
+                    <td><img src="assets/logo.png" height="75" width="150"></td>
+                    <td>
+                        <h4 font-family="Roboto">Management</h4>
+                    </td>
+                    <td>
+                        <H4 font-family="Roboto">Tool</H4>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td width="7%">
+            <!-- <div *ngIf="user">
+                <form>
+                    <nb-user [picture]="pathProfilePicture" [name]="user?.fullName" [title]="user?.function"
+                        size="middle" [nbContextMenu]="items" nbContextMenuTag="my-context-menu">
+                    </nb-user>
+                </form>
+            </div> -->
+        </td>
+        <td width="2%">
+        </td>
+    </tr>
+</table>

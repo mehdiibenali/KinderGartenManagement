@@ -25,14 +25,12 @@ export class EditemployeeComponent implements OnInit {
     this.username=this._Activatedroute.snapshot.paramMap.get("username");
     this.employeeService.GetByUserName(this.username)
     .subscribe(data => {
-      console.log(data)
       this.user.firstname = data.firstName;
       this.user.lastname = data.lastName;
       this.user.email = data.email;
       this.user.username = data.userName;
       this.user.profilepicture = data.profilePicture;
       this.user.role = data.role;
-      console.log(this.user);
     },
     error => {
       console.log(error);
@@ -68,8 +66,6 @@ export class EditemployeeComponent implements OnInit {
       },
       (error) => {
         this.toastrService.show('Server error', 'Update', { status: 'danger' });
-        console.log(error);
-        console.log(this.user);
       }   
     )
   };

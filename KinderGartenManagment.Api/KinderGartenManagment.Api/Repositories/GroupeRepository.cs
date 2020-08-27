@@ -17,13 +17,13 @@ namespace KinderGartenManagment.Api.Repositories
         }
         public async Task<IEnumerable<Groupe>> GetAll()
         {
-            var t = await _context.Groupes.ToListAsync();
+            var t = await _context.Groupes.Include(c => c.EleveGroupes).ToListAsync();
             return t;
         }
 
         public async Task<Groupe> GetByIdAsync(int id)
         {
-            return await _context.Groupes.FindAsync(id);
+            return await _context.Groupes.Include(c => c.Classe).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task InsertAsync(Groupe groupe)
@@ -46,6 +46,12 @@ namespace KinderGartenManagment.Api.Repositories
         {
             await _context.SaveChangesAsync();
         }
-
+        public async Task<IEnumerable<Groupe>> GetGroupesByEleveId(int eleveId)
+        {
+            return await _context.Groupes
+                .Include(p => p.EleveGroupes)
+                .Where(p => p.EleveGroupes.Select(ep => ep.EleveId).Contains(eleveId))
+                .Include(p => p.Classe).ToListAsync();
+        }
     }
 }

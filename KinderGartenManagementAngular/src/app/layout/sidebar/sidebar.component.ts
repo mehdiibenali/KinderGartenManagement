@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       title: 'Employees',
-      expanded : true,
+      expanded : false,
       children : [
         {
           title : 'EmployeeList',
@@ -25,6 +25,10 @@ export class SidebarComponent implements OnInit {
           link : '/employees/add'
         }
       ]
+    },
+    {
+      title: 'Eleves',
+      link:"/eleves/list"
     }
    ];
   constructor() { }

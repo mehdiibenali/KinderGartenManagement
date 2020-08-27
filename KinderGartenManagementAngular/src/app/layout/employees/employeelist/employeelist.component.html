@@ -16,8 +16,7 @@
             <td>{{Employee.lastName}}</td>
             <td>{{Employee.email}}</td>
             <td>{{Employee.userName}}</td>
-            <td>{{Employee.profilePicture}}</td>
-            <td><img class="images" src="C:\Users\ASUS\Desktop\Project\KinderGarten\KinderGartenManagment.Api\KinderGartenManagment.Api\Resources\Images\The Hustle.jpg"/></td>
+            <td><img [src]="Employee.profilePicture"  style="border-radius: 50%;height: 40;width: 60px;"></td>
             <td>{{Employee.role}}</td>
             <td>
                 <button type='button' class='btn btn-danger' (click)="Delete(Employee.userName)">

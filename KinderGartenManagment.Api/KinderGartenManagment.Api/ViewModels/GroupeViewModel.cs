@@ -8,8 +8,8 @@ namespace KinderGartenManagment.Api.ViewModels
     public class GroupeViewModel
     {
         public string Name { get; set; }
-        public int AnneeDeDebut { get; set; }
-        public int AnneDeFin { get; set; }
+        public string DateDeDebut { get; set; }
+        public string DateDeFin { get; set; }
         public int ClasseId { get; set; }
     }
 }

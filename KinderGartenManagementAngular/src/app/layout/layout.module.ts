@@ -5,7 +5,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbContextMenuModule, NbMenuModule } from '@nebular/theme';
 import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './nav/nav.component';;
 // import { EmployeelistComponent } from './employees/employeelist/employeelist.component';
 
 

@@ -18,8 +18,10 @@ namespace KinderGartenManagment.Api.Context
         }
         public DbSet<Classe> Classes { get; set; }
         //public DbSet<Club> Clubs { get; set; }
-        //public DbSet<Convention> Conventions { get; set; }
+        public DbSet<Convention> Conventions { get; set; }
         public DbSet<Eleve> Eleves { get; set; }
+        public DbSet<EleveParent> EleveParents { get; set; }
+        public DbSet<EleveGroupe> EleveGroupes { get; set; }
         //public DbSet<EleveClub> EleveClubs { get; set; }
         public DbSet<Groupe> Groupes { get; set; }
         public DbSet<Parent> Parents { get; set; }
@@ -27,8 +29,10 @@ namespace KinderGartenManagment.Api.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<BookAuthor>()
-            //.HasKey(o => new { o.AuthorId, o.BookId });
+            modelBuilder.Entity<EleveParent>()
+            .HasKey(o => new { o.EleveId, o.ParentId });
+            modelBuilder.Entity<EleveGroupe>()
+            .HasKey(o => new { o.EleveId, o.GroupeId });
             //modelBuilder.Entity<BookCategory>()
             //.HasKey(o => new { o.BookId, o.CategoryId });
             base.OnModelCreating(modelBuilder);

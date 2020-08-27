@@ -1,0 +1,74 @@
+<div *ngFor="let Parent of Parents">
+    <div class='row'>
+        <div class="col-4" >
+                <label class="label" for="input-prenom">Prénom:</label>
+                <input nbInput
+                [(ngModel)]="Parent.prenom"
+                #prenom="ngModel"
+                id="input-prenom"
+                required
+                disabled
+                name="prenom" placeholder="Prénom" autofocus fullWidth fieldSize="large">
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-nom">Nom De Famille:</label>
+                <input nbInput [(ngModel)]="Parent.nomDeFamille" id="input-nom" disabled
+                    name="nomdefamille" placeholder="Nom De Famille" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-teldomicile">Tel Domicile:</label>
+                <input nbInput [(ngModel)]="Parent.telDomicile" id="input-teldomicile"
+                    disabled name="teldomicile" placeholder="Tel Domicile" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-telportable">Tel Portable:</label>
+                <input nbInput [(ngModel)]="Parent.telPortable" id="input-telportable"
+                    disabled name="telportable" placeholder="Tel Portable" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-adresseemail">Adresse Email:</label>
+                <input nbInput [(ngModel)]="Parent.adresseMail" id="input-telportable"
+                    disabled name="adresseemail" placeholder="Adresse Email" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="select-convention">Convention:</label><br>
+                <nb-select name="convention" id="select-convention" placeholder="Aucune Convention"
+                    disabled [(ngModel)]="Parent.conventionId">    
+                    <nb-option [value]=null>Aucune Convention</nb-option>
+                    <nb-option [value]=1>Orange</nb-option>
+                </nb-select>
+            </div>
+        </div>
+    </div>
+    <div class="row"><p></p></div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <button nbButton fullWidth status="success" size="large" (click)='EditParent(Parent.id)'>
+                Edit
+            </button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+<input type="text" id="myInput" onkeyup="ParentExistant()" placeholder="Search for names..">
+<button nbButton status="info" size="large" (click)='AddParent()'>
+Ajouter
+</button>

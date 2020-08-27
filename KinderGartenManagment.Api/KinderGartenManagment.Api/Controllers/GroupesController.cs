@@ -3,9 +3,11 @@ using KinderGartenManagment.Api.Interfaces.Repositories;
 using KinderGartenManagment.Api.Models;
 using KinderGartenManagment.Api.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace KinderGartenManagment.Api.Controllers
@@ -39,24 +41,30 @@ namespace KinderGartenManagment.Api.Controllers
             }
 
             return groupe;
-        }   
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPublishingHouse(int id, PublishingHouseViewModel publishingHouse)
-        //{
+        }
+        [HttpGet("ByEleveId/{eleveId}")]
+        public async Task<IEnumerable<Groupe>> GetGroupesByEleveId(int eleveId)
+        {
+            var resultListe = await _groupeRepository.GetGroupesByEleveId(eleveId);
+            return resultListe;
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutGroupe(int id, GroupeViewModel groupe)
+        {
 
-        //    try
-        //    {
-        //        var p = _mapper.Map<PublishingHouse>(publishingHouse);
-        //        p.Id = id;
-        //        _publishingHouseRepository.Update(p);
-        //        await _publishingHouseRepository.SaveAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        throw;
-        //    }
-        //    return NoContent();
-        //}
+            try
+            {
+                var p = _mapper.Map<Groupe>(groupe);
+                p.Id = id;
+                _groupeRepository.Update(p);
+                await _groupeRepository.SaveAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+            return NoContent();
+        }
 
         [HttpPost]
         public async Task<Groupe> PostGroupe(GroupeViewModel groupe)

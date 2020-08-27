@@ -1,0 +1,32 @@
+<button nbButton status="info" size="large" (click)='AddEleve()'>
+    Nouvel Eleve
+</button>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>DateDeNaissance</th>
+            <th>LieuDeNaissance</th>
+            <th>Adresse</th>
+            <th>Sexe</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let Eleve of Eleves">
+            <td>{{Eleve.nom}}</td>
+            <td>{{Eleve.prenom}}</td>
+            <td>{{Eleve.dateDeNaissance}}</td>
+            <td>{{Eleve.lieuDeNaissance}}</td>
+            <td>{{Eleve.adresse}}</td>
+            <td>{{Eleve.sexe}}</td>
+            <td>
+                <button type='button' class='btn btn-danger' (click)="Delete(Eleve.id)">
+                    Delete</button>
+                <button type='button' class='btn btn-success' (click)="Edit(Eleve.id)">
+                Voir Fiche</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

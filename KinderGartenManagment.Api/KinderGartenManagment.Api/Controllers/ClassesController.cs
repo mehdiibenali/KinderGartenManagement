@@ -3,6 +3,7 @@ using KinderGartenManagment.Api.Interfaces.Repositories;
 using KinderGartenManagment.Api.Models;
 using KinderGartenManagment.Api.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,68 +15,58 @@ namespace KinderGartenManagment.Api.Controllers
     [ApiController]
     public class ClassesController : ControllerBase
     {
-        private readonly IClasseRepository _classeRepository;
+        private readonly IClasseRepository _classeRepository ;
         private readonly IMapper _mapper;
 
-        public ClassesController(IClasseRepository classeRepository, IMapper imapper)
+        public ClassesController ( IClasseRepository classeRepository , IMapper imapper)
         {
-            _classeRepository = classeRepository;
+            _classeRepository = classeRepository ;
             _mapper = imapper;
         }
-        // GET: api/PublishingHouses
         [HttpGet]
-        public async Task<IEnumerable<Classe>> GetClasses()
+        public async Task<IEnumerable< Classe >> GetClasses ()
         {
-            var resultListe = await _classeRepository.GetAll();
+            var resultListe = await _classeRepository .GetAll();
             return resultListe;
         }
-        // GET: api/PublishingHouses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Classe>> GetClasse(int id)
+        public async Task<ActionResult< Classe >> GetClasse (int id)
         {
-            Classe classe = await _classeRepository.GetByIdAsync(id);
+            Classe classe = await _classeRepository .GetByIdAsync(id);
 
-            if (classe == null)
+            if ( classe == null)
             {
                 return NotFound();
             }
 
             return classe;
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutClasse(int id, ClasseViewModel classe)
+        {
 
-        //    return groupe;
-        //}
-
-        //PUT: api/PublishingHouses/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPublishingHouse(int id, PublishingHouseViewModel publishingHouse)
-        //{
-
-        //    try
-        //    {
-        //        var p = _mapper.Map<PublishingHouse>(publishingHouse);
-        //        p.Id = id;
-        //        _publishingHouseRepository.Update(p);
-        //        await _publishingHouseRepository.SaveAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        throw;
-        //    }
-        //    return NoContent();
-        //}
+            try
+            {
+                var p = _mapper.Map<Classe>(classe);
+                p.Id = id;
+                _classeRepository.Update(p);
+                await _classeRepository.SaveAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+            return NoContent();
+        }
 
         [HttpPost]
-        public async Task<Classe> PostClasse(ClasseViewModel groupe)
+        public async Task< Classe > PostClasse ( ClasseViewModel classe)
         {
             try
             {
-                var p = _mapper.Map<Classe>(groupe);
-                await _classeRepository.InsertAsync(p);
-                await _classeRepository.SaveAsync();
-                //return await _classeRepository.GetByIdAsync(p.Id);
+                var p = _mapper.Map< Classe >( classe );
+                await _classeRepository .InsertAsync(p);
+                await _classeRepository .SaveAsync();
                 return p;
             }
             catch (Exception e)
@@ -85,10 +76,10 @@ namespace KinderGartenManagment.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<Object> DeleteClasse(int id)
+        public async Task<Object> DeleteClasse (int id)
         {
-            await _classeRepository.DeleteAsync(id);
-            await _classeRepository.SaveAsync();
+            await _classeRepository .DeleteAsync(id);
+            await _classeRepository .SaveAsync();
 
             return Ok(new { message = "Deleted Successfully" });
         }

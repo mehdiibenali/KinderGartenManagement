@@ -48,7 +48,7 @@ export class ApiService {
     ).pipe(catchError(this.formatErrors));
   }
 
-  post(path: string, body: User): Observable<any> {
+  post(path: string, body): Observable<any> {
     let myHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + this.token

@@ -11,7 +11,8 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task< Groupe > GetByIdAsync(int groupeId ); 
         Task InsertAsync( Groupe groupe ); 
         Task DeleteAsync(int groupeId ); 
-        void Update( Groupe groupe ); 
+        void Update( Groupe groupe );
+        Task<IEnumerable<Groupe>> GetGroupesByEleveId(int eleveId);
         Task SaveAsync(); 
     } 
 } 
