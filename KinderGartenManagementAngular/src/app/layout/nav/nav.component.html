@@ -8,24 +8,29 @@
         <td>
             <table>
                 <tr>
-                    <td><img src="assets/logo.png" height="75" width="150"></td>
+                    <td><img src="assets/logo.jpeg" height="75" width="150"></td>
                     <td>
-                        <h4 font-family="Roboto">Management</h4>
+                        <h4 font-family="Roboto">KinderGarten </h4>
                     </td>
                     <td>
-                        <H4 font-family="Roboto">Tool</H4>
+                        <H4 font-family="Roboto">Management</H4>
                     </td>
                 </tr>
             </table>
         </td>
         <td width="7%">
-            <!-- <div *ngIf="user">
+            <div *ngIf="user">
                 <form>
-                    <nb-user [picture]="pathProfilePicture" [name]="user?.fullName" [title]="user?.function"
-                        size="middle" [nbContextMenu]="items" nbContextMenuTag="my-context-menu">
+                    <nb-user  
+                    shape="round"
+                    [name]="user.fullName" 
+                    size="large"
+                    [picture]="user.ProfilePicture" 
+                    [nbContextMenu]="items"
+                    nbContextMenuTag="my-context-menu">
                     </nb-user>
                 </form>
-            </div> -->
+            </div>
         </td>
         <td width="2%">
         </td>

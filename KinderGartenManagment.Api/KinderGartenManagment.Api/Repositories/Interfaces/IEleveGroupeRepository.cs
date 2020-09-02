@@ -9,7 +9,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
     { 
         Task<IEnumerable< EleveGroupe >> GetAll(); 
         Task InsertAsync( EleveGroupe elevegroupe ); 
-        Task DeleteAsync(int elevegroupeId ); 
+        Task DeleteAsync(int eleveid , int groupeid); 
         void Update( EleveGroupe elevegroupe ); 
         Task SaveAsync(); 
     } 

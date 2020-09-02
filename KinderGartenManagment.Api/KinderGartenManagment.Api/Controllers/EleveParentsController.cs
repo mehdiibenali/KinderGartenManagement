@@ -45,11 +45,27 @@ namespace KinderGartenManagment.Api.Controllers
             }
             return NoContent();
         }
+        [HttpPut("DisableParentTuteur/{eleveid}")]
+        public async Task<IActionResult> DisableParentTuteur(int eleveid)
+        {
+
+            try
+            {
+                await _eleveParentRepository.DisableParentTuteurAsync(eleveid);
+                await _eleveParentRepository.SaveAsync();
+                return Ok();    
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+            return NoContent();
+        }
 
         [HttpPost]
         public async Task<EleveParent> PostEleveParent(EleveParentViewModel eleveparent)
         {
-            try
+            try 
             {
                 var p = _mapper.Map<EleveParent>(eleveparent);
                 await _eleveParentRepository.InsertAsync(p);
@@ -61,10 +77,10 @@ namespace KinderGartenManagment.Api.Controllers
                 throw e;
             }
         }
-        [HttpDelete("{id}")]
-        public async Task<Object> DeleteEleveParent(int id)
+        [HttpDelete("{eleveid}/{parentid}")]
+        public async Task<Object> DeleteEleveParent(int eleveid,int parentid)
         {
-            await _eleveParentRepository.DeleteAsync(id);
+            await _eleveParentRepository.DeleteAsync(eleveid,parentid);
             await _eleveParentRepository.SaveAsync();
 
             return Ok(new { message = "Deleted Successfully" });

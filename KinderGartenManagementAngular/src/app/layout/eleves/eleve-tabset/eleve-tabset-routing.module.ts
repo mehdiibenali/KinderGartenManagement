@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EleveTabsetComponent } from './eleve-tabset/eleve-tabset.component';
+import { EleveTabsetComponent } from './eleve-tabset.component';
 
 
 const routes: Routes = [

@@ -1,11 +1,11 @@
     <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th>FirstName</th>
-            <th>LastName</th>
+            <th>Prénom</th>
+            <th>Nom</th>
             <th>Email</th>
-            <th>UserName</th>
-            <th>ProfilePicture</th>
+            <th>Pseudo</th>
+            <th>Photo De Profil</th>
             <th>Role</th>
             <th>Actions</th>
         </tr>
@@ -20,9 +20,9 @@
             <td>{{Employee.role}}</td>
             <td>
                 <button type='button' class='btn btn-danger' (click)="Delete(Employee.userName)">
-                    Delete</button>
+                    Supprimer</button>
                 <button type='button' class='btn btn-success' (click)="Edit(Employee.userName)">
-                Edit</button>
+                Editer</button>
             </td>
         </tr>
     </tbody>

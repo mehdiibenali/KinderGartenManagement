@@ -28,7 +28,29 @@ namespace KinderGartenManagment.Api.Controllers
         { 
             var resultListe = await _conventionRepository .GetAll(); 
             return resultListe; 
-        } 
+        }
+        [HttpGet("GetActive/{parentid}")]
+        public async Task<ActionResult<Convention>> GetActive(int parentid)
+        {
+            var resultListe = await _conventionRepository.GetActive(parentid);
+            if (resultListe == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(resultListe);
+        }
+        [HttpGet("SearchByYear/{year}")]
+        public async Task<ActionResult<IEnumerable<Convention>>> SearchByYear(int year)
+        {
+            var resultListe = await _conventionRepository.SearchByYear(year);
+            if (resultListe == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(resultListe);
+        }
         [HttpGet("{id}")] 
         public async Task<ActionResult< Convention >> GetConvention (int id) 
         { 
@@ -83,6 +105,6 @@ namespace KinderGartenManagment.Api.Controllers
             await _conventionRepository .SaveAsync(); 
  
             return Ok(new { message = "Deleted Successfully" }); 
-        } 
+        }
     } 
 } 

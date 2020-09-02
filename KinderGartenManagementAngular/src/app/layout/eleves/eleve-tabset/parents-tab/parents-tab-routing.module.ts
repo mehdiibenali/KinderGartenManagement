@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ParentsListComponent } from './parents-list/parents-list.component';
-import { EditParentComponent } from './edit-parent/edit-parent.component';
-import { AddParentComponent } from './add-parent/add-parent.component';
+import { AddParentTeComponent } from './add-parent-te/add-parent-te.component';
+import { EditParentTeComponent } from './edit-parent-te/edit-parent-te.component';
 
 
 const routes: Routes = [
@@ -12,11 +12,11 @@ const routes: Routes = [
   },
   {
     path:"add",
-    component:AddParentComponent
+    component:AddParentTeComponent
   },
   {
     path:":parentid",
-    component:EditParentComponent
+    component:EditParentTeComponent,
   },
 
 ];

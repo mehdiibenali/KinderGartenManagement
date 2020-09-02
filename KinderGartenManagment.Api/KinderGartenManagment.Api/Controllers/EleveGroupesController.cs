@@ -61,15 +61,15 @@ namespace KinderGartenManagment.Api.Controllers
             { 
                 throw e; 
             } 
-        } 
- 
-        [HttpDelete("{id}")] 
-        public async Task<Object> DeleteEleveGroupe (int id) 
-        { 
-            await _eleveGroupeRepository .DeleteAsync(id); 
-            await _eleveGroupeRepository .SaveAsync(); 
- 
-            return Ok(new { message = "Deleted Successfully" }); 
-        } 
+        }
+
+        [HttpDelete("{eleveid}/{groupeid}")]
+        public async Task<Object> DeleteEleveParent(int eleveid, int groupeid)
+        {
+            await _eleveGroupeRepository.DeleteAsync(eleveid, groupeid);
+            await _eleveGroupeRepository.SaveAsync();
+
+            return Ok(new { message = "Deleted Successfully" });
+        }
     } 
 } 

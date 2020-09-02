@@ -1,0 +1,135 @@
+<form (ngSubmit)="UpdateParent()" #form="ngForm" aria-labelledby="title">
+    <div class='row'>
+        <div class="col-4" >
+                <label class="label" for="input-prenom">Prénom:</label>
+                <input nbInput
+                [(ngModel)]="Parent.prenom"
+                #prenom="ngModel"
+                id="input-prenom"
+                required
+                name="prenom" autofocus fullWidth fieldSize="large">
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-nom">Nom De Famille:</label>
+                <input nbInput [(ngModel)]="Parent.nomDeFamille" id="input-nom"
+                    name="nomdefamille" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-ncin">NCin:</label>
+                <input nbInput [(ngModel)]="Parent.nCin" id="input-ncin"
+                    name="ncin" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-profession">Profession:</label>
+                <input nbInput [(ngModel)]="Parent.profession" #profession="ngModel" id="input-profession" name="profession"
+                    fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-employeur">Employeur:</label>
+                <input nbInput [(ngModel)]="Parent.employeur" #employeur="ngModel" id="input-employeur" name="employeur"
+                    fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-matricule">Matricule:</label>
+                <input nbInput [(ngModel)]="Parent.matricule" #matricule="ngModel" id="input-matricule" name="matricule"
+                    fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-tel1">Tel 1:</label>
+                <input nbInput [(ngModel)]="Parent.tel1" 
+                #tel1="ngModel" id="input-tel1" name="tel1"
+                 fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-tel2">Tel 2:</label>
+                <input nbInput [(ngModel)]="Parent.tel2" 
+                #tel2="ngModel" id="input-tel2" name="tel2"
+                fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-tel3">Tel 3:</label>
+                <input nbInput [(ngModel)]="Parent.tel3" 
+                #tel3="ngModel" id="input-tel3" name="tel23"
+                fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-adressemail">Adresse Email:</label>
+                <input nbInput [(ngModel)]="Parent.adresseMail"  
+                #adressemail="ngModel" id="input-adressemail" name="adressemail"
+                fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="label" for="select-convention">Convention:</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <nb-select name="year" size="tiny" shape="round" appearance="filled" placeholder="année" id="select-year"
+                        [(ngModel)]="conventionyear">
+                        <nb-option [value]=null (click)="conventionsnull()">Aucune</nb-option>
+                        <nb-option [value]=2020 (click)="SearchConventionByYear()">2020</nb-option>
+                    </nb-select>
+                </div>
+                <div class="col-3"><p></p></div>
+                <div class="row"> 
+                    <nb-select name="convention" shape="round" fullWidth placeholder="Aucune Convention" id="select-convention"
+                        [(ngModel)]="Convention.id">
+                        <nb-option *ngIf="conventionyear==null" [value]='Convention.id'>{{Convention.name}}</nb-option>
+                        <nb-option [value]=null>Aucune Convention</nb-option>
+                        <nb-option *ngFor="let Convention of Conventions" [value]="Convention.id">{{Convention.name}}</nb-option>
+                    </nb-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row"><p></p></div>
+<div class="row">
+    <div class="col-6">
+        <button nbButton fullWidth status="primary" size="large" [disabled]="!form.valid"
+            (click)='UpdateParent()'>
+            Update Parent
+        </button>
+    </div>
+    <div class="col-6">
+        <button nbButton fullWidth status="danger" size="large"
+        (click)='CancelEditParent()'>
+        Cancel
+    </button>
+    </div>
+</div>

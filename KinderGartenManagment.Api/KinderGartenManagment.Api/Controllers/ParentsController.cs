@@ -53,7 +53,7 @@ namespace KinderGartenManagment.Api.Controllers
             
         }
         [HttpGet("ByEleveId/{eleveId}")]
-        public async Task<IEnumerable<Parent>> GetParentsByEleveId(int eleveId)
+        public async Task<IEnumerable<Object>> GetParentsByEleveId(int eleveId)
         {
             var resultListe = await _parentRepository.GetParentsByEleveId(eleveId);
             return resultListe;

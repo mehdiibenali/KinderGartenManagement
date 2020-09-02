@@ -18,8 +18,17 @@ namespace KinderGartenManagment.Api.Repositories
         public async Task<IEnumerable< Convention >> GetAll() 
         { 
             return await _context. Conventions .ToListAsync(); 
-        } 
- 
+        }
+        public async Task<Convention> GetActive(int parentid)
+        {
+            return await _context.Conventions
+                .Where(c => c.ParentConventions.Any(cp => cp.ParentId == parentid && cp.Active == true)).FirstOrDefaultAsync();
+        }
+        public async Task<IEnumerable<Convention>> SearchByYear(int year)
+        {
+            return await _context.Conventions.Where(c => c.DateDeDebut.Year <= year && c.DateDeFin.Year >= year).ToListAsync();
+        }
+
         public async Task< Convention > GetByIdAsync(int id) 
         { 
             return await _context. Conventions .FindAsync(id); 

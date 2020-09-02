@@ -3,4 +3,5 @@ export class Payload {
     role : string;
     username : string;
     fullName : string;
+    ProfilePicture: string;
 }

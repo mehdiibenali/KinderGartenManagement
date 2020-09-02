@@ -1,0 +1,92 @@
+<form (ngSubmit)="UpdateEleve()" #form="ngForm" aria-labelledby="title">
+    <div class='row'>
+        <div class="col-6" >
+                <label class="label" for="input-prenom">Prénom:</label>
+                <input nbInput
+                [disabled]="!FormEnabled"
+                [(ngModel)]="eleve.prenom"
+                #prenom="ngModel"
+                id="input-prenom"
+                required
+                name="prenom" autofocus fullWidth fieldSize="large">
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-nom">Nom:</label>
+                <input nbInput [(ngModel)]="eleve.nom" id="input-nom" required [disabled]="!FormEnabled"
+                    name="nom" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-datedenaissance">Date De Naissance:</label>
+                <input nbInput [(ngModel)]="eleve.datedenaissance" type="date" #datedenaissance="ngModel" id="input-datedenaissance"
+                   [disabled]="!FormEnabled" required name="datedenaissance" fullWidth fieldSize="large" required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-lieudenaissance">Lieu De Naissance:</label>
+                <input nbInput [(ngModel)]="eleve.lieudenaissance" #lieudenaissance="ngModel" id="input-lieudenaissance" [disabled]="!FormEnabled" required name="lieudenaissance"
+                      fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-adresse">Adresse:</label>
+                <input nbInput [(ngModel)]="eleve.adresse" #adresse="ngModel" id="input-adresse" name="adresse"
+                      [disabled]="!FormEnabled" fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="select-sexe">Sexe:</label><br>
+                <nb-select name="sexes" [disabled]="!FormEnabled" id="select-sexe"
+                    [(ngModel)]="eleve.sexe" required>    
+                    <nb-option value="M">M</nb-option>
+                    <nb-option value="F">F</nb-option>
+                </nb-select>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="row"><p></p></div>
+<div *ngIf ="FormEnabled">
+    <div class="row">
+        <div class="col-6">
+            <button nbButton fullWidth status="primary" size="large" [disabled]=" !form.valid"
+            (click)='UpdateEleve()'>
+            Update Eleve
+            </button>
+        </div>
+        <div class="col-6">
+            <button nbButton status="danger" size="large"
+             fullWidth (click)='CancelEditEleve()'>
+            Cancel
+            </button>
+        </div>
+    </div>
+</div>
+<div *ngIf="!FormEnabled">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <button nbButton status="success" size="large"
+             fullWidth (click)='EditEleve()'>
+            Edit
+            </button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>

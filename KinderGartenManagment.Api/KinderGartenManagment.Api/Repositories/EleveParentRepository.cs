@@ -28,19 +28,27 @@ namespace KinderGartenManagment.Api.Repositories
         public async Task InsertAsync( EleveParent eleveparent ) 
         { 
             await _context. EleveParents .AddAsync( eleveparent ); 
-        } 
- 
-        public async Task DeleteAsync(int eleveparentId ) 
+        }
+
+        public async Task DeleteAsync(int eleveid,int parentid ) 
         { 
-            EleveParent eleveparent = await _context. EleveParents .FindAsync( eleveparentId ); 
-            _context. EleveParents .Remove( eleveparent ); 
+           EleveParent eleveparent = _context. EleveParents .Where(p=>p.EleveId==eleveid && p.ParentId==parentid).First(); 
+            _context. EleveParents .Remove( eleveparent );
         } 
  
         public void Update( EleveParent eleveparent ) 
         { 
             _context.Entry( eleveparent ).State = EntityState.Modified; 
-        } 
- 
+        }
+        public async Task DisableParentTuteurAsync(int eleveid)
+        {
+            EleveParent ep = _context.EleveParents.Where(ep => ep.ParentTuteur == true && ep.EleveId == eleveid).FirstOrDefault();
+            if (ep != null)
+            {
+                ep.ParentTuteur = false;
+                _context.Entry(ep).State = EntityState.Modified;
+            }
+        }
         public async Task SaveAsync() 
         { 
             await _context.SaveChangesAsync(); 

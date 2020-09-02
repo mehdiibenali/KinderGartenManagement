@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ElevelistComponent } from './elevelist/elevelist.component';
-import { EditeleveComponent } from './editeleve/editeleve.component';
 const routes: Routes = [
   {
     path:'fiche',
@@ -10,10 +9,6 @@ const routes: Routes = [
   {
     path:'list',
     component: ElevelistComponent,
-  },
-  {
-    path:'edit/:id',
-    component: EditeleveComponent, 
   },
 ];
 

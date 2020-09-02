@@ -9,5 +9,6 @@ namespace KinderGartenManagment.Api.ViewModels
     {
         public int EleveId { get; set; }
         public int ParentId { get; set; }
+        public bool? ParentTuteur { get; set; }
     }
 }

@@ -7,7 +7,9 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
 { 
     public interface IConventionRepository  
     { 
-        Task<IEnumerable< Convention >> GetAll(); 
+        Task<IEnumerable< Convention >> GetAll();
+        Task<Convention> GetActive(int parentid);
+        Task<IEnumerable<Convention>> SearchByYear(int year);
         Task< Convention > GetByIdAsync(int conventionId ); 
         Task InsertAsync( Convention convention ); 
         Task DeleteAsync(int conventionId ); 

@@ -1,4 +1,37 @@
-<div *ngFor="let Parent of Parents">
+<div *ngIf="Parents.length>0">
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Tel 1</th>
+                <th>Tel 2</th>
+                <th>Tel 3</th>
+                <th>Adresse Email</th>
+                <th>Convention</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Parent of ParentsAndConventions">
+                <td>{{Parent.p.prenom}}</td>
+                <td>{{Parent.p.nomDeFamille}}</td>
+                <td>{{Parent.p.tel1}}</td>
+                <td>{{Parent.p.tel2}}</td>
+                <td>{{Parent.p.tel3}}</td>
+                <td>{{Parent.p.adresseMail}}</td>
+                <td>{{Parent.nameOfConvention}}</td>
+                <td>
+                    <button type='button' class='btn btn-success' (click)="EditParent(Parent.p.id)">
+                    Editer</button>
+                    <button type='button' class='btn btn-danger' (click)="DeleteEleveParent(Parent.p.id)">
+                    Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- <div *ngFor="let Parent of Parents">
     <div class='row'>
         <div class="col-4" >
                 <label class="label" for="input-prenom">Prénom:</label>
@@ -19,9 +52,9 @@
         </div>
         <div class="col-4">
             <div class="form-control-group">
-                <label class="label" for="input-teldomicile">Tel Domicile:</label>
-                <input nbInput [(ngModel)]="Parent.telDomicile" id="input-teldomicile"
-                    disabled name="teldomicile" placeholder="Tel Domicile" autofocus fullWidth fieldSize="large">
+                <label class="label" for="input-tel1">Tel 1:</label>
+                <input nbInput [(ngModel)]="Parent.tel1" id="input-tel1"
+                    disabled name="tel1" autofocus fullWidth fieldSize="large">
             </div>
         </div>
     </div>
@@ -31,15 +64,15 @@
     <div class='row'>
         <div class="col-4">
             <div class="form-control-group">
-                <label class="label" for="input-telportable">Tel Portable:</label>
-                <input nbInput [(ngModel)]="Parent.telPortable" id="input-telportable"
-                    disabled name="telportable" placeholder="Tel Portable" autofocus fullWidth fieldSize="large">
+                <label class="label" for="input-tel2">Tel 2:</label>
+                <input nbInput [(ngModel)]="Parent.tel2" id="input-tel2"
+                    disabled name="tel2"  autofocus fullWidth fieldSize="large">
             </div>
         </div>
         <div class="col-4">
             <div class="form-control-group">
                 <label class="label" for="input-adresseemail">Adresse Email:</label>
-                <input nbInput [(ngModel)]="Parent.adresseMail" id="input-telportable"
+                <input nbInput [(ngModel)]="Parent.adresseMail" id="input-adresseemail"
                     disabled name="adresseemail" placeholder="Adresse Email" autofocus fullWidth fieldSize="large">
             </div>
         </div>
@@ -67,8 +100,32 @@
     <br>
     <br>
     <br>
+</div> -->
+<div class="row">
+    <div class="col-6">
+        <div class="row">
+        <div class="col-8">
+        <input type="text" id="myInput" autocomplete="off" (keyup)="ParentExistant()" placeholder="Parent Existant"[(ngModel)]="parentsearch">
+        <div *ngIf="parentsearch">
+            <ul id="myUL">
+                <div *ngFor="let result of searchresult">
+                    <div *ngIf="CheckParent(result)">
+                        <li><button (click)="AddEleveParent(result.id,result.nomDeFamille,result.prenom)" >{{result.nomDeFamille}} {{result.prenom}}</button></li>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        </div>
+        <div class="col-4">
+            <button nbButton status="secondary" size="large" (click)='SubmitEleveParent()'>
+                Valider
+            </button>
+        </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <button nbButton status="info" size="large" (click)='AddParent()'>
+            Ajouter
+        </button>
+    </div>
 </div>
-<input type="text" id="myInput" onkeyup="ParentExistant()" placeholder="Search for names..">
-<button nbButton status="info" size="large" (click)='AddParent()'>
-Ajouter
-</button>

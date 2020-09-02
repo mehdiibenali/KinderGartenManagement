@@ -21,7 +21,7 @@ export class AddemployeeComponent implements OnInit {
   file: any;
   submitted = false;
   ngOnInit(): void {
-    this.user.profilepicture = "assets/img/Default.jpg";
+    this.user.profilepicture = "assets/Default.jpg";
   }
   AddEmployee() {
     if (this.file == null){this.registerEmployee();return};

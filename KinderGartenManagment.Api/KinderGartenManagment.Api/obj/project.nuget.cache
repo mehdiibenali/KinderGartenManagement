@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RI7mPpnao87HPEzKrlNCUqROgihhJCgBQdL18n3Dpj1+K8d+s4aQMXRXn3fzRc0COE0EA7n+ptgrRNg90Klg2g==",
+  "dgSpecHash": "oVHmBPz3SXvKbKhCI4Ku7r1LDfGcu4AiWi7pqDXPzgrD0QT3U8Y6/pMyeF1afWXIa9MqB/wqjcCpZs8sZJ3UTQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\ASUS\\Desktop\\Project\\KinderGarten\\KinderGartenManagment.Api\\KinderGartenManagment.Api\\KinderGartenManagment.Api.csproj",
   "expectedPackageFiles": [
@@ -211,7 +211,8 @@
     "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\z.entityframework.plus.queryincludefilter.efclassic\\1.8.16\\z.entityframework.plus.queryincludefilter.efclassic.1.8.16.nupkg.sha512"
   ],
   "logs": []
 }

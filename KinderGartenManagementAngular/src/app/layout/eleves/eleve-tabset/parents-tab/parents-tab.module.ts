@@ -6,12 +6,13 @@ import { ParentsListComponent } from './parents-list/parents-list.component';
 import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonModule, NbTabsetModule, NbSpinnerModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { EditParentComponent } from './edit-parent/edit-parent.component';
-import { AddParentComponent } from './add-parent/add-parent.component';
+import { AddParentTeComponent } from './add-parent-te/add-parent-te.component';
+import { FrameworkModule } from 'src/app/framework/framework.module';
+import { EditParentTeComponent } from './edit-parent-te/edit-parent-te.component';
 
 
 @NgModule({
-  declarations: [ParentsListComponent, EditParentComponent, AddParentComponent],
+  declarations: [ParentsListComponent, AddParentTeComponent, EditParentTeComponent],
   imports: [
     CommonModule,
     ParentsTabRoutingModule,
@@ -25,6 +26,7 @@ import { AddParentComponent } from './add-parent/add-parent.component';
     NbButtonModule,
     NbTabsetModule,
     NbSpinnerModule,
+    FrameworkModule,
   ]
 })
 export class ParentsTabModule { }

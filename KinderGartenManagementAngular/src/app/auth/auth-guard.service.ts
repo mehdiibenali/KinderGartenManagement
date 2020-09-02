@@ -18,7 +18,22 @@ user : Payload;
             });
     }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        this.authService.onTokenChange()
+        .subscribe((token: NbAuthJWTToken) => {
+            this.authService.getToken().subscribe(
+                data=>{
+                    if (data.isValid()){
+                        this.user = token.getPayload();
+                    }
+                    else{
+                        this.user=null;
+                    }
+                    
+                }
+            )
+        });
         const currentUser = this.user;  
+        
         if (currentUser) {
             // check if route is restricted by role
             if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {

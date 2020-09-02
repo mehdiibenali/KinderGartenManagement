@@ -42,6 +42,17 @@ namespace KinderGartenManagment.Api.Controllers
 
             return groupe;
         }
+        [HttpGet("SearchByName/{groupesearch}")]
+        public async Task<ActionResult<IEnumerable<Groupe>>> SearchByName(string groupesearch)
+        {
+            var result = await this._groupeRepository.SearchByName(groupesearch);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+
+        }
         [HttpGet("ByEleveId/{eleveId}")]
         public async Task<IEnumerable<Groupe>> GetGroupesByEleveId(int eleveId)
         {

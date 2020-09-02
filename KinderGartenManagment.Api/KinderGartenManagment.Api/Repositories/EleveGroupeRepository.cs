@@ -35,8 +35,12 @@ namespace KinderGartenManagment.Api.Repositories
         public void Update( EleveGroupe elevegroupe ) 
         { 
             _context.Entry( elevegroupe ).State = EntityState.Modified; 
-        } 
- 
+        }
+        public async Task DeleteAsync(int eleveid, int groupeid)
+        {
+            EleveGroupe elevegroupe = _context.EleveGroupes.Where(p => p.EleveId == eleveid && p.GroupeId == groupeid).First();
+            _context.EleveGroupes.Remove(elevegroupe);
+        }
         public async Task SaveAsync() 
         { 
             await _context.SaveChangesAsync(); 

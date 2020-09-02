@@ -81,7 +81,7 @@ namespace KinderGartenManagment.Api.Controllers
                         new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault()),
                         new Claim("username",user.UserName),
                         new Claim("fullName",user.FirstName + " " + user.LastName),
-                        new Claim("ProfilePicture", "Hardcoded picture profile")
+                        new Claim("ProfilePicture", user.ProfilePicture)
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtLocalConstants.SecretKey)), SecurityAlgorithms.HmacSha256Signature)
@@ -212,20 +212,20 @@ namespace KinderGartenManagment.Api.Controllers
             try
             {
                 var file = Request.Form.Files[0];
-                var pathToSave = Path.Combine("C:/Users/ASUS/Desktop/Project/KinderGarten/KinderGartenManagementAngular/src", "assets");
+                var pathToSave = "C:/Users/ASUS/Desktop/Project/KinderGarten/KinderGartenManagementAngular/src/assets";
                 //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine("assets", fileName);
+                    var fullPath = pathToSave+"/"+fileName;
+                    var dbPath = "assets/"+fileName;
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
-                    return Ok(new { dbPath });
+                        return Ok(new { dbPath });
                     //return StatusCode(200, dbPath) ;
                 }
                 else

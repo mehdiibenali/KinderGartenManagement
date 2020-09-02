@@ -20,4 +20,10 @@ export class GroupeService {
   GetGroupesByEleveId(eleveId:number){
     return this.api.get('/api/Groupes/ByEleveId/'+eleveId);
   }
+  SearchByName(groupesearch){
+    return this.api.get('/api/Groupes/SearchByName/'+groupesearch)
+  }
+  DeleteEleveGroupe(eleveid,groupeid){
+    return this.api.delete('/api/EleveGroupes/'+eleveid+'/'+groupeid)
+  }
 }

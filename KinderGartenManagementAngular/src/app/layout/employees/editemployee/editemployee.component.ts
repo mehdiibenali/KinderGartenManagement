@@ -14,7 +14,7 @@ export class EditemployeeComponent implements OnInit {
   progress: number;
   message: string;
   user: Userforedit = new Userforedit() ;
-  imageUrl: string = "assets/img/Default.jpg";
+  imageUrl: string = "assets/Default.jpg";
   FileToUpload: File = null;
   file: any;
   username : string;

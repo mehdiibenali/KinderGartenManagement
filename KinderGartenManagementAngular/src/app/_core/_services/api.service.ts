@@ -32,7 +32,6 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + this.token
     })
-
     return this.http.get(this.base+path, { headers: myHeaders });
 
   }

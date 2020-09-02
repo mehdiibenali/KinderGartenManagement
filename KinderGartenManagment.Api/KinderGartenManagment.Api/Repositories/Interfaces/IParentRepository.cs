@@ -12,7 +12,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task InsertAsync( Parent parent ); 
         Task DeleteAsync(int parentId ); 
         void Update( Parent parent );
-        Task<IEnumerable<Parent>> GetParentsByEleveId(int eleveId);
+        Task<IEnumerable<Object>> GetParentsByEleveId(int eleveId);
         Task<IEnumerable<Parent>> SearchByName(string parentsearch);
         Task SaveAsync(); 
     } 

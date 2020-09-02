@@ -1,0 +1,76 @@
+<form (ngSubmit)="RegisterEleve()" #form="ngForm" aria-labelledby="title">
+    <div class='row'>
+        <div class="col-6" >
+                <label class="label" for="input-prenom">Prénom:</label>
+                <input nbInput
+                [(ngModel)]="eleve.prenom"
+                #prenom="ngModel"
+                id="input-prenom"
+                required
+                name="prenom" autofocus fullWidth fieldSize="large">
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-nom">Nom:</label>
+                <input nbInput [(ngModel)]="eleve.nom" id="input-nom"
+                    name="nom" autofocus fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+        <div class='row'>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-datedenaissance">Date De Naissance:</label>
+                <input nbInput [(ngModel)]="eleve.datedenaissance" type="date" #datedenassance="ngModel" id="input-datedenaissance"
+                    name="datedenaissance" fullWidth fieldSize="large" required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-lieudenaissance">Lieu De Naissance:</label>
+                <input nbInput [(ngModel)]="eleve.lieudenaissance" #lieudenaissance="ngModel" id="input-lieudenaissance" name="lieudenaissance"
+                    fullWidth fieldSize="large">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-adresse">Adresse:</label>
+                <input nbInput [(ngModel)]="eleve.adresse" #adresse="ngModel" id="input-adresse" name="adresse"
+                         fullWidth fieldSize="large">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="select-sexe">Sexe:</label><br>
+                <nb-select name="sexes" placeholder="Chosissez une option" id="select-sexe"
+                    [(ngModel)]="eleve.sexe" required>    
+                    <nb-option value="M">M</nb-option>
+                    <nb-option value="F">F</nb-option>
+                </nb-select>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row"><p></p></div>
+<div class="row">
+    <div class="col-6">
+        <button nbButton fullWidth status="primary" size="large" [disabled]="submitted || !form.valid"
+            [class.btn-pulse]="submitted" (click)='RegisterEleve()'>
+            Add Eleve
+        </button>
+    </div>
+    <div class="col-6">
+        <button nbButton status="danger" size="large"
+         fullWidth (click)='CancelAddEleve()'>
+            Cancel
+        </button>
+    </div>
+</div>

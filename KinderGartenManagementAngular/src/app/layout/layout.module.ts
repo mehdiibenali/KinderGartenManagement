@@ -2,23 +2,30 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LayoutRoutingModule } from './layout-routing.module';
-import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbContextMenuModule, NbMenuModule } from '@nebular/theme';
+import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbContextMenuModule, NbMenuModule, NbUserModule, NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbTabsetModule, NbSpinnerModule } from '@nebular/theme';
 import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { NavComponent } from './nav/nav.component';;
+import { NavComponent } from './nav/nav.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+;
 // import { EmployeelistComponent } from './employees/employeelist/employeelist.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, SidebarComponent, NavComponent],
+  declarations: [LayoutComponent, SidebarComponent, NavComponent,],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     NbLayoutModule,
-    NbSidebarModule.forRoot(), // NbSidebarModule.forRoot(), //if this is your app.module
+    NbSidebarModule, // NbSidebarModule.forRoot(), //if this is your app.module
     NbButtonModule,
     NbContextMenuModule,
-    NbMenuModule.forRoot(),
-  ]
+    NbMenuModule,
+    NbUserModule,
+    NbCardModule,
+    NbSelectModule,
+  ],
+
 })
 export class LayoutModule { }

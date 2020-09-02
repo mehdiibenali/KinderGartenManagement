@@ -14,9 +14,9 @@ namespace KinderGartenManagment.Api.ViewModels
         public string Profession { get; set; }
         public string Employeur { get; set; }
         public string Matricule { get; set; }
-        public int TelDomicile { get; set; }
-        public int TelPortable { get; set; }
+        public int Tel1 { get; set; }
+        public int Tel2 { get; set; }
+        public int Tel3 { get; set; }
         public string AdresseMail { get; set; }
-        public int? ConventionId { get; set; }
     }
 }

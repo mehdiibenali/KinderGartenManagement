@@ -3247,6 +3247,15 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic/1.8.16": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.dll": {}
+        }
       }
     }
   },
@@ -9946,6 +9955,24 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic/1.8.16": {
+      "sha512": "EeqgADrnpW/pzekRuICfhoUfrQDerfasi7t6zwkLG27pmufIEP1PHRxdqnMYNmS//HtADXFGqx2j5YC+7I4Z0w==",
+      "type": "package",
+      "path": "z.entityframework.plus.queryincludefilter.efclassic/1.8.16",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.dll",
+        "lib/net40/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.xml",
+        "lib/net45/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.dll",
+        "lib/net45/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.xml",
+        "lib/netstandard2.0/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.deps.json",
+        "lib/netstandard2.0/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.dll",
+        "lib/netstandard2.0/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.xml",
+        "z.entityframework.plus.queryincludefilter.efclassic.1.8.16.nupkg.sha512",
+        "z.entityframework.plus.queryincludefilter.efclassic.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -9963,7 +9990,8 @@
       "Microsoft.OData.Edm >= 7.7.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
       "Newtonsoft.Json >= 12.0.3",
-      "Swashbuckle.AspNetCore >= 5.5.1"
+      "Swashbuckle.AspNetCore >= 5.5.1",
+      "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic >= 1.8.16"
     ]
   },
   "packageFolders": {
@@ -10062,6 +10090,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[5.5.1, )"
+          },
+          "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic": {
+            "target": "Package",
+            "version": "[1.8.16, )"
           }
         },
         "imports": [

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddEleveComponent } from './add-eleve/add-eleve.component';
-import { EditEleveComponent } from './edit-eleve/edit-eleve.component';
+import { EditEleveTeComponent } from './edit-eleve-te/edit-eleve-te.component';
+import { AddEleveTeComponent } from './add-eleve-te/add-eleve-te.component';
 
 
 const routes: Routes = [
   {
     path:"add",
-    component:AddEleveComponent,
+    component:AddEleveTeComponent,
   },
   {
     path:":eleveid",
-    component:EditEleveComponent,
+    component:EditEleveTeComponent,
   },
 ];
 

@@ -9,7 +9,9 @@ namespace KinderGartenManagment.Api.Models
     {
         public int EleveId { get; set; }
         public int ParentId { get; set; }
+        public bool ParentTuteur { get; set; }
         public Eleve Eleve { get; set; }
         public Parent Parent { get; set; }
+
     }
 }

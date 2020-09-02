@@ -1,14 +1,13 @@
 export class Parent {
-    // public int Id { get; set; }
+    id:number;
     prenom:string;
     nomdefamille:string;
     ncin:number;
     profession:string;
     employeur:string;
     matricule:string
-    teldomicile:number;
-    telportable:number;
-    adressemail:string
-    conventionid:number;
-    convention:object;
+    tel1:number;
+    tel2:number;
+    tel3:number;
+    adressemail:string;
 }

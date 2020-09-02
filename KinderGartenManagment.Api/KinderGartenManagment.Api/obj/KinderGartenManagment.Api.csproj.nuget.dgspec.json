@@ -97,6 +97,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.5.1, )"
+            },
+            "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic": {
+              "target": "Package",
+              "version": "[1.8.16, )"
             }
           },
           "imports": [

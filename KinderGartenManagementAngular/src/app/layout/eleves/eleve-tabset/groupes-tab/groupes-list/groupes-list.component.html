@@ -1,3 +1,49 @@
-<button nbButton status="info" size="large" (click)='AddGroupe()'>
-    Ajouter
-</button>
+<div *ngIf="Groupes.length>0">
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>Nom</th>
+                <th>Date De Début</th>
+                <th>Date De Fin</th>
+                <th>Classe</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Groupe of Groupes">
+                <td>{{Groupe.name}}</td>
+                <td>{{Groupe.dateDeDebut}}</td>
+                <td>{{Groupe.dateDeFin}}</td>
+                <div *ngIf="Groupe.classeId!=null">
+                    <td>{{Groupe.classe.name}}</td>
+                </div>
+                <div *ngIf="Groupe.classeId==null">
+                    <td></td>
+                </div>
+                <td>
+                    <button type='button' class='btn btn-danger' (click)="DeleteEleveGroupe(Groupe.id)">
+                    Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-8">
+    <input type="text" id="myInput" autocomplete="off" (keyup)="GroupeExistant()" placeholder="Recherche Du Groupe"[(ngModel)]="groupesearch">
+    <div *ngIf="groupesearch">
+        <ul id="myUL">
+            <div *ngFor="let result of searchresult">
+                <div *ngIf="CheckGroupe(result)">
+                    <li><button (click)="AddEleveGroupe(result.id,result.name)" >{{result.name}}</button></li>
+                </div>
+            </div>
+        </ul>
+    </div>
+    </div>
+    <div class="col-4">
+        <button nbButton status="secondary" size="large" (click)='SubmitEleveGroupe()'>
+            Valider
+        </button>
+    </div>
+</div>

@@ -9,5 +9,8 @@ namespace KinderGartenManagment.Api.ViewModels
     {
         public int EleveId { get; set; }
         public int GroupeId { get; set; }
+        public DateTime DateDeDebut { get; set; }
+        public DateTime DateDeFin { get; set; }
+        public bool Active { get; set; }
     }
 }

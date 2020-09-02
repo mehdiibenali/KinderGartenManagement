@@ -41,7 +41,13 @@ namespace KinderGartenManagment.Api.Repositories
         {
             _context.Entry(groupe).State = EntityState.Modified;
         }
-
+        public async Task<IEnumerable<Groupe>> SearchByName(string groupesearch)
+        {
+            return await _context.Groupes
+                .Include(c => c.Classe)
+                .Where(x => x.Name.Contains(groupesearch))
+                .ToListAsync();
+        }
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
