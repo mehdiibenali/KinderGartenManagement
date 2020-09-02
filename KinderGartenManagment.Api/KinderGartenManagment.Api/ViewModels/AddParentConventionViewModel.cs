@@ -8,6 +8,6 @@ namespace KinderGartenManagment.Api.ViewModels
     public class AddParentConventionViewModel
     {
         public int ParentId { get; set; }
-        public int ConventionId { get; set; }
+        public int? NewConventionId { get; set; }
     }
 }

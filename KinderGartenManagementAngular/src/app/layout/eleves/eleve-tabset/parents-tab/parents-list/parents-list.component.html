@@ -13,6 +13,7 @@
             </tr>
         </thead>
         <tbody>
+            <form #myForm="ngForm" (submit)="templateForm(myForm.value)" novalidate>
             <tr *ngFor="let Parent of ParentsAndConventions">
                 <td>{{Parent.p.prenom}}</td>
                 <td>{{Parent.p.nomDeFamille}}</td>
@@ -27,7 +28,13 @@
                     <button type='button' class='btn btn-danger' (click)="DeleteEleveParent(Parent.p.id)">
                     Supprimer</button>
                 </td>
+                <td class="custom-control custom-radio">
+                
+                    <input id="male" type="radio" class="custom-control-input" value="male" name="gender" ngModel>       
+                
+                </td>
             </tr>
+            </form>
         </tbody>
     </table>
 </div>

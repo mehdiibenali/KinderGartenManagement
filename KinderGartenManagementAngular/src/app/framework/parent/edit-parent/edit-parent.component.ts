@@ -7,6 +7,7 @@ import { Convention } from 'src/app/_core/_models/convention';
 import { Parent } from 'src/app/_core/_models/parent';
 import { ParentConvention } from 'src/app/_core/_models/parent-convention';
 import { formatDate } from '@angular/common';
+import { AddParentConvention } from 'src/app/_core/_models/add-parent-convention';
 
 @Component({
   selector: 'app-edit-parent',
@@ -19,8 +20,7 @@ export class EditParentComponent implements OnInit {
   parentid:any;
   conventionyear:number;
   ParentConvention:any=new Object();
-  ParentConventionToAdd:ParentConvention=new ParentConvention();
-  ParentConventionToEdit:ParentConvention=new ParentConvention();
+  ParentConventionToAdd:AddParentConvention=new AddParentConvention();
   Conventions:Convention[]=[];
   Parent:any=new Object();
   Convention:any=new Object();
@@ -53,40 +53,13 @@ export class EditParentComponent implements OnInit {
     this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
       (success) => {
         this.toastrService.show('Parent Updated successfully', 'Update', { status: 'success' });
-        if (this.Parent.parentConventions.length==0){
-          this.ParentConventionToAdd.active=true;
-          this.ParentConventionToAdd.conventionid=this.Convention.id;
-          this.ParentConventionToAdd.parentid=this.parentid;
-          this.ParentConventionToAdd.datededebut=this.today;
-          console.log(this.ParentConventionToAdd);
-          this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(data=>{console.log('success'),
-          err=>console.log(err)});
-          this.updateeleve.emit();
-          return;
-        }
-        if (this.Convention.id != this.ParentConvention.conventionId){
-          this.ParentConventionToEdit.active=true;
-          this.ParentConventionToEdit.conventionid=this.ParentConvention.conventionId;
-          this.ParentConventionToEdit.parentid=this.parentid;
-          this.ParentConventionToEdit.datededebut=this.ParentConvention.dateDeDebut;
-          this.ParentConventionToEdit.datedefin=this.today;
-          console.log(this.ParentConventionToEdit);
-          this.parentService.UpdateParentConvention(this.ParentConventionToEdit).subscribe(
-            data=>{console.log(data)},
-            err=>console.log(err));
-          this.parentService.DisableParentConvention(this.parentid).subscribe(
-            err=>console.log(err)
-          );
-          if (this.Convention.id!=null){
-            this.ParentConventionToAdd.active=true;
-            this.ParentConventionToAdd.conventionid=this.Convention.id;
-            this.ParentConventionToAdd.parentid=this.parentid;
-            this.ParentConventionToAdd.datededebut=this.today;
-            this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(data=>console.log(data),
-            err=>console.log(err));
-          }
-        }
-        this.updateeleve.emit();
+        this.ParentConventionToAdd.parentid=this.Parent.id;
+        if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
+        console.log(this.ParentConventionToAdd);
+        this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(
+          data=>{this.updateeleve.emit()},
+          err=>console.log(err));
+
       },
       (error) => {
         this.toastrService.show('Server error', 'Update', { status: 'danger' });
@@ -97,6 +70,7 @@ export class EditParentComponent implements OnInit {
     this.conventionService.SearchByYear(this.conventionyear).subscribe(
       data=>{this.Conventions=data},
       err=>{console.log(err)}
+    
     );
   }
   conventionsnull(){this.Conventions=null;this.ParentConvention.conventionid=null}

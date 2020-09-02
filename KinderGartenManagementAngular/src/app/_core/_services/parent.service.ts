@@ -31,8 +31,8 @@ export class ParentService {
   DeleteEleveParent(eleveid,parentid){
     return this.api.delete('/api/EleveParents/'+eleveid+'/'+parentid)
   }
-  AddParentConvention(parentconvention){
-    return this.api.post('/api/ParentConventions',parentconvention)
+  AddParentConvention(addparentconvention){
+    return this.api.post('/api/ParentConventions',addparentconvention)
   }
   DisableParentConvention(parentid){
     return this.api.put('/api/ParentConventions/DisableConventionActive/'+parentid,null)

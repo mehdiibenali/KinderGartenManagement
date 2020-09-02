@@ -87,4 +87,7 @@ export class ParentsListComponent implements OnInit {
   CheckParent(result){
     return this.Parents.filter(p=>p.id === result.id).length==0
   }
+  templateForm(value: any) {
+    alert(JSON.stringify(value));
+  }
 }

@@ -74,34 +74,38 @@ namespace KinderGartenManagment.Api.Controllers
             }
             return NoContent();
         }
-        [HttpPost{"{parentid}/{oldconventionid}/{newconventionid}"] 
-        public async Task< ParentConvention > AddParentConvention (int parentid, int? oldconventionid=null, int? newconventionid=null) 
+        [HttpPost]
+        public async Task<IActionResult> AddParentConvention( AddParentConventionViewModel pcvm) 
         {
-            if (oldconventionid != null) {
-                try
-                {
-                    await _parentConventionRepository.DisableConventionActive(parentid);
-                    await _parentConventionRepository.SaveAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-                }
-            }
-            if (newconventionid != null)
+             try
+             {
+                await _parentConventionRepository.DisableConventionActive(pcvm.ParentId);
+                await _parentConventionRepository.SaveAsync();
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+               throw;
+             }
+            if (pcvm.NewConventionId != null)
             {
                 try
                 {
-
-                    await _parentConventionRepository.InsertAsync(p);
+                    ParentConvention pc = new ParentConvention
+                    {
+                        ParentId = pcvm.ParentId,
+                        ConventionId = pcvm.NewConventionId.Value,
+                        Active = true,
+                        DateDeDebut = DateTime.Now,
+                    };
+                    await _parentConventionRepository.InsertAsync(pc);
                     await _parentConventionRepository.SaveAsync();
-                    return p;
                 }
                 catch (Exception e)
                 {
                     throw e;
                 }
             }
+            return Ok();
         } 
  
         [HttpDelete("{id}")] 

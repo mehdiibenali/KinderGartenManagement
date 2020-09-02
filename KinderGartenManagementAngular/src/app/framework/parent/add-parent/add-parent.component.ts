@@ -8,6 +8,7 @@ import { ConventionService } from 'src/app/_core/_services/convention.service';
 import { Convention } from 'src/app/_core/_models/convention';
 import { ParentConvention } from 'src/app/_core/_models/parent-convention';
 import { formatDate } from '@angular/common';
+import { AddParentConvention } from 'src/app/_core/_models/add-parent-convention';
 
 @Component({
   selector: 'app-add-parent',
@@ -20,7 +21,7 @@ export class AddParentComponent implements OnInit {
   previousUrl:any;
   test:any;
   parent:any = new Object();
-  parentconvention:ParentConvention=new ParentConvention();
+  parentconvention:AddParentConvention=new AddParentConvention();
   conventionyear:number;
   conventionid:number;
   Conventions:Convention[]=[];
@@ -32,10 +33,8 @@ export class AddParentComponent implements OnInit {
     this.parentService.AddParent(this.parent).subscribe(
       (data) => {
         if (this.conventionid !=null){
-          this.parentconvention.active=true;
-          this.parentconvention.conventionid=this.conventionid;
+          this.parentconvention.newconventionid=this.conventionid;
           this.parentconvention.parentid=data.id;
-          this.parentconvention.datededebut=this.today;
           this.parentService.AddParentConvention(this.parentconvention).subscribe(
             (success) => { this.parentid.emit(data.id); },
             (error) => {
