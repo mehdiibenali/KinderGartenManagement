@@ -16,7 +16,7 @@ export class ConventionService {
   SearchByYear(year){
     return this.api.get('/api/Conventions/SearchByYear/'+year)
   }
-  GetActive(parentid){
-    return this.api.get('/api/Conventions/GetActive/'+parentid)
+  GetActive(parentid,datetime){
+    return this.api.get('/api/Conventions/GetActive/'+parentid+'/'+datetime)
   }
 }

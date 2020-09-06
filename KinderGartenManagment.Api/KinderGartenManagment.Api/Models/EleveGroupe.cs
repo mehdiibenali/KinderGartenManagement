@@ -14,7 +14,6 @@ namespace KinderGartenManagment.Api.Models
         public DateTime DateDeDebut { get; set; }
 
         public DateTime? DateDeFin { get; set; }
-        public bool Active { get; set; }
         public Eleve Eleve { get; set; }
         public Groupe Groupe { get; set; }
     }

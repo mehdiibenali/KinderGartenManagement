@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using KinderGartenManagment.Api.Context; 
 using KinderGartenManagment.Api.Interfaces.Repositories; 
 using System.Threading.Tasks; 
-using System.Linq; 
- 
+using System.Linq;
+using System;
+
 namespace KinderGartenManagment.Api.Repositories 
 { 
     public class ConventionRepository : IConventionRepository 
@@ -19,10 +20,10 @@ namespace KinderGartenManagment.Api.Repositories
         { 
             return await _context. Conventions .ToListAsync(); 
         }
-        public async Task<Convention> GetActive(int parentid)
+        public async Task<Convention> GetActive(int parentid,DateTime datetime)
         {
             return await _context.Conventions
-                .Where(c => c.ParentConventions.Any(cp => cp.ParentId == parentid && cp.Active == true)).FirstOrDefaultAsync();
+                .Where(c => c.ParentConventions.Any(cp => cp.ParentId == parentid && cp.DateDeFin > datetime)).FirstOrDefaultAsync();
         }
         public async Task<IEnumerable<Convention>> SearchByYear(int year)
         {

@@ -33,6 +33,10 @@ namespace KinderGartenManagment.Api.Helpers
                 .ReverseMap();
             CreateMap<ParentConventionViewModel, ParentConvention>()
                 .ReverseMap();
+            CreateMap<ConventionFeeViewModel, ConventionFee>()
+                .ReverseMap();
+            CreateMap<ParameterViewModel, Parameter >()
+                .ReverseMap();
         }
     }
 }

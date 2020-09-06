@@ -43,10 +43,9 @@ namespace KinderGartenManagment.Api.Repositories
         }
         public async Task DisableConventionActive(int parentid)
         {
-            ParentConvention pc = _context.ParentConventions.Where(ep => ep.Active == true && ep.ParentId == parentid).FirstOrDefault();
+            ParentConvention pc = _context.ParentConventions.Where(ep => ep.DateDeFin > DateTime.Now && ep.ParentId == parentid).FirstOrDefault();
             if (pc != null)
             {
-                pc.Active = false;
                 pc.DateDeFin = DateTime.Now;
                 _context.Entry(pc).State = EntityState.Modified;
             }

@@ -17,16 +17,28 @@ namespace KinderGartenManagment.Api.Repositories
         } 
         public async Task<IEnumerable< EleveParent >> GetAll() 
         { 
-            return await _context. EleveParents.Include(c => c.Eleve).Include(c => c.Parent).ToListAsync(); 
+            return await _context. EleveParents.ToListAsync(); 
         } 
  
-        public async Task< EleveParent > GetByIdAsync(int id) 
+        public async Task< EleveParent > GetByIdAsync(int eleveid,int parentid) 
         { 
-            return await _context. EleveParents .FindAsync(id); 
-        } 
- 
+            return await _context. EleveParents .Where(ep=>ep.EleveId==eleveid && ep.ParentId==parentid).FirstOrDefaultAsync();
+        
+        }
+        public async Task<EleveParent> GetByEleveIdParentTuteur(int eleveid)
+        {
+            return await _context.EleveParents.Where(ep => ep.EleveId == eleveid && ep.ParentTuteur == true).FirstOrDefaultAsync();
+        }
+
         public async Task InsertAsync( EleveParent eleveparent ) 
-        { 
+        {
+            EleveParent ep = _context.EleveParents.Where(ep => ep.ParentTuteur == true && ep.EleveId == eleveparent.EleveId).FirstOrDefault();
+            if (ep != null)
+            {
+                ep.ParentTuteur = false;
+                _context.Entry(ep).State = EntityState.Modified;
+            }
+            eleveparent.ParentTuteur = true;
             await _context. EleveParents .AddAsync( eleveparent ); 
         }
 
@@ -34,11 +46,28 @@ namespace KinderGartenManagment.Api.Repositories
         { 
            EleveParent eleveparent = _context. EleveParents .Where(p=>p.EleveId==eleveid && p.ParentId==parentid).First(); 
             _context. EleveParents .Remove( eleveparent );
+            EleveParent ep = _context.EleveParents.Where(ep => ep.ParentTuteur == false && ep.EleveId == eleveid).FirstOrDefault();
+            if (ep != null)
+            {
+                ep.ParentTuteur = true;
+                _context.Entry(ep).State = EntityState.Modified;
+            }
         } 
  
-        public void Update( EleveParent eleveparent ) 
-        { 
-            _context.Entry( eleveparent ).State = EntityState.Modified; 
+        public async Task UpdateAsync( int eleveid , int parentid) 
+        {
+            EleveParent ep = _context.EleveParents.Where(ep => ep.ParentTuteur == true && ep.EleveId == eleveid).FirstOrDefault();
+            if (ep != null)
+            {
+                ep.ParentTuteur = false;
+                _context.Entry(ep).State = EntityState.Modified;
+            }
+            EleveParent newep = await _context.EleveParents.Where(pe => pe.EleveId == eleveid && pe.ParentId == parentid).FirstOrDefaultAsync();
+            if (newep != null)
+            {
+                newep.ParentTuteur = true;
+                _context.Entry(newep).State = EntityState.Modified;
+            }
         }
         public async Task DisableParentTuteurAsync(int eleveid)
         {

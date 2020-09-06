@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ParentsTabRoutingModule } from './parents-tab-routing.module';
 import { ParentsListComponent } from './parents-list/parents-list.component';
-import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonModule, NbTabsetModule, NbSpinnerModule } from '@nebular/theme';
+import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonModule, NbTabsetModule, NbSpinnerModule, NbCheckboxModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AddParentTeComponent } from './add-parent-te/add-parent-te.component';
@@ -27,6 +27,7 @@ import { EditParentTeComponent } from './edit-parent-te/edit-parent-te.component
     NbTabsetModule,
     NbSpinnerModule,
     FrameworkModule,
+    NbCheckboxModule,
   ]
 })
 export class ParentsTabModule { }

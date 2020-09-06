@@ -12,7 +12,6 @@ namespace KinderGartenManagment.Api.Models
         public int ConventionId { get; set; }
         public DateTime DateDeDebut { get; set; }
         public DateTime? DateDeFin { get; set; }
-        public bool Active { get; set; }
         public Parent Parent { get; set; }
         public Convention Convention { get; set; }
     }

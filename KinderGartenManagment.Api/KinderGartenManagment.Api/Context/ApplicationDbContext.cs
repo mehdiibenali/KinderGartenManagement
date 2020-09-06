@@ -27,6 +27,9 @@ namespace KinderGartenManagment.Api.Context
         public DbSet<Groupe> Groupes { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ConventionFee> ConventionFees { get; set; }
+        public DbSet<Parameter> Parameters { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

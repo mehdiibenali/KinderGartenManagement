@@ -30,6 +30,13 @@ namespace KinderGartenManagment.Api.Controllers
             var resultListe = await _groupeRepository.GetAll();
             return resultListe;
         }
+        [HttpGet("GetYears/{eleveid}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetYears(int eleveid)
+        {
+            var resultListe = await _groupeRepository.GetYears(eleveid);
+            if (resultListe != null) { return Ok(resultListe); };
+            return NotFound();
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<Groupe>> GetGroupe(int id)
         {
@@ -41,6 +48,18 @@ namespace KinderGartenManagment.Api.Controllers
             }
 
             return groupe;
+        }
+        [HttpGet("SearchByYear/{anneededebut}/{anneedefin}")]
+        public async Task<ActionResult<IEnumerable<Groupe>>> SearchByYear(int anneededebut,int anneedefin)
+        {
+            IEnumerable<Groupe> groupe = await _groupeRepository.SearchByYear(anneededebut,anneedefin);
+
+            if (groupe == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(groupe);
         }
         [HttpGet("SearchByName/{groupesearch}")]
         public async Task<ActionResult<IEnumerable<Groupe>>> SearchByName(string groupesearch)

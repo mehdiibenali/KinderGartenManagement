@@ -94,7 +94,6 @@ namespace KinderGartenManagment.Api.Controllers
                     {
                         ParentId = pcvm.ParentId,
                         ConventionId = pcvm.NewConventionId.Value,
-                        Active = true,
                         DateDeDebut = DateTime.Now,
                     };
                     await _parentConventionRepository.InsertAsync(pc);

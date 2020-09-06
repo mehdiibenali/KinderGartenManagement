@@ -16,17 +16,23 @@ export class GroupesListComponent implements OnInit {
   groupesearch:string;
   searchresult:Groupe[]=[];
   groupeid:number;
+  Years:Object[];
   elevegroupe:EleveGroupe = new EleveGroupe();
   constructor(private router:Router,private _Activatedroute:ActivatedRoute,private groupeService:GroupeService, private toastrService: NbToastrService) { }
 
   ngOnInit(): void {
     this.eleveid=this._Activatedroute.snapshot.paramMap.get("eleveid");
     this.GetByEleveId();
+    this.groupeService.GetYears(this.eleveid).subscribe(
+      data=>{
+        console.log(data);
+        this.Years=data},
+      err=>console.log(err)
+    )
   };
   GetByEleveId(){
     this.groupeService.GetGroupesByEleveId(this.eleveid).subscribe(data => {
       this.Groupes = data;
-      console.log(this.Groupes);
     },
     error => {  
       console.log(error);
@@ -77,6 +83,15 @@ export class GroupesListComponent implements OnInit {
           this.toastrService.show('Server error', 'Add', { status: 'danger' });
           console.log(error);
       } 
+    )
+  }
+  SearchByYear(debut,fin){
+    this.groupeService.SearchByYear(debut,fin).subscribe(
+      data=>{
+        this.searchresult=data;
+        console.log(this.searchresult);
+        this.groupesearch='  '},
+      err=>console.log(err)
     )
   }
 }

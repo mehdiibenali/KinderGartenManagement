@@ -8,7 +8,9 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
     public interface IGroupeRepository  
     { 
         Task<IEnumerable< Groupe >> GetAll(); 
-        Task< Groupe > GetByIdAsync(int groupeId ); 
+        Task< Groupe > GetByIdAsync(int groupeId );
+        Task<IEnumerable<object>> GetYears(int eleveid);
+        Task<IEnumerable<Groupe>> SearchByYear(int anneededebut, int anneedefin);
         Task InsertAsync( Groupe groupe ); 
         Task DeleteAsync(int groupeId ); 
         void Update( Groupe groupe );

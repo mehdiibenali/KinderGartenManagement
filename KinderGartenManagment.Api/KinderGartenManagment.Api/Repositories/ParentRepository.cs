@@ -23,7 +23,7 @@ namespace KinderGartenManagment.Api.Repositories
             {
                 p,
                 ParentConventions = p.ParentConventions
-                                           .Where(p => p.Active == true)
+                                           .Where(pc => pc.DateDeFin > DateTime.Now)
             })
             .AsEnumerable()
             .Select(x => x.p).ToList();
@@ -35,7 +35,7 @@ namespace KinderGartenManagment.Api.Repositories
         {
 
             Parent Parent = await _context.Parents.FindAsync(id);
-            Parent.ParentConventions = await _context.ParentConventions.Include(pc => pc.Convention).Where(pc => pc.Active == true && pc.ParentId == id).ToListAsync();
+            Parent.ParentConventions = await _context.ParentConventions.Include(pc => pc.Convention).Where(pc => pc.DateDeFin > DateTime.Now && pc.ParentId == id).ToListAsync();
             return Parent;
     
           }
@@ -60,13 +60,13 @@ namespace KinderGartenManagment.Api.Repositories
             {
                 p,
                 ParentConventions = p.ParentConventions
-                                             .Where(p => p.Active == true),
+                                             .Where(pc => pc.DateDeFin > DateTime.Now),
             }
                 ).AsEnumerable()
             .Select(x => x.p).ToList();
              return from p in _context.Parents
                            join ep in _context.EleveParents on p.Id equals ep.ParentId
-                           join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = pc.Active } into ppc
+                           join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = pc.DateDeFin>DateTime.Now } into ppc
                            from subparentconvention in ppc.DefaultIfEmpty()
                            select new { p, NameOfConvention = subparentconvention.Convention.Name ??  null };
 

@@ -29,10 +29,10 @@ namespace KinderGartenManagment.Api.Controllers
             var resultListe = await _conventionRepository .GetAll(); 
             return resultListe; 
         }
-        [HttpGet("GetActive/{parentid}")]
-        public async Task<ActionResult<Convention>> GetActive(int parentid)
+        [HttpGet("GetActive/{parentid}/{datetime}")]
+        public async Task<ActionResult<Convention>> GetActive(int parentid,DateTime datetime)
         {
-            var resultListe = await _conventionRepository.GetActive(parentid);
+            var resultListe = await _conventionRepository.GetActive(parentid,datetime);
             if (resultListe == null)
             {
                 return NotFound();

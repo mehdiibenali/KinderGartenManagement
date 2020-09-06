@@ -28,6 +28,12 @@ export class ParentService {
   SearchByName(parentsearch){
     return this.api.get('/api/Parents/SearchByName/'+parentsearch)
   }
+  GetEleveParentByParentTuter(eleveid){
+    return this.api.get('/api/EleveParents/GetByParentTuteur/'+eleveid)
+  }
+  UpdateEleveParent(eleveid,parentid){
+    return this.api.put('/api/EleveParents/'+eleveid+'/'+parentid,null)
+  }
   DeleteEleveParent(eleveid,parentid){
     return this.api.delete('/api/EleveParents/'+eleveid+'/'+parentid)
   }

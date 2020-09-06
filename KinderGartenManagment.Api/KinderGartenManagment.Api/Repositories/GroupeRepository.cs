@@ -20,7 +20,14 @@ namespace KinderGartenManagment.Api.Repositories
             var t = await _context.Groupes.Include(c => c.EleveGroupes).ToListAsync();
             return t;
         }
-
+        public async Task<IEnumerable<object>> GetYears(int eleveid)
+        {
+            return await _context.Groupes.Where(g=>g.EleveGroupes.Any(eg=>eg.EleveId==eleveid)).Select(g => new {debut= g.DateDeDebut.Year, fin=g.DateDeFin.Year }).Distinct().ToListAsync();
+        }
+        public async Task<IEnumerable<Groupe>> SearchByYear(int anneededebut,int anneedefin)
+        {
+            return await _context.Groupes.Where(g => g.DateDeDebut.Year == anneededebut && g.DateDeFin.Year == anneedefin).ToListAsync();
+        }
         public async Task<Groupe> GetByIdAsync(int id)
         {
             return await _context.Groupes.Include(c => c.Classe).FirstOrDefaultAsync(x => x.Id == id);

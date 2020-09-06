@@ -29,21 +29,40 @@ namespace KinderGartenManagment.Api.Controllers
             var resultListe = await _eleveParentRepository.GetAll();
             return resultListe;
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEleveParent(int id, EleveParentViewModel eleveparent)
+        [HttpGet("{eleveid}/{parentid}")]
+        public async Task<ActionResult<EleveParent>> GetEleveParentsById(int eleveid,int parentid)
+        {
+            var result = await _eleveParentRepository.GetByIdAsync(eleveid,parentid);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpGet("GetByParentTuteur/{eleveid}")]
+        public async Task<ActionResult<EleveParent>> GetByParentTuteur(int eleveid)
+        {
+            var result = await _eleveParentRepository.GetByEleveIdParentTuteur(eleveid);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpPut("{eleveid}/{parentid}")]
+        public async Task<IActionResult> PutEleveParent(int eleveid, int parentid)
         {
 
             try
             {
-                var p = _mapper.Map<EleveParent>(eleveparent);
-                _eleveParentRepository.Update(p);
+                await _eleveParentRepository.UpdateAsync(eleveid,parentid);
                 await _eleveParentRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw;
             }
-            return NoContent();
+            return Ok();
         }
         [HttpPut("DisableParentTuteur/{eleveid}")]
         public async Task<IActionResult> DisableParentTuteur(int eleveid)

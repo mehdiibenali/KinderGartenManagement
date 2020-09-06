@@ -7,13 +7,12 @@
                 <th>Tel 1</th>
                 <th>Tel 2</th>
                 <th>Tel 3</th>
-                <th>Adresse Email</th>
-                <th>Convention</th>
-                <th>Actions</th>
+                <th><div class="row justify-content-center">Adresse Email</div></th>
+                <th><div class="row justify-content-center">Convention</div></th>
+                <th><div class="row justify-content-center">Actions</div></th>
             </tr>
         </thead>
         <tbody>
-            <form #myForm="ngForm" (submit)="templateForm(myForm.value)" novalidate>
             <tr *ngFor="let Parent of ParentsAndConventions">
                 <td>{{Parent.p.prenom}}</td>
                 <td>{{Parent.p.nomDeFamille}}</td>
@@ -28,13 +27,14 @@
                     <button type='button' class='btn btn-danger' (click)="DeleteEleveParent(Parent.p.id)">
                     Supprimer</button>
                 </td>
-                <td class="custom-control custom-radio">
-                
-                    <input id="male" type="radio" class="custom-control-input" value="male" name="gender" ngModel>       
-                
+                <td>
+                    <div class="row">
+                    <button type='button' class='btn btn-info' [disabled] = checkpt(Parent.p.id) (click)="ChangeParentTuteur(Parent.p.id)">
+                        Parent Tuteur</button>
+                    <nb-checkbox status="basic" disabled [checked]=checkpt(Parent.p.id)></nb-checkbox>
+                    </div>
                 </td>
             </tr>
-            </form>
         </tbody>
     </table>
 </div>

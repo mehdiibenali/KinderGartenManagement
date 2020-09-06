@@ -16,6 +16,10 @@ const routes: Routes = [
         path:'eleves',
         loadChildren: () => import('./eleves/eleves.module').then(m=>m.ElevesModule)
       },
+      {
+        path:'conventions',
+        loadChildren: () => import('./conventions/conventions.module').then(m=>m.ConventionsModule)
+      },
     ]
   }
 ];

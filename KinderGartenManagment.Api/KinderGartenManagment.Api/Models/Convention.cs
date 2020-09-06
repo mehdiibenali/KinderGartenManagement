@@ -15,5 +15,6 @@ namespace KinderGartenManagment.Api.Models
 
         public DateTime DateDeFin { get; set; }
         public virtual ICollection<ParentConvention> ParentConventions { get; set; }
+        public virtual ICollection<ConventionFee> ConventionFees { get; set; }
     }
 }

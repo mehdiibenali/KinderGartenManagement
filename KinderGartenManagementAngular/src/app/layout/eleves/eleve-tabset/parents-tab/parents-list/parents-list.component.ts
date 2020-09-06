@@ -22,6 +22,7 @@ export class ParentsListComponent implements OnInit {
   eleveparent:EleveParent=new EleveParent();
   parentid:number;
   conventionname:string;
+  parenttuteur:number;
   constructor(private router:Router,private _Activatedroute:ActivatedRoute,private parentService:ParentService, private toastrService: NbToastrService,private conventionService:ConventionService) { }
 
   ngOnInit(): void {
@@ -32,6 +33,10 @@ export class ParentsListComponent implements OnInit {
     this.parentService.GetParentByEleveId(this.eleveid).subscribe(data => {
       this.ParentsAndConventions=data;
       this.Parents=data.map(d=>d.p);
+      this.parentService.GetEleveParentByParentTuter(this.eleveid).subscribe(
+        data=>{console.log('success');this.parenttuteur=data.parentId},
+        err=>console.log(err)
+      )
     },
     error => {  
       console.log(error);
@@ -54,11 +59,11 @@ export class ParentsListComponent implements OnInit {
   DeleteEleveParent(parentid:number){
     this.parentService.DeleteEleveParent(this.eleveid,parentid).subscribe(
       (success) => {
-        this.toastrService.show('Parent Supprimé De L\'éleve', 'Delete', { status: 'success' });
+        this.toastrService.show('Parent Supprimé De L\'éleve', 'Suppression', { status: 'success' });
         this.GetByEleveId();
       },
       (error) => {
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Server error', 'Suppression', { status: 'danger' });
           console.log(error);
       } 
     );
@@ -70,7 +75,7 @@ export class ParentsListComponent implements OnInit {
   SubmitEleveParent(){
     if (this.parentid==null){return}
     this.eleveparent.EleveId=this.eleveid;
-    this.eleveparent.ParentId=this.parentid;
+    this.eleveparent.ParentId=this.parentid
     this.parentService.AddEleveParent(this.eleveparent).subscribe(
       (success) => {
         this.toastrService.show('Parent added successfully', 'Add', { status: 'success' });
@@ -87,7 +92,17 @@ export class ParentsListComponent implements OnInit {
   CheckParent(result){
     return this.Parents.filter(p=>p.id === result.id).length==0
   }
-  templateForm(value: any) {
-    alert(JSON.stringify(value));
+  ChangeParentTuteur(parentid: any) {
+    this.parentService.UpdateEleveParent(this.eleveid,parentid).subscribe(
+      data=>{
+        this.parentService.GetEleveParentByParentTuter(this.eleveid).subscribe(
+        data=>this.parenttuteur=data.parentId,
+        err=>console.log(err)
+      )
+        },
+      err=>console.log(err)
+    )
+
   }
+  checkpt(parentid){return this.parenttuteur==parentid}
 }
