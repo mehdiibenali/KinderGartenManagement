@@ -68,7 +68,7 @@ namespace KinderGartenManagment.Api.Migrations
                     b.Property<int>("ConventionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Tarif")
+                    b.Property<int>("Fee")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -108,12 +108,12 @@ namespace KinderGartenManagment.Api.Migrations
                     b.ToTable("Eleves");
                 });
 
-            modelBuilder.Entity("KinderGartenManagment.Api.Models.EleveGroupe", b =>
+            modelBuilder.Entity("KinderGartenManagment.Api.Models.EleveEnrollement", b =>
                 {
                     b.Property<int>("EleveId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GroupeId")
+                    b.Property<int>("EnrollementId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateDeDebut")
@@ -122,11 +122,14 @@ namespace KinderGartenManagment.Api.Migrations
                     b.Property<DateTime?>("DateDeFin")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("EleveId", "GroupeId");
+                    b.Property<string>("SubscriptionType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("GroupeId");
+                    b.HasKey("EleveId", "EnrollementId");
 
-                    b.ToTable("EleveGroupes");
+                    b.HasIndex("EnrollementId");
+
+                    b.ToTable("EleveEnrollements");
                 });
 
             modelBuilder.Entity("KinderGartenManagment.Api.Models.EleveParent", b =>
@@ -147,14 +150,14 @@ namespace KinderGartenManagment.Api.Migrations
                     b.ToTable("EleveParents");
                 });
 
-            modelBuilder.Entity("KinderGartenManagment.Api.Models.Groupe", b =>
+            modelBuilder.Entity("KinderGartenManagment.Api.Models.Enrollement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClasseId")
+                    b.Property<int?>("ClasseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateDeDebut")
@@ -166,11 +169,14 @@ namespace KinderGartenManagment.Api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClasseId");
 
-                    b.ToTable("Groupes");
+                    b.ToTable("Enrollements");
                 });
 
             modelBuilder.Entity("KinderGartenManagment.Api.Models.Parameter", b =>
@@ -252,6 +258,49 @@ namespace KinderGartenManagment.Api.Migrations
                     b.HasIndex("ConventionId");
 
                     b.ToTable("ParentConventions");
+                });
+
+            modelBuilder.Entity("KinderGartenManagment.Api.Models.Payement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateDeDebut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateDeFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EleveEnrollementEleveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EleveEnrollementEnrollementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EleveEnrollementId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EleveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Expected")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Paid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EleveId");
+
+                    b.HasIndex("EleveEnrollementEleveId", "EleveEnrollementEnrollementId");
+
+                    b.ToTable("Payements");
                 });
 
             modelBuilder.Entity("KinderGartenManagment.Api.Models.Role", b =>
@@ -468,17 +517,17 @@ namespace KinderGartenManagment.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("KinderGartenManagment.Api.Models.EleveGroupe", b =>
+            modelBuilder.Entity("KinderGartenManagment.Api.Models.EleveEnrollement", b =>
                 {
                     b.HasOne("KinderGartenManagment.Api.Models.Eleve", "Eleve")
-                        .WithMany("EleveGroupes")
+                        .WithMany("EleveEnrollements")
                         .HasForeignKey("EleveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KinderGartenManagment.Api.Models.Groupe", "Groupe")
-                        .WithMany("EleveGroupes")
-                        .HasForeignKey("GroupeId")
+                    b.HasOne("KinderGartenManagment.Api.Models.Enrollement", "Enrollement")
+                        .WithMany("EleveEnrollements")
+                        .HasForeignKey("EnrollementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -498,13 +547,11 @@ namespace KinderGartenManagment.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("KinderGartenManagment.Api.Models.Groupe", b =>
+            modelBuilder.Entity("KinderGartenManagment.Api.Models.Enrollement", b =>
                 {
                     b.HasOne("KinderGartenManagment.Api.Models.Classe", "Classe")
-                        .WithMany("Groupes")
-                        .HasForeignKey("ClasseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Enrollements")
+                        .HasForeignKey("ClasseId");
                 });
 
             modelBuilder.Entity("KinderGartenManagment.Api.Models.ParentConvention", b =>
@@ -518,6 +565,19 @@ namespace KinderGartenManagment.Api.Migrations
                     b.HasOne("KinderGartenManagment.Api.Models.Parent", "Parent")
                         .WithMany("ParentConventions")
                         .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("KinderGartenManagment.Api.Models.Payement", b =>
+                {
+                    b.HasOne("KinderGartenManagment.Api.Models.Eleve", null)
+                        .WithMany("Payements")
+                        .HasForeignKey("EleveId");
+
+                    b.HasOne("KinderGartenManagment.Api.Models.EleveEnrollement", "EleveEnrollement")
+                        .WithMany()
+                        .HasForeignKey("EleveEnrollementEleveId", "EleveEnrollementEnrollementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

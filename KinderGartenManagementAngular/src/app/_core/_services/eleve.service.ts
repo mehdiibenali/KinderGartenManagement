@@ -11,11 +11,11 @@ export class EleveService {
   AddEleve(eleve:Eleve){
     return this.api.post('/api/Eleves',eleve);
   }
-  // AddPicture(formData){
-  //   return this.api.postfile('/api/ApplicationUser/Upload', formData)
-  // }
   GetAll(){
     return this.api.get('/api/Eleves')
+  }
+  Search(search){
+    return this.api.post('/api/Eleves/Search',search)
   }
   DeleteEleve(id){
     return this.api.delete('/api/Eleves/'+id) 

@@ -8,6 +8,10 @@ const routes: Routes = [
     path:'list',
     component:ConventionListComponent
   },
+  {
+    path:'fiche',
+    loadChildren: () => import('./convention-tabset/convention-tabset.module').then(m=>m.ConventionTabsetModule)
+  }
 ];
 
 @NgModule({

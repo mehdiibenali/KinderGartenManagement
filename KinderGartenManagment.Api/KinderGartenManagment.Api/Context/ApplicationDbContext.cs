@@ -17,26 +17,25 @@ namespace KinderGartenManagment.Api.Context
 
         }
         public DbSet<Classe> Classes { get; set; }
-        //public DbSet<Club> Clubs { get; set; }
         public DbSet<Convention> Conventions { get; set; }
         public DbSet<Eleve> Eleves { get; set; }
         public virtual DbSet<ParentConvention> ParentConventions { get; set; }
         public DbSet<EleveParent> EleveParents { get; set; }
-        public DbSet<EleveGroupe> EleveGroupes { get; set; }
-        //public DbSet<EleveClub> EleveClubs { get; set; }
-        public DbSet<Groupe> Groupes { get; set; }
+        public DbSet<EleveEnrollement> EleveEnrollements { get; set; }
+        public DbSet<Enrollement> Enrollements { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ConventionFee> ConventionFees { get; set; }
         public DbSet<Parameter> Parameters { get; set; }
+        public DbSet<Payement> Payements { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EleveParent>()
             .HasKey(o => new { o.EleveId, o.ParentId });
-            modelBuilder.Entity<EleveGroupe>()
-            .HasKey(o => new { o.EleveId, o.GroupeId });
+            modelBuilder.Entity<EleveEnrollement>()
+            .HasKey(o => new { o.EleveId, o.EnrollementId });
             modelBuilder.Entity<ParentConvention>()
             .HasKey(o => new { o.ParentId, o.ConventionId, o.DateDeDebut });
             //modelBuilder.Entity<BookCategory>()
@@ -57,7 +56,7 @@ namespace KinderGartenManagment.Api.Context
                     .IsRequired();
             });
             //modelBuilder.Entity<Classe>()   
-            //    .HasMany(c => c.Groupes)
+            //    .HasMany(c => c.Enrollements)
             //    .WithOne(e => e.Classe);
         }
     }

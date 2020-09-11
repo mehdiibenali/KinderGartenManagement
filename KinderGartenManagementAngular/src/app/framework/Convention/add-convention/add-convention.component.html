@@ -1,0 +1,53 @@
+<form (ngSubmit)="AddConvention()" #form="ngForm" aria-labelledby="title">
+    <div class='row'>
+        <div class="col-6" >
+                <label class="label" for="input-nom">Nom:</label>
+                <input nbInput
+                [(ngModel)]="convention.name"
+                #prenom="ngModel"
+                id="input-nom"
+                name="nom" autofocus fullWidth fieldSize="large" required>
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-tarif">Tarif:</label>
+                <input nbInput [(ngModel)]="conventionfee.fee" #tarif="ngModel" id="input-tarif"
+                    name="tarif" fullWidth fieldSize="large" required>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-datededebut">Date De Début:</label>
+                <input nbInput [(ngModel)]="convention.datededebut" id="input-datededebut" type="date"
+                    name="datededebut" type = "date" autofocus fullWidth fieldSize="large" required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-control-group">
+                <label class="label" for="input-datedefin">Date De Fin:</label>
+                <input nbInput [(ngModel)]="convention.datedefin" #datedefin="ngModel" id="input-datedefin"
+                    fullWidth fieldSize="large" type="date" name="datedefin" required>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row"><p></p></div>
+<div class="row">
+    <div class="col-6">
+        <button nbButton fullWidth status="primary" size="large" [disabled]="!form.valid"
+            (click)='AddConvention()'>
+            Ajouter Convention
+        </button>
+    </div>
+    <div class="col-6">
+        <button nbButton status="danger" size="large"
+         fullWidth (click)='CancelAddConvention()'>
+            Annuler
+        </button>
+    </div>
+</div>

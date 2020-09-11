@@ -15,7 +15,6 @@ export class LoginComponent extends NbLoginComponent implements OnInit {
   };
   
   ngOnInit(): void {this.service.onTokenChange().subscribe((token: NbAuthJWTToken) => {
-    //console.log('inside on init');
     if (token.isValid()) {
       //console.log('token valid');
       this.router.navigate(['']); // Your redirection goes here

@@ -8,7 +8,7 @@ namespace KinderGartenManagment.Api.ViewModels
     public class ConventionFeeViewModel
     {
         public string Code { get; set; }
-        public int Tarif { get; set; }
+        public int Fee { get; set; }
         public int ConventionId { get; set; }
     }
 }

@@ -1,31 +1,136 @@
-<button nbButton status="info" size="large" (click)='AddEleve()'>
-    Nouvel Eleve
-</button>
-<table class="table">
-    <thead class="thead-dark">
+<!-- <div class="row">
+    <div class="col-10">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-3">
+                        <p>hellodefazearzaeaeza</p>
+                        <input nbInput type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche de l'éleve"[(ngModel)]="search.elevesearch">
+                    </div>
+                    <div class="col-3">
+                        <P>hi</P>
+                    </div>
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-3">
+                        <P></P>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-5">
+                        
+                    </div>
+                    <div class="col-2">
+                        <P></P>
+                    </div>
+                    <div class="col-5">
+                        
+                    </div>
+                    <div class="col-2">
+                        <P></P>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-5">
+                        
+                    </div>
+                    <div class="col-2">
+                        <P></P>
+                    </div>
+                    <div class="col-5">
+                        
+                    </div>
+                    <div class="col-2">
+                        <P></P>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-5">
+                        
+                    </div>
+                    <div class="col-2">
+                        <P></P>
+                    </div>
+                    <div class="col-5">
+                        
+                    </div>
+                    <div class="col-2">
+                        <div><p></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <button nbButton status="info" size="large" (click)='AddEleve()'>
+            Nouvel Eleve
+        </button>
+    </div>
+</div> -->
+<tr>
+    <td>
+        <input nbInput type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche de l'éleve"[(ngModel)]="search.elevesearch">
+    </td>
+    <td>
+        <input nbInput type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche du parent"[(ngModel)]="search.parentsearch">
+    </td>
+    <td>
+        <nb-select  name="sexes" placeholder="Sexe" id="select-sexe" [(ngModel)]="search.sexe">
+            <nb-option [value]=null (click)=Search()>Tous</nb-option>
+            <nb-option value="M" (click)="Search()">M</nb-option>
+            <nb-option value="F" (click)="Search()">F</nb-option>
+        </nb-select>
+    </td>
+    <td>
+        <nb-select  name="classes" placeholder="Classe" id="select-classe" [(ngModel)]="search.classeid" (onChange)="console.log('hi'">
+            <nb-option [value]=null (click)=Search()>Toutes</nb-option>
+            <nb-option *ngFor="let Classe of Classes" [value]="Classe.id" (click)="Search()">{{Classe.name}}</nb-option>
+        </nb-select>
+    </td>
+    <td>
+        <nb-select name="groupes"  aria-placeholder=="Groupe" id="select-groupe" [(ngModel)]=search.groupeid>
+            <nb-option [value]=null (click)=Search()>Tout</nb-option>
+        </nb-select>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        <button nbButton status="info" size="large" (click)='AddEleve()'>
+            Nouvel Eleve
+        </button>
+    </td>
+</tr>
+<table class="table table-striped">
+    <thead class="thead-dark" >
         <tr>
             <th>Nom</th>
             <th>Prénom</th>
-            <th>DateDeNaissance</th>
-            <th>LieuDeNaissance</th>
+            <th>Date De Naissance</th>
             <th>Adresse</th>
             <th>Sexe</th>
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="width:50%">
         <tr *ngFor="let Eleve of Eleves">
             <td>{{Eleve.nom}}</td>
             <td>{{Eleve.prenom}}</td>
             <td>{{Eleve.dateDeNaissance}}</td>
-            <td>{{Eleve.lieuDeNaissance}}</td>
             <td>{{Eleve.adresse}}</td>
             <td>{{Eleve.sexe}}</td>
-            <td>
+            <td class="row">
                 <button type='button' class='btn btn-danger' (click)="Delete(Eleve.id)">
-                    Delete</button>
+                    Supprimer</button>
                 <button type='button' class='btn btn-success' (click)="Edit(Eleve.id)">
-                Voir Fiche</button>
+                Fiche</button>
             </td>
         </tr>
     </tbody>

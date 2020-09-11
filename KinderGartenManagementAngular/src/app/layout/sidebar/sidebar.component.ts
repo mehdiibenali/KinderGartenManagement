@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
       link: '/'
     },
     {
-      title: 'Employees',
+      title: 'Employers',
       expanded : false,
       children : [
         {
@@ -29,7 +29,11 @@ export class SidebarComponent implements OnInit {
     {
       title: 'Eleves',
       link:"/eleves/list"
-    }
+    },
+    {
+      title:'Conventions',
+      link:"/conventions/list"
+    },
    ];
   constructor() { }
 

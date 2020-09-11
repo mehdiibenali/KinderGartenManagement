@@ -1,0 +1,32 @@
+<button nbButton status="info" size="large" (click)='AddParent()'>
+    Nouvel Parent
+</button>
+<table class="table table-striped">
+    <thead class="thead-dark" >
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Tel 1</th>
+            <th>Tel 2</th>
+            <th>Tel 3</th>
+            <th>Convention</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody style="width:50%">
+        <tr *ngFor="let Parent of ParentsAndConventions">
+            <td>{{Parent.p.nomDeFamille}}</td>
+            <td>{{Parent.p.prenom}}</td>
+            <td>{{Parent.p.tel1}}</td>
+            <td>{{Parent.p.tel2}}</td>
+            <td>{{Parent.p.tel3}}</td>
+            <td>{{Parent.nameOfConvention}}</td>
+            <td class="row">
+                <button type='button' class='btn btn-danger' (click)="Delete(Parent.p.id)">
+                    Supprimer</button>
+                <button type='button' class='btn btn-success' (click)="Edit(Parent.p.id)">
+                Fiche</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

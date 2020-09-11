@@ -1,1 +1,26 @@
-<p>convention-list works!</p>
+<button nbButton status="info" size="large" (click)="AddConvention()">Nouvelle Convention</button>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Date De Début</th>
+            <th>Date De Fin</th>
+            <th>Tarif</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody > 
+        <tr *ngFor="let Convention of Conventions,let i = index">
+            <td>{{Convention.name}}</td>
+            <td>{{Convention.dateDeDebut}}</td>
+            <td>{{Convention.dateDeFin}}</td>
+            <td>{{ConventionFees[i][0]?.tarif}}</td>
+            <td>
+                <button type='button' class='btn btn-danger'>
+                    Delete</button>
+                <button type='button' class='btn btn-success' (click)="EditConvention(Convention.id)">
+                Voir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

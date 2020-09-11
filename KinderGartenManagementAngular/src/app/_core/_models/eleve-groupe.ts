@@ -1,4 +1,5 @@
 export class EleveGroupe {
-    EleveId:number;
-    GroupeId:number;
+    eleveid:number;
+    enrollementid:number;
+    subscriptiontype:string;
 }

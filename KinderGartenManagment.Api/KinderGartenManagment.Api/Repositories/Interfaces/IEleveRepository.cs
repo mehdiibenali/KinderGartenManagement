@@ -10,6 +10,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task<IEnumerable<Eleve>> GetAll();
         Task<Eleve> GetByIdAsync(int eleveId);
         Task InsertAsync(Eleve eleve);
+        Task<IEnumerable<Eleve>> Search(string elevesearch, string parentsearch, string sexe, bool? hasconvention, int? classeid, int? groupeid, int? clubid, int? conventionid);
         Task DeleteAsync(int eleveId);
         void Update(Eleve eleve);
         Task SaveAsync();

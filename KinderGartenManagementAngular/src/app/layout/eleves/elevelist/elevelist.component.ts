@@ -3,6 +3,8 @@ import { EleveService } from 'src/app/_core/_services/eleve.service';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 import { Eleve } from 'src/app/_core/_models/eleve';
+import { SearchEleve } from 'src/app/_core/_models/search-eleve';
+import { GroupeService } from 'src/app/_core/_services/groupe.service';
 
 @Component({
   selector: 'app-elevelist',
@@ -11,7 +13,10 @@ import { Eleve } from 'src/app/_core/_models/eleve';
 })
 export class ElevelistComponent implements OnInit {
   Eleves:Eleve[]=[];
+  search:SearchEleve=new SearchEleve();
+  Classes:Object[]=[]
   constructor(
+    private groupeService:GroupeService,
     private eleveService:EleveService,
     private toastrService: NbToastrService,
     private router: Router
@@ -19,6 +24,7 @@ export class ElevelistComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetAll();
+    this.GetAllClasses();
   }
   GetAll(){
     this.eleveService.GetAll()
@@ -28,6 +34,12 @@ export class ElevelistComponent implements OnInit {
     error => {  
       console.log(error);
     })
+  }
+  GetAllClasses(){
+    this.groupeService.GetAllClasses().subscribe(
+      data=>this.Classes=data,
+      err=>console.log(err)
+    )
   }
   Delete(id){
     return this.eleveService.DeleteEleve(id).subscribe(
@@ -45,5 +57,11 @@ export class ElevelistComponent implements OnInit {
   }
   AddEleve(){
     this.router.navigate(["eleves/fiche/eleve/add"])
+  }
+  Search(){
+    this.eleveService.Search(this.search).subscribe(
+      data=>{this.Eleves=data},
+      err=>console.log(err)
+    )
   }
 }

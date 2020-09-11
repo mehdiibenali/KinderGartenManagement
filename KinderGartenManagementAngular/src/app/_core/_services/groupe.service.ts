@@ -9,27 +9,27 @@ export class GroupeService {
 
   constructor( private api : ApiService) { }
   GetById(id:number){
-    return this.api.get('/api/Groupes/'+id);
+    return this.api.get('/api/EnrollementGroupes/'+id);
   };
   AddGroupe(groupe:Groupe){
-    return this.api.post('/api/Groupes',parent);
+    return this.api.post('/api/EnrollementGroupes',parent);
   }
   AddEleveGroupe(elevegroupe){
-    return this.api.post('/api/EleveGroupes',elevegroupe)
+    return this.api.post('/api/EleveEnrollements',elevegroupe)
   }
   GetGroupesByEleveId(eleveId:number){
-    return this.api.get('/api/Groupes/ByEleveId/'+eleveId);
+    return this.api.get('/api/EnrollementGroupes/ByEleveId/'+eleveId);
   }
-  SearchByName(groupesearch){
-    return this.api.get('/api/Groupes/SearchByName/'+groupesearch)
+  Search(search){
+    return this.api.post('/api/EnrollementGroupes/Search',search)
   }
-  SearchByYear(anneededebut,anneedefin){
-    return this.api.get('/api/Groupes/SearchByYear/'+anneededebut+'/'+anneedefin)
-  }
-  GetYears(eleveid){
-    return this.api.get('/api/Groupes/GetYears/'+eleveid)
+  GetYears(){
+    return this.api.get('/api/EnrollementGroupes/GetYears')
   }
   DeleteEleveGroupe(eleveid,groupeid){
-    return this.api.delete('/api/EleveGroupes/'+eleveid+'/'+groupeid)
+    return this.api.delete('/api/EleveEnrollements/'+eleveid+'/'+groupeid)
+  }
+  GetAllClasses(){
+    return this.api.get('/api/Classes')
   }
 }

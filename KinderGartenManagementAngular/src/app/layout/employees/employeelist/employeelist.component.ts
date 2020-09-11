@@ -40,7 +40,6 @@ export class EmployeelistComponent implements OnInit {
     this.employeeService.GetAll()
     .subscribe(data => {
       this.Employees = data;
-      console.log(data);
     },
     error => {
       console.log(error);

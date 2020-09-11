@@ -20,7 +20,7 @@ export class AddEleveComponent implements OnInit {
   elevefiche:boolean = true;
   parentfiche:boolean = false;
   groupefiche:boolean = false;
-  constructor(private router: Router,private eleveService: EleveService, private toastrService: NbToastrService) { }
+  constructor(private eleveService: EleveService, private toastrService: NbToastrService) { }
 
   ngOnInit(): void {
   }

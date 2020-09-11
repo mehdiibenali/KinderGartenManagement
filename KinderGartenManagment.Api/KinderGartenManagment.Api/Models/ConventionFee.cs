@@ -10,7 +10,7 @@ namespace KinderGartenManagment.Api.Models
     {
         public int Id { get; set; }
         public string Code { get; set; }
-        public int Tarif { get; set; }
+        public int Fee { get; set; }
         public int ConventionId { get; set; }
         public virtual Convention Convention { get; set; }
     }

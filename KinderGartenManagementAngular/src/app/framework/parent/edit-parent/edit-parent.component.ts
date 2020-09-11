@@ -55,7 +55,6 @@ export class EditParentComponent implements OnInit {
         this.toastrService.show('Parent Updated successfully', 'Update', { status: 'success' });
         this.ParentConventionToAdd.parentid=this.Parent.id;
         if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
-        console.log(this.ParentConventionToAdd);
         this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(
           data=>{this.updateeleve.emit()},
           err=>console.log(err));

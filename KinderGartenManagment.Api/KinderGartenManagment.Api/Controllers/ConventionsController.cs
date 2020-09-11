@@ -83,14 +83,14 @@ namespace KinderGartenManagment.Api.Controllers
         }
 
         [HttpPost] 
-        public async Task< Convention > PostConvention ( ConventionViewModel convention ) 
+        public async Task< Convention > PostConvention ( ConventionViewModel convention) 
         { 
             try 
             { 
-                var p = _mapper.Map< Convention >( convention ); 
-                await _conventionRepository .InsertAsync(p); 
+                var c = _mapper.Map< Convention >( convention ); 
+                await _conventionRepository .InsertAsync(c); 
                 await _conventionRepository .SaveAsync(); 
-                return p; 
+                return c; 
             } 
             catch (Exception e) 
             { 

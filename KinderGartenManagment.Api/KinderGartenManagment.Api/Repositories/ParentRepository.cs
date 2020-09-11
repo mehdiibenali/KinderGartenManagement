@@ -17,18 +17,13 @@ namespace KinderGartenManagment.Api.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Parent>> GetAll()
+        public async Task<IEnumerable<Object>> GetAll()
         {
-            return _context.Parents.Select(p => new
-            {
-                p,
-                ParentConventions = p.ParentConventions
-                                           .Where(pc => pc.DateDeFin > DateTime.Now)
-            })
-            .AsEnumerable()
-            .Select(x => x.p).ToList();
-            //return await _context.Parents.Include(p => p.ParentConventions).ThenInclude(pc => pc.Convention).ToListAsync();
-
+            return from p in _context.Parents
+                   join ep in _context.EleveParents on p.Id equals ep.ParentId
+                   join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = pc.DateDeFin > DateTime.Now } into ppc
+                   from subparentconvention in ppc.DefaultIfEmpty()
+                   select new { p, NameOfConvention = subparentconvention.Convention.Name ?? null };
         }
 
         public async Task<Parent> GetByIdAsync(int id)  
@@ -49,34 +44,21 @@ namespace KinderGartenManagment.Api.Repositories
             Parent parent = await _context.Parents.FindAsync(parentId);
             _context.Parents.Remove(parent);
         }
-
         public void Update(Parent parent)
         {
             _context.Entry(parent).State = EntityState.Modified;
         }
         public async Task<IEnumerable<Object>> GetParentsByEleveId(int eleveId)
         {
-            IEnumerable<Parent> Parents = _context.Parents.Include(p => p.EleveParents).Select(p => new
-            {
-                p,
-                ParentConventions = p.ParentConventions
-                                             .Where(pc => pc.DateDeFin > DateTime.Now),
-            }
-                ).AsEnumerable()
-            .Select(x => x.p).ToList();
              return from p in _context.Parents
-                           join ep in _context.EleveParents on p.Id equals ep.ParentId
+                           join ep in _context.EleveParents on p.Id equals ep.ParentId where ep.EleveId == eleveId
                            join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = pc.DateDeFin>DateTime.Now } into ppc
                            from subparentconvention in ppc.DefaultIfEmpty()
                            select new { p, NameOfConvention = subparentconvention.Convention.Name ??  null };
-
-
-
-
-            return Parents
-                    .Where(p => p.EleveParents.Select(ep => ep.EleveId).Contains(eleveId));
-            //IEnumerable<Parent> test =await _context.Parents.IncludeFilter(p => p.ParentConventions.Where(pc => pc.Active == true)).Take(1).ToListAsync();
-            return Parents;
+        }
+        public async Task<IEnumerable<Parent>> GetParentsByConventionId(int conventionid)
+        {
+            return await _context.Parents.Where(p => p.ParentConventions.Any(pc => pc.ConventionId == conventionid)).ToListAsync();
         }
         public async Task<IEnumerable<Parent>> SearchByName(string parentsearch)
         {   

@@ -7,7 +7,6 @@ import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 })
 export class EleveTabsetComponent implements OnInit {
   eleveid:any;
-  test:boolean=false;
   url:any;
   disabled:boolean=true;
   constructor(private router: Router,private _Activatedroute:ActivatedRoute) {

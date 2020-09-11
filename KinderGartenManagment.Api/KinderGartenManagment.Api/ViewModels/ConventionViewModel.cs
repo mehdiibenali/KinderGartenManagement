@@ -10,5 +10,6 @@ namespace KinderGartenManagment.Api.ViewModels
         public string Name { get; set; }
         public DateTime DateDeDebut { get; set; }
         public DateTime? DateDeFin { get; set; }
+
     }
 }

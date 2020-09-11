@@ -19,7 +19,7 @@ namespace KinderGartenManagment.Api.Helpers
                 .ReverseMap();
             CreateMap<ClasseViewModel, Classe>()
                 .ReverseMap();
-            CreateMap<GroupeViewModel, Groupe>()
+            CreateMap<EnrollementViewModel, Enrollement>()
                  .ReverseMap();
             CreateMap<EleveViewModel, Eleve>()
                 .ReverseMap();
@@ -27,7 +27,7 @@ namespace KinderGartenManagment.Api.Helpers
                 .ReverseMap();
             CreateMap<EleveParentViewModel, EleveParent>()
                 .ReverseMap();
-            CreateMap<EleveGroupeViewModel, EleveGroupe>()
+            CreateMap<EleveEnrollementViewModel, EleveEnrollement>()
                 .ReverseMap();
             CreateMap<ConventionViewModel, Convention>()
                 .ReverseMap();

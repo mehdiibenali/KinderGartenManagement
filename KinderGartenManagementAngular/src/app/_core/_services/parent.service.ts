@@ -10,6 +10,9 @@ export class ParentService {
   constructor(
     private api : ApiService,
   ) { }
+  GetAll(){
+    return this.api.get('/api/Parents')
+  }
   GetById(id:number){
     return this.api.get('/api/Parents/'+id);
   };
@@ -22,13 +25,16 @@ export class ParentService {
   GetParentByEleveId(eleveId:number){
     return this.api.get('/api/Parents/ByEleveId/'+eleveId);
   }
+  GetParentsByConventionId(conventionId:number){
+    return this.api.get('/api/Parents/ByConventionId/'+conventionId)
+  }
   UpdateParent(parent,id){
     return this.api.put('/api/Parents/'+id,parent)
   }
   SearchByName(parentsearch){
     return this.api.get('/api/Parents/SearchByName/'+parentsearch)
   }
-  GetEleveParentByParentTuter(eleveid){
+  GetEleveParentByParentTuteur(eleveid){
     return this.api.get('/api/EleveParents/GetByParentTuteur/'+eleveid)
   }
   UpdateEleveParent(eleveid,parentid){
@@ -36,6 +42,9 @@ export class ParentService {
   }
   DeleteEleveParent(eleveid,parentid){
     return this.api.delete('/api/EleveParents/'+eleveid+'/'+parentid)
+  }
+  DeleteParent(parentid){
+    return this.api.delete('/api/Parents/'+parentid)
   }
   AddParentConvention(addparentconvention){
     return this.api.post('/api/ParentConventions',addparentconvention)

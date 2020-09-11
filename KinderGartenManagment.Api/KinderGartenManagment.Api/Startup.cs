@@ -65,12 +65,13 @@ namespace KinderGartenManagment.Api
                 options.Password.RequiredUniqueChars = 0;
             });
             //dependancy injection
-            services.AddScoped<IGroupeRepository, GroupeRepository>();
+            services.AddScoped<IEnrollementGroupeRepository, EnrollementGroupeRepository>();
+            services.AddScoped<IEnrollementClubRepository, EnrollementClubRepository>();
             services.AddScoped<IEleveRepository, EleveRepository>();
             services.AddScoped<IParentRepository, ParentRepository>();
             services.AddScoped<IClasseRepository, ClasseRepository>();
             services.AddScoped<IEleveParentRepository, EleveParentRepository>();
-            services.AddScoped<IEleveGroupeRepository, EleveGroupeRepository>();
+            services.AddScoped<IEleveEnrollementRepository, EleveEnrollementRepository>();
             services.AddScoped<IConventionRepository, ConventionRepository>();
             services.AddScoped<IParentConventionRepository, ParentConventionRepository>();
             services.AddScoped<IConventionFeeRepository, ConventionFeeRepository>();

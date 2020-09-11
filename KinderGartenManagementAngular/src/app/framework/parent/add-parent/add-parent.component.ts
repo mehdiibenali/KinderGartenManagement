@@ -58,8 +58,7 @@ export class AddParentComponent implements OnInit {
   }
   SearchConventionByYear(){
     this.conventionService.SearchByYear(this.conventionyear).subscribe(
-      data=>{this.Conventions=data;
-      console.log(this.Conventions)},
+      data=>{this.Conventions=data;},
       err=>{console.log(err)}
     );
   }

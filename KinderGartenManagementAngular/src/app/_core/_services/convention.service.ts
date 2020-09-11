@@ -19,4 +19,10 @@ export class ConventionService {
   GetActive(parentid,datetime){
     return this.api.get('/api/Conventions/GetActive/'+parentid+'/'+datetime)
   }
+  AddConvention(convention){
+    return this.api.post('/api/Conventions',convention)
+  }
+  AddConventionFee(conventionfee){
+    return this.api.post('/api/ConventionFees',conventionfee)
+  }
 }

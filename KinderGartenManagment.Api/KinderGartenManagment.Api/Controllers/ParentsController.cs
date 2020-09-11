@@ -24,7 +24,7 @@ namespace KinderGartenManagment.Api.Controllers
             _mapper = imapper;
         }
         [HttpGet]
-        public async Task<IEnumerable<Parent>> GetParents()
+        public async Task<IEnumerable<Object>> GetParents()
         {
             var resultListe = await _parentRepository.GetAll();
             return resultListe;
@@ -56,6 +56,12 @@ namespace KinderGartenManagment.Api.Controllers
         public async Task<IEnumerable<Object>> GetParentsByEleveId(int eleveId)
         {
             var resultListe = await _parentRepository.GetParentsByEleveId(eleveId);
+            return resultListe;
+        }
+        [HttpGet("ByConventionId/{conventionId}")]
+        public async Task<IEnumerable<Parent>> GetParentsByConventionId(int conventionId)
+        {
+            var resultListe = await _parentRepository.GetParentsByConventionId(conventionId);
             return resultListe;
         }
         [HttpPut("{id}")]

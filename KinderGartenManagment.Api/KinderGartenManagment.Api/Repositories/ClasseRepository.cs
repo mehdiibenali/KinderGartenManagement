@@ -17,7 +17,7 @@ namespace KinderGartenManagment.Api.Repositories
         }
         public async Task<IEnumerable<Classe>> GetAll()
         {
-            return await _context.Classes.Include(c=>c.Groupes).ToListAsync();
+            return await _context.Classes.Include(c=>c.Enrollements).ToListAsync();
         }
 
         public async Task<Classe> GetByIdAsync(int id)

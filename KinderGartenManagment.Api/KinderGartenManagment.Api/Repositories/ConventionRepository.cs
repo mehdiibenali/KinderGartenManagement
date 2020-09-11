@@ -17,8 +17,8 @@ namespace KinderGartenManagment.Api.Repositories
             _context = context; 
         } 
         public async Task<IEnumerable< Convention >> GetAll() 
-        { 
-            return await _context. Conventions .ToListAsync(); 
+        {
+            return await _context.Conventions.Include(c => c.ConventionFees). ToListAsync(); 
         }
         public async Task<Convention> GetActive(int parentid,DateTime datetime)
         {

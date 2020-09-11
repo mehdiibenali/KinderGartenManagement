@@ -1,0 +1,9 @@
+<nb-tabset (changeTab)="changeTab($event.tabTitle)">
+    <nb-tab tabTitle="Convention" >
+    </nb-tab>
+    <nb-tab [disabled] = "disabled" tabTitle="Parents">
+    </nb-tab>
+    <nb-tab [disabled] = "disabled" tabTitle="Paiements">
+    </nb-tab>
+</nb-tabset>
+<router-outlet></router-outlet>

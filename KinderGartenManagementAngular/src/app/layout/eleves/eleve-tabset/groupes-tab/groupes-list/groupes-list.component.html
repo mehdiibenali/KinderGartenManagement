@@ -29,27 +29,28 @@
     </table>
 </div>
 <div class="row">
-    <div class="col-4">
-        <input type="text" id="myInput" autocomplete="off" (keyup)="GroupeExistant()" placeholder="Recherche Du Groupe"[(ngModel)]="groupesearch">
-        <div *ngIf="groupesearch">
+    <div class="col-3">
+        <input type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche Du Groupe"[(ngModel)]="search.enrollementsearch">
             <ul id="myUL">
                 <div *ngFor="let result of searchresult">
-                    <div *ngIf="CheckGroupe(result)">
-                        <li><button (click)="AddEleveGroupe(result.id,result.name)" >{{result.name}}</button></li>
-                    </div>
+                    <li><button (click)="AddEleveGroupe(result.id,result.name)" >{{result.name}}</button></li>
                 </div>
             </ul>
-        </div>
     </div>
-    <div class="col-2">
-        <div class="col-3">
-            <nb-select name="year" shape="round" appearance="filled" placeholder="année" id="select-year">
-                <nb-option *ngFor="let Year of Years" value = 2020 (click)=SearchByYear(Year.debut,Year.fin)>{{Year.debut}}-{{Year.fin}}</nb-option>
+    <div class="col-1">
+            <nb-select name="year" shape="round" appearance="filled"  placeholder="année" id="select-year"  [(ngModel)]="SelectedYear.CurrentYear">
+                <nb-option *ngFor="let Year of Years" [value]="Year.debut+'-'+Year.fin" (click)=Search()>{{Year.debut}}-{{Year.fin}}</nb-option>
             </nb-select>
-        </div>
     </div>
     <div class="col-2"><p></p></div>
-    <div class="col-4">
+    <div class="col-1">
+            <nb-select name="classe" shape="round" appearance="filled" placeholder="Classe" id="select-classe" [(ngModel)]="search.classeid">
+                <nb-option [value]=null (click)=Search()>Toutes les classes</nb-option>
+                <nb-option *ngFor="let Classe of Classes" [value]=Classe.id (click)=Search()>{{Classe.name}}</nb-option>
+            </nb-select>
+    </div>
+    <div class="col-2"><p></p></div>
+    <div class="col-3">
         <button nbButton status="secondary" size="large" (click)='SubmitEleveGroupe()'>
             Valider
         </button>

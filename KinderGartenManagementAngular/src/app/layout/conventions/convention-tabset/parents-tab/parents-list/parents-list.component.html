@@ -1,0 +1,33 @@
+<div *ngIf="Parents.length>0">
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Tel 1</th>
+                <th>Tel 2</th>
+                <th>Tel 3</th>
+                <th>Matricule</th>
+                <th>Adresse Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Parent of Parents">
+                <td>{{Parent.prenom}}</td>
+                <td>{{Parent.nomDeFamille}}</td>
+                <td>{{Parent.tel1}}</td>
+                <td>{{Parent.tel2}}</td>
+                <td>{{Parent.tel3}}</td>
+                <td>{{Parent.matricule}}</td>
+                <td>{{Parent.adresseMail}}</td>
+                <td>
+                    <button type='button' class='btn btn-success' (click)="EditParent(Parent.id)">
+                    Editer</button>
+                    <button type='button' class='btn btn-danger'>
+                    Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -9,10 +9,11 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AddParentComponent } from './parent/add-parent/add-parent.component';
 import { EditParentComponent } from './parent/edit-parent/edit-parent.component';
+import { AddConventionComponent } from './Convention/add-convention/add-convention.component';
 
 
 @NgModule({
-  declarations: [AddEleveComponent, EditEleveComponent, AddParentComponent, EditParentComponent],
+  declarations: [AddEleveComponent, EditEleveComponent, AddParentComponent, EditParentComponent, AddConventionComponent],
   imports: [
     CommonModule,
     FrameworkRoutingModule,
@@ -32,6 +33,6 @@ import { EditParentComponent } from './parent/edit-parent/edit-parent.component'
     NbTabsetModule,
     NbSpinnerModule,
   ],
-  exports:[AddEleveComponent, EditEleveComponent, AddParentComponent,EditParentComponent]
+  exports:[AddEleveComponent, EditEleveComponent, AddParentComponent,EditParentComponent,AddConventionComponent]
 })
 export class FrameworkModule { }

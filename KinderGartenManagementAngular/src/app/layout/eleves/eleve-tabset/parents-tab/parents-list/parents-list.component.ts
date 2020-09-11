@@ -33,8 +33,8 @@ export class ParentsListComponent implements OnInit {
     this.parentService.GetParentByEleveId(this.eleveid).subscribe(data => {
       this.ParentsAndConventions=data;
       this.Parents=data.map(d=>d.p);
-      this.parentService.GetEleveParentByParentTuter(this.eleveid).subscribe(
-        data=>{console.log('success');this.parenttuteur=data.parentId},
+      this.parentService.GetEleveParentByParentTuteur(this.eleveid).subscribe(
+        data=>{this.parenttuteur=data.parentId},
         err=>console.log(err)
       )
     },
@@ -95,7 +95,7 @@ export class ParentsListComponent implements OnInit {
   ChangeParentTuteur(parentid: any) {
     this.parentService.UpdateEleveParent(this.eleveid,parentid).subscribe(
       data=>{
-        this.parentService.GetEleveParentByParentTuter(this.eleveid).subscribe(
+        this.parentService.GetEleveParentByParentTuteur(this.eleveid).subscribe(
         data=>this.parenttuteur=data.parentId,
         err=>console.log(err)
       )
