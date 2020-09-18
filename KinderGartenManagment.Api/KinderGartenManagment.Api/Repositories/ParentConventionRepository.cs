@@ -27,7 +27,9 @@ namespace KinderGartenManagment.Api.Repositories
         } 
  
         public async Task InsertAsync( ParentConvention parentconvention ) 
-        { 
+        {
+            Convention convention = await _context.Conventions.FindAsync(parentconvention.ConventionId);
+            parentconvention.DateDeFin = convention.DateDeFin;
             await _context. ParentConventions .AddAsync( parentconvention ); 
         } 
  
@@ -41,12 +43,12 @@ namespace KinderGartenManagment.Api.Repositories
         { 
             _context.Entry( parentconvention ).State = EntityState.Modified; 
         }
-        public async Task DisableConventionActive(int parentid)
+        public async Task DisableConventionActive(int parentid,DateTime datedefin)
         {
             ParentConvention pc = _context.ParentConventions.Where(ep => ep.DateDeFin > DateTime.Now && ep.ParentId == parentid).FirstOrDefault();
             if (pc != null)
             {
-                pc.DateDeFin = DateTime.Now;
+                pc.DateDeFin = datedefin;
                 _context.Entry(pc).State = EntityState.Modified;
             }
         }

@@ -13,11 +13,14 @@ export class ConventionService {
   GetById(id){
     return this.api.get('/api/Conventions/'+id)
   }
-  SearchByYear(year){
-    return this.api.get('/api/Conventions/SearchByYear/'+year)
+  GetYears(){
+    return this.api.get('/api/Conventions/GetYears')
   }
-  GetActive(parentid,datetime){
-    return this.api.get('/api/Conventions/GetActive/'+parentid+'/'+datetime)
+  Search(search){
+    return this.api.post('/api/Conventions/Search',search)
+  }
+  GetActive(getactive){
+    return this.api.post('/api/Conventions/GetActive/',getactive)
   }
   AddConvention(convention){
     return this.api.post('/api/Conventions',convention)

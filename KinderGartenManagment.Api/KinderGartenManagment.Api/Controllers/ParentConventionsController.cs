@@ -16,10 +16,10 @@ namespace KinderGartenManagment.Api.Controllers
     [ApiController] 
     public class ParentConventionsController : ControllerBase 
     { 
-        private readonly IParentConventionRepository _parentConventionRepository ; 
+        private readonly IParentConventionRepository _parentConventionRepository ;
         private readonly IMapper _mapper; 
  
-        public ParentConventionsController ( IParentConventionRepository parentConventionRepository , IMapper imapper) 
+        public ParentConventionsController ( IParentConventionRepository parentConventionRepository, IMapper imapper) 
         { 
             _parentConventionRepository = parentConventionRepository ; 
             _mapper = imapper; 
@@ -59,17 +59,17 @@ namespace KinderGartenManagment.Api.Controllers
             }
            
         }
-        [HttpPut("DisableConventionActive/{parentid}")]
-        public async Task<IActionResult> DisableConventionActive(int parentid)
+        [HttpPut("DisableConventionActive/{parentid,datedefin}")]
+        public async Task<IActionResult> DisableConventionActive(int parentid,DateTime datedefin)
         {
 
             try
             {
-                await _parentConventionRepository.DisableConventionActive(parentid);
+                await _parentConventionRepository.DisableConventionActive(parentid,datedefin);
                 await _parentConventionRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
-            {
+            { 
                 throw;
             }
             return NoContent();
@@ -77,15 +77,6 @@ namespace KinderGartenManagment.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddParentConvention( AddParentConventionViewModel pcvm) 
         {
-             try
-             {
-                await _parentConventionRepository.DisableConventionActive(pcvm.ParentId);
-                await _parentConventionRepository.SaveAsync();
-             }
-             catch (DbUpdateConcurrencyException)
-             {
-               throw;
-             }
             if (pcvm.NewConventionId != null)
             {
                 try
@@ -94,7 +85,7 @@ namespace KinderGartenManagment.Api.Controllers
                     {
                         ParentId = pcvm.ParentId,
                         ConventionId = pcvm.NewConventionId.Value,
-                        DateDeDebut = DateTime.Now,
+                        DateDeDebut = pcvm.DateDeDebut,
                     };
                     await _parentConventionRepository.InsertAsync(pc);
                     await _parentConventionRepository.SaveAsync();

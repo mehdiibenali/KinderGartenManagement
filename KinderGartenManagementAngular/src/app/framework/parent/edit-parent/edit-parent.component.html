@@ -100,16 +100,16 @@
                 </div>
                 <div class="col-3">
                     <nb-select name="year" size="tiny" shape="round" appearance="filled" placeholder="année" id="select-year"
-                        [(ngModel)]="conventionyear">
+                        [(ngModel)]="CurrentYear">
                         <nb-option [value]=null (click)="conventionsnull()">Aucune</nb-option>
-                        <nb-option [value]=2020 (click)="SearchConventionByYear()">2020</nb-option>
+                        <nb-option *ngFor="let Year of Years" [value]="Year.debut+'-'+Year.fin" (click)="SearchConvention()">{{Year.debut}}-{{Year.fin}}</nb-option>
                     </nb-select>
                 </div>
                 <div class="col-3"><p></p></div>
                 <div class="row"> 
                     <nb-select name="convention" shape="round" fullWidth placeholder="Aucune Convention" id="select-convention"
                         [(ngModel)]="Convention.id">
-                        <nb-option *ngIf="conventionyear==null && Convention.id != null" [value]='Convention.id'>{{Convention.name}}</nb-option>
+                        <nb-option *ngIf="CurrentYear==null && Convention.id != null" [value]='Convention.id'>{{Convention.name}}</nb-option>
                         <nb-option [value]=null>Aucune Convention</nb-option>
                         <nb-option *ngFor="let Convention of Conventions" [value]="Convention.id">{{Convention.name}}</nb-option>
                     </nb-select>

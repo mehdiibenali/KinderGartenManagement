@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace KinderGartenManagment.Api.ViewModels
 {
-    public class AddParentConventionViewModel
+    public class GetConventionViewModel
     {
         public int ParentId { get; set; }
-        public int? NewConventionId { get; set; }
-        public DateTime DateDeDebut { get; set; }
+        public DateTime? DateTime { get; set; }
     }
 }

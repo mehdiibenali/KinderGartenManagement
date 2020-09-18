@@ -38,21 +38,21 @@ namespace KinderGartenManagment.Api.Repositories
             IEnumerable<Eleve> Eleves = _context.Eleves.Include(e => e.EleveEnrollements).ThenInclude(ee=>ee.Enrollement).Include(e=>e.EleveParents).ThenInclude(ep=>ep.Parent).ThenInclude(p=>p.ParentConventions);
             if (elevesearch != null)
             {
-                Eleves = Eleves.Where(e => e.Nom.Contains(elevesearch) || e.Prenom.Contains(elevesearch) || (e.Nom + ' ' + e.Prenom).Contains(elevesearch) || (e.Prenom+' '+e.Nom).Contains(elevesearch));
+                Eleves = Eleves.Where(e => e.Nom.ToLower().Contains(elevesearch) || e.Prenom.ToLower().Contains(elevesearch) || (e.Nom.ToLower() + ' ' + e.Prenom.ToLower()).Contains(elevesearch) || (e.Prenom.ToLower()+' '+e.Nom.ToLower()).Contains(elevesearch));
 
             }
             if (parentsearch != null)
             {
                 Eleves = Eleves.Where(e => e.EleveParents
-                .Any(ep => ep.Parent.NomDeFamille.Contains(parentsearch) || ep.Parent.Prenom.Contains(parentsearch) || (ep.Parent.NomDeFamille + ' ' + ep.Parent.Prenom).Contains(parentsearch) || (ep.Parent.Prenom + ' ' + ep.Parent.NomDeFamille).Contains(parentsearch))
+                .Any(ep => ep.Parent.NomDeFamille.ToLower().Contains(parentsearch) || ep.Parent.Prenom.ToLower().Contains(parentsearch) || (ep.Parent.NomDeFamille.ToLower() + ' ' + ep.Parent.Prenom.ToLower()).Contains(parentsearch) || (ep.Parent.Prenom.ToLower() + ' ' + ep.Parent.NomDeFamille.ToLower()).Contains(parentsearch))
                 );
             }
             if (sexe!=null){
                 Eleves = Eleves.Where(e => e.Sexe == sexe);
             }
-            if (hasconvention != null)
+            if (hasconvention != null && hasconvention!=false)
             {
-                Eleves = Eleves.Where(e => e.EleveParents.Any(ep => ep.ParentTuteur == true && ep.Parent.ParentConventions.Any(pc => pc.DateDeFin > DateTime.Now)));
+                Eleves = Eleves.Where(e => e.EleveParents.Any(ep => ep?.ParentTuteur == true && ep?.Parent.ParentConventions?.Any(pc => pc.DateDeFin > DateTime.Now)==true));
             };
             if (classeid != null)
             {
@@ -69,7 +69,7 @@ namespace KinderGartenManagment.Api.Repositories
             };
             if (conventionid != null)
             {
-                Eleves.Where(e => e.EleveParents.Any(ep => ep.ParentTuteur == true && ep.Parent.ParentConventions.Any(pc => pc.DateDeFin > DateTime.Now && pc.ConventionId == conventionid)));
+                Eleves = Eleves.Where(e => e.EleveParents.Any(ep => ep?.ParentTuteur == true && ep?.Parent.ParentConventions?.Any(pc => pc?.DateDeFin > DateTime.Now && pc?.ConventionId == conventionid)==true));
             };
             Eleves = Eleves.ToList();
             return Eleves;

@@ -6,6 +6,7 @@ import { Groupe } from 'src/app/_core/_models/groupe';
 import { EleveGroupe } from 'src/app/_core/_models/eleve-groupe';
 import { SearchGroupe } from 'src/app/_core/_models/search-groupe';
 import { Classe } from 'src/app/_core/_models/classe';
+import { ParameterService } from 'src/app/_core/_services/parameter.service';
 
 @Component({
   selector: 'app-groupes-list',
@@ -20,10 +21,10 @@ export class GroupesListComponent implements OnInit {
   groupeid:number;
   search:SearchGroupe=new SearchGroupe()
   Years:Object[];
-  SelectedYear:any=new Object;
+  SelectedYear:any=new Object();
   Classes:Classe[]=[];
   elevegroupe:EleveGroupe = new EleveGroupe();
-  constructor(private router:Router,private _Activatedroute:ActivatedRoute,private groupeService:GroupeService, private toastrService: NbToastrService) { }
+  constructor(private router:Router,private parameterService:ParameterService,private _Activatedroute:ActivatedRoute,private groupeService:GroupeService, private toastrService: NbToastrService) { }
 
   ngOnInit(): void {
     this.eleveId=this._Activatedroute.snapshot.paramMap.get("eleveid");
@@ -31,8 +32,12 @@ export class GroupesListComponent implements OnInit {
     this.GetByEleveId();
     this.groupeService.GetYears().subscribe(
       data=>{
-        this.SelectedYear.CurrentYear=data.filter(y=>y.current==true)[0].debut+'-'+data.filter(y=>y.current==true)[0].fin;
-        this.Years=data},
+        this.Years=data;
+        this.parameterService.GetByCode('CurrentScholarYear').subscribe(
+          data=>{this.SelectedYear.CurrentYear=data.value},
+          err=>console.log(err)
+        )
+      },
       err=>console.log(err)
     )
     this.groupeService.GetAllClasses().subscribe(

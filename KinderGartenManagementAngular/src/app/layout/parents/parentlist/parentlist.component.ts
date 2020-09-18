@@ -25,7 +25,9 @@ export class ParentlistComponent implements OnInit {
       console.log(error);
     });
   };
-  Edit(id){}
+  Edit(id){
+    this.router.navigate(['/parents/fiche/parent/'+id])
+  }
   Delete(id){
     this.parentService.DeleteParent(id);
   }

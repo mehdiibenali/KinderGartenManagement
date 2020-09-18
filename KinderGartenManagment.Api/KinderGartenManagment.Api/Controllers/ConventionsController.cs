@@ -15,12 +15,14 @@ namespace KinderGartenManagment.Api.Controllers
     [ApiController] 
     public class ConventionsController : ControllerBase 
     { 
-        private readonly IConventionRepository _conventionRepository ; 
+        private readonly IConventionRepository _conventionRepository ;
+        private readonly IParentRepository _parentRepository;
         private readonly IMapper _mapper; 
  
-        public ConventionsController ( IConventionRepository conventionRepository , IMapper imapper) 
+        public ConventionsController ( IConventionRepository conventionRepository , IParentRepository parentRepository , IMapper imapper) 
         { 
-            _conventionRepository = conventionRepository ; 
+            _conventionRepository = conventionRepository ;
+            _parentRepository = parentRepository;
             _mapper = imapper; 
         } 
         [HttpGet] 
@@ -29,10 +31,27 @@ namespace KinderGartenManagment.Api.Controllers
             var resultListe = await _conventionRepository .GetAll(); 
             return resultListe; 
         }
-        [HttpGet("GetActive/{parentid}/{datetime}")]
-        public async Task<ActionResult<Convention>> GetActive(int parentid,DateTime datetime)
+        [HttpPost("GetActive")]
+        public async Task<ActionResult<Convention>> GetActive(GetConventionViewModel gcvm)
         {
-            var resultListe = await _conventionRepository.GetActive(parentid,datetime);
+            Parent parent = await _parentRepository.GetByIdAsync(gcvm.ParentId);
+            if (parent == null)     
+            {
+                return NotFound();
+            }
+            if (gcvm.DateTime == null) { gcvm.DateTime = DateTime.Now; };
+            var result = await _conventionRepository.GetActive(gcvm.ParentId,gcvm.DateTime.Value);
+            if (result == null)
+            {
+                return Ok();
+            }
+
+            return Ok(result);
+        }
+        [HttpPost("Search")]
+        public async Task<ActionResult<IEnumerable<Convention>>> Search(SearchConventionViewModel searchconvention)
+        {
+            var resultListe = await _conventionRepository.Search(searchconvention.Name,searchconvention.annees);
             if (resultListe == null)
             {
                 return NotFound();
@@ -40,16 +59,11 @@ namespace KinderGartenManagment.Api.Controllers
 
             return Ok(resultListe);
         }
-        [HttpGet("SearchByYear/{year}")]
-        public async Task<ActionResult<IEnumerable<Convention>>> SearchByYear(int year)
+        [HttpGet("GetYears")]
+        public async Task<ActionResult<IEnumerable<Object>>> GetYears()
         {
-            var resultListe = await _conventionRepository.SearchByYear(year);
-            if (resultListe == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(resultListe);
+            var resultliste = await _conventionRepository.GetYears();
+            return Ok(resultliste);
         }
         [HttpGet("{id}")] 
         public async Task<ActionResult< Convention >> GetConvention (int id) 

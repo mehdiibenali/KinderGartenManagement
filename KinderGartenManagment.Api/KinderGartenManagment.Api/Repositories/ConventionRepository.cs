@@ -25,9 +25,22 @@ namespace KinderGartenManagment.Api.Repositories
             return await _context.Conventions
                 .Where(c => c.ParentConventions.Any(cp => cp.ParentId == parentid && cp.DateDeFin > datetime)).FirstOrDefaultAsync();
         }
-        public async Task<IEnumerable<Convention>> SearchByYear(int year)
+        public async Task<IEnumerable<object>> GetYears()
         {
-            return await _context.Conventions.Where(c => c.DateDeDebut.Year <= year && c.DateDeFin.Year >= year).ToListAsync();
+            return await _context.Conventions.Select(c => new { debut = c.DateDeDebut.Year, fin = c.DateDeFin.Year }).Distinct().ToListAsync();
+        }
+        public async Task<IEnumerable<Convention>> Search(string? name,List<int?> annees)
+        {
+            IEnumerable<Convention> conventions = _context.Conventions;
+            if (annees != null)
+            {
+                conventions = conventions.Where(c => c.DateDeDebut.Year == annees.First() && c.DateDeFin.Year == annees.Last());
+            }
+            if (name != null)
+            {
+                conventions = conventions.Where(c => c.Name.ToLower().Contains(name.ToLower()));
+            }
+            return conventions.ToList();
         }
 
         public async Task< Convention > GetByIdAsync(int id) 

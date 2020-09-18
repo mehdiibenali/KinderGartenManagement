@@ -13,6 +13,9 @@ export class ParentService {
   GetAll(){
     return this.api.get('/api/Parents')
   }
+  GetAllConventions(){
+    return this.api.get('/api/Conventions')
+  }
   GetById(id:number){
     return this.api.get('/api/Parents/'+id);
   };

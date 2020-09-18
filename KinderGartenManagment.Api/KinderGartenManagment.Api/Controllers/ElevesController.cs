@@ -44,7 +44,7 @@ namespace KinderGartenManagment.Api.Controllers
         [HttpPost("Search")]
         public async Task<IEnumerable<Eleve>> Search(SearchEleveViewModel search)
         {
-            var resultListe = await _eleveRepository.Search(search.EleveSearch,search.ParentSearch,search.Sexe,search.HasConvention,search.ClasseId,search.GroupeId,search.ClubId,search.ConventionId);
+            var resultListe = await _eleveRepository.Search(search.EleveSearch? .ToLower(),search.ParentSearch?.ToLower(),search.Sexe,search.HasConvention,search.ClasseId,search.GroupeId,search.ClubId,search.ConventionId);
             return resultListe;
         }
         [HttpPut("{id}")]

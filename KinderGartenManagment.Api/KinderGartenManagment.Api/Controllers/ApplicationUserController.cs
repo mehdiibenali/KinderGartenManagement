@@ -99,7 +99,7 @@ namespace KinderGartenManagment.Api.Controllers
         [Authorize(Roles = Roles.Admin)]
         [Route("GetByUserName/{username}")]
         //GET : /api/ApplicationUser/GetByUserName/UserName
-        public async Task<ActionResult<SUserViewModel>> GetByUserName(string username)
+        public async Task<ActionResult<UserViewModel>> GetByUserName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
@@ -107,7 +107,7 @@ namespace KinderGartenManagment.Api.Controllers
                 return NotFound();
             }
             var role = await _userManager.GetRolesAsync(user);
-            var result = new SUserViewModel()
+            var result = new UserViewModel()
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -121,7 +121,7 @@ namespace KinderGartenManagment.Api.Controllers
         [HttpGet]
         [Route("GetAll")]
         //GET : /api/ApplicationUser/GetByUserName/UserName
-        public async Task<ActionResult<SUserViewModel>> GetAll()
+        public async Task<ActionResult<UserViewModel>> GetAll()
         {
             //var user = _userManager.Users.ToList();
             //var users = await _context.Users.ToListAsync();
@@ -130,7 +130,7 @@ namespace KinderGartenManagment.Api.Controllers
             {
                 return NotFound();
             }
-            var result = _mapper.Map<List<SUserViewModel>>(users);
+            var result = _mapper.Map<List<UserViewModel>>(users);
         
             return Ok(result);
 
@@ -139,7 +139,7 @@ namespace KinderGartenManagment.Api.Controllers
         [HttpPut]
         [Authorize(Roles = Roles.Admin)]
         [Route("Update/{username}")]
-        public async Task<ActionResult<UserViewModel>> Update(string username, SUserViewModel model)
+        public async Task<ActionResult<UserViewModel>> Update(string username, UserViewModel model)
         {
             var user = await _userManager.FindByNameAsync(username);    
             if (user == null)

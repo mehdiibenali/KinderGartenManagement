@@ -52,7 +52,7 @@ namespace KinderGartenManagment.Api.Repositories
         {
              return from p in _context.Parents
                            join ep in _context.EleveParents on p.Id equals ep.ParentId where ep.EleveId == eleveId
-                           join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = pc.DateDeFin>DateTime.Now } into ppc
+                           join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = (pc.DateDeFin>DateTime.Now) } into ppc
                            from subparentconvention in ppc.DefaultIfEmpty()
                            select new { p, NameOfConvention = subparentconvention.Convention.Name ??  null };
         }

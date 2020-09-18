@@ -14,18 +14,18 @@
         </tr>
     </thead>
     <tbody style="width:50%">
-        <tr *ngFor="let Parent of ParentsAndConventions">
+        <tr *ngFor="let Parent of ParentsAndConventions" class="row" >
             <td>{{Parent.p.nomDeFamille}}</td>
             <td>{{Parent.p.prenom}}</td>
             <td>{{Parent.p.tel1}}</td>
             <td>{{Parent.p.tel2}}</td>
             <td>{{Parent.p.tel3}}</td>
             <td>{{Parent.nameOfConvention}}</td>
-            <td class="row">
-                <button type='button' class='btn btn-danger' (click)="Delete(Parent.p.id)">
-                    Supprimer</button>
-                <button type='button' class='btn btn-success' (click)="Edit(Parent.p.id)">
-                Fiche</button>
+            <td>
+                    <button type='button' class='btn btn-danger' (click)="Delete(Parent.p.id)">
+                        Supprimer</button>
+                    <button type='button' class='btn btn-success' (click)="Edit(Parent.p.id)">
+                    Fiche</button>
             </td>
         </tr>
     </tbody>

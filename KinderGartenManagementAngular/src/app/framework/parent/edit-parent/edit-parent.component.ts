@@ -8,6 +8,8 @@ import { Parent } from 'src/app/_core/_models/parent';
 import { ParentConvention } from 'src/app/_core/_models/parent-convention';
 import { formatDate } from '@angular/common';
 import { AddParentConvention } from 'src/app/_core/_models/add-parent-convention';
+import { ParameterService } from 'src/app/_core/_services/parameter.service';
+import { SearchConvention } from 'src/app/_core/_models/search-convention';
 
 @Component({
   selector: 'app-edit-parent',
@@ -18,18 +20,29 @@ export class EditParentComponent implements OnInit {
   @Output("OnCancelEditParent") cancel:EventEmitter<String>=new EventEmitter<String>();
   @Output("OnUpdateEleve") updateeleve:EventEmitter<String>=new EventEmitter<String>();
   parentid:any;
-  conventionyear:number;
   ParentConvention:any=new Object();
   ParentConventionToAdd:AddParentConvention=new AddParentConvention();
   Conventions:Convention[]=[];
   Parent:any=new Object();
   Convention:any=new Object();
-  today:string=formatDate(new Date(), 'yyyy-MM-dd', 'en');
-  time:string=formatDate(new Date(), 'hh:mm:ss', 'en');
-  constructor(private _Activatedroute:ActivatedRoute,private parentService:ParentService, private toastrService: NbToastrService,private conventionService:ConventionService) { }
+  CurrentYear:string;
+  Years:Object[];
+  GetActive:any=new Object();
+  DisableConvention:boolean=false;
+  search:SearchConvention=new SearchConvention();
+  constructor(private _Activatedroute:ActivatedRoute,private parameterService:ParameterService,private parentService:ParentService, private toastrService: NbToastrService,private conventionService:ConventionService) { }
 
   ngOnInit(): void {
-    this.today=this.today+'T'+this.time;
+    this.conventionService.GetYears().subscribe(
+      data=>{this.Years=data;
+        this.parameterService.GetByCode('CurrentScholarYear').subscribe(
+          data=>{this.CurrentYear=data.value;
+          this.SearchConvention()},
+          err=>console.log(err)
+        );
+      },
+      err=>console.log(err)
+    )
     this.Convention.name="Aucune Convention"
     this.parentid=this._Activatedroute.snapshot.paramMap.get("parentid");
     this.GetById();
@@ -50,26 +63,44 @@ export class EditParentComponent implements OnInit {
     this.cancel.emit();
   }
   UpdateParent(){
-    this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
-      (success) => {
-        this.toastrService.show('Parent Updated successfully', 'Update', { status: 'success' });
-        this.ParentConventionToAdd.parentid=this.Parent.id;
-        if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
-        this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(
-          data=>{this.updateeleve.emit()},
-          err=>console.log(err));
-
+    this.GetActive.parentid=this.parentid;
+    this.conventionService.GetActive(this.GetActive).subscribe(
+      data=>{
+        if (data==null || data.id == this.Convention.id){
+          this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
+            (success) => {
+              this.toastrService.show('Parent Updated successfully', 'Update', { status: 'success' });
+              this.ParentConventionToAdd.parentid=this.Parent.id;
+              if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
+              if (data.id != this.Convention.id){
+              this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(
+                data=>{this.updateeleve.emit()},
+                err=>console.log(err));
+              }
+            },
+            (error) => {
+              this.toastrService.show('Server error', 'Update', { status: 'danger' });
+            }
+          )
+        }
+        else{
+          console.log(data);
+          if(confirm(this.Parent.prenom+" "+this.Parent.nomDeFamille+" a déja une convention à cette date \n Voulez vous y mettre fin ?")) {
+            this.DisableConvention=true;
+          }
+        }
       },
-      (error) => {
-        this.toastrService.show('Server error', 'Update', { status: 'danger' });
+      err=>{
+        console.log(err)
       }
     )
   }
-  SearchConventionByYear(){
-    this.conventionService.SearchByYear(this.conventionyear).subscribe(
+  
+  SearchConvention(){
+    this.search.annees=this.CurrentYear.split('-');
+    this.conventionService.Search(this.search).subscribe(
       data=>{this.Conventions=data},
       err=>{console.log(err)}
-    
     );
   }
   conventionsnull(){this.Conventions=null;this.ParentConvention.conventionid=null}

@@ -8,6 +8,9 @@ import { Groupe } from '../_models/groupe';
 export class GroupeService {
 
   constructor( private api : ApiService) { }
+  GetAll(){
+    return this.api.get('/api/EnrollementGroupes');
+  }
   GetById(id:number){
     return this.api.get('/api/EnrollementGroupes/'+id);
   };

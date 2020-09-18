@@ -93,9 +93,9 @@
                 </div>
                 <div class="col-3">
                     <nb-select name="year" size="tiny" shape="round" appearance="filled" placeholder="année" id="select-year"
-                        [(ngModel)]="conventionyear">
+                        [(ngModel)]="CurrentYear">
                         <nb-option [value]=null (click)="conventionsnull()">Aucune</nb-option>
-                        <nb-option [value]=2020 (click)="SearchConventionByYear()">2020</nb-option>
+                        <nb-option *ngFor="let Year of Years" [value]="Year.debut+'-'+Year.fin" (click)="SearchConvention()">{{Year.debut}}-{{Year.fin}}</nb-option>
                     </nb-select>
                 </div>
                 <div class="col-3"><p></p></div>

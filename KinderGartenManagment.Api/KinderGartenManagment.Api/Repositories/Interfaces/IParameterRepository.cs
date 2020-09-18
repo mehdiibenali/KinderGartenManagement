@@ -8,7 +8,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
     public interface IParameterRepository  
     { 
         Task<IEnumerable< Parameter >> GetAll(); 
-        Task< Parameter > GetByIdAsync(int parameterId ); 
+        Task< Parameter > GetByIdAsync(string code ); 
         Task InsertAsync( Parameter parameter ); 
         Task DeleteAsync(int parameterId ); 
         void Update( Parameter parameter ); 

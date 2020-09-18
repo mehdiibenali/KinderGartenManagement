@@ -23,8 +23,7 @@ namespace KinderGartenManagment.Api.Repositories
         }
         public async Task<IEnumerable<object>> GetYears()
         {
-            int Year = await _context.Enrollements.Where(e => e.Type == "Groupe" && e.DateDeFin > DateTime.Now).Select(g=>g.DateDeDebut.Year).Distinct().FirstOrDefaultAsync();
-            return await _context.Enrollements.Where(e=>e.Type=="Groupe").Select(g => new {debut= g.DateDeDebut.Year, fin=g.DateDeFin.Year, current= Year==g.DateDeDebut.Year}).Distinct().ToListAsync();
+            return await _context.Enrollements.Where(e=>e.Type=="Groupe").Select(g => new {debut= g.DateDeDebut.Year, fin=g.DateDeFin.Year}).Distinct().ToListAsync();
         }
         public async Task<IEnumerable<Enrollement>> Search(List<int?> annees, string Enrollementsearch, int? classeid)
         {

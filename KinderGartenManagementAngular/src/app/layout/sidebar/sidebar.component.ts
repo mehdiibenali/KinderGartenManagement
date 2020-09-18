@@ -31,6 +31,10 @@ export class SidebarComponent implements OnInit {
       link:"/eleves/list"
     },
     {
+      title: 'Parents',
+      link:"/parents/list"
+    },
+    {
       title:'Conventions',
       link:"/conventions/list"
     },

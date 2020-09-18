@@ -12,7 +12,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task InsertAsync( ParentConvention parentconvention ); 
         Task DeleteAsync(int parentconventionId ); 
         void Update( ParentConvention parentconvention );
-        Task DisableConventionActive(int parentid);
+        Task DisableConventionActive(int parentid,DateTime datedefin);
         Task SaveAsync(); 
     } 
 } 

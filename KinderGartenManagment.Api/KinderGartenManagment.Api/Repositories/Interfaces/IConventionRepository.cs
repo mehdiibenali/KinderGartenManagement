@@ -9,7 +9,8 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
     { 
         Task<IEnumerable< Convention >> GetAll();
         Task<Convention> GetActive(int parentid,DateTime datetime);
-        Task<IEnumerable<Convention>> SearchByYear(int year);
+        Task<IEnumerable<object>> GetYears();
+        Task<IEnumerable<Convention>> Search(string? Name,List<int?> annees);
         Task< Convention > GetByIdAsync(int conventionId ); 
         Task InsertAsync( Convention convention ); 
         Task DeleteAsync(int conventionId ); 

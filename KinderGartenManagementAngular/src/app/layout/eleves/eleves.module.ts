@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ElevesRoutingModule } from './eleves-routing.module';
 import { ElevelistComponent } from './elevelist/elevelist.component';
-import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonModule, NbTabsetModule, NbSpinnerModule } from '@nebular/theme';
+import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonModule, NbTabsetModule, NbSpinnerModule, NbCheckboxModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     NbAlertModule,
     NbTabsetModule,
     NbSpinnerModule,
+    NbCheckboxModule,
   ],
 })
 export class ElevesModule { }
