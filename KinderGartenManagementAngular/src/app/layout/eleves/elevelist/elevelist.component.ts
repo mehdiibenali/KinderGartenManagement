@@ -37,7 +37,7 @@ export class ElevelistComponent implements OnInit {
 
   ngOnInit(): void {
     this.parameterService.GetByCode('CurrentScholarYear').subscribe(
-      data=>this.searchgroupe.annees=data.split('-'),
+      data=>{this.searchgroupe.annees=data[0].value.split('-')},
       err=>console.log(err)
     )
     this.GetAll();
@@ -107,4 +107,10 @@ export class ElevelistComponent implements OnInit {
     if (this.search.parentsearch == ''){this.search.parentsearch=null};
     this.Search();
   }
+  // Collapse(){}
+  //   $('#collapseOne').collapse({
+  //     toggle: false
+  //   })
+    
+  // }
 }

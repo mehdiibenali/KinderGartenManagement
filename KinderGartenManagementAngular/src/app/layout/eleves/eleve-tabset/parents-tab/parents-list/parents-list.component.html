@@ -1,4 +1,52 @@
 <div *ngIf="Parents.length>0">
+    <div class="row">
+        <div *ngFor="let Parent of ParentsAndConventions" [class]='split'>
+            <nb-card>
+                <nb-card-body>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>{{Parent.p.prenom}}</tr>
+                            <br>
+                            <tr>{{Parent.p.nomDeFamille}}</tr>
+                            <br>
+                            <tr>{{Parent.p.tel1}}</tr>
+                            <br>
+                            <tr>{{Parent.p.tel2}}</tr>
+                            <br>
+                            <tr>{{Parent.p.tel3}}</tr>
+                            <br>
+                            <tr>{{Parent.nameOfConvention}}</tr>
+                            <br>
+                            <div class="row">
+                                <div class="col-6">
+                                <button nbButton fullWidth status='success' (click)="EditParent(Parent.p.id)">
+                                    Editer</button>
+                                </div>
+                                <div class="col-6">
+                                    <button nbButton fullWidth status='danger' (click)="DeleteEleveParent(Parent.p.id)">
+                                    Supprimer</button>
+                                </div>
+                            </div>
+                            <div class="row"><p></p></div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8">
+                                <button nbButton fullWidth status='info' [disabled] = checkpt(Parent.p.id) (click)="ChangeParentTuteur(Parent.p.id)">
+                                    Parent Tuteur</button>
+                                </div>
+                                <div class="col-2">
+                                    <nb-checkbox status="basic" fullWidth disabled [checked]=checkpt(Parent.p.id)></nb-checkbox>
+                                </div>
+                            </div>
+                        </tbody>
+                    </table>
+                </nb-card-body> 
+            </nb-card>
+        </div>
+        <div [class]=split>
+            
+        </div>
+    </div>
     <table class="table">
         <thead class="table-primary">
             <tr>
@@ -6,7 +54,6 @@
                 <th>Nom</th>
                 <th>Tel 1</th>
                 <th>Tel 2</th>
-                <th>Tel 3</th>
                 <th><div class="row justify-content-center">Convention</div></th>
                 <th><div class="row justify-content-center">Actions</div></th>
             </tr>
@@ -17,7 +64,6 @@
                 <td>{{Parent.p.nomDeFamille}}</td>
                 <td>{{Parent.p.tel1}}</td>
                 <td>{{Parent.p.tel2}}</td>
-                <td>{{Parent.p.tel3}}</td>
                 <td>{{Parent.nameOfConvention}}</td>
                 <td>
                     <button type='button' class='btn btn-success' (click)="EditParent(Parent.p.id)">

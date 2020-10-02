@@ -29,16 +29,16 @@ namespace KinderGartenManagment.Api.Controllers
             return resultListe; 
         } 
         [HttpGet("{code}")] 
-        public async Task<ActionResult< Parameter >> GetParameter (string code) 
+        public async Task<ActionResult< IEnumerable<Parameter> >> GetParameter (string code) 
         { 
-            Parameter parameter = await _parameterRepository .GetByIdAsync(code); 
+            IEnumerable<Parameter> parameters = await _parameterRepository .GetByCodeAsync(code); 
  
-            if ( parameter == null) 
+            if ( parameters == null) 
             { 
                 return NotFound(); 
             } 
  
-            return parameter ; 
+            return Ok(parameters) ; 
         } 
  
  

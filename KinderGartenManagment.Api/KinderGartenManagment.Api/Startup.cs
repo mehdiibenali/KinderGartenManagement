@@ -76,6 +76,10 @@ namespace KinderGartenManagment.Api
             services.AddScoped<IParentConventionRepository, ParentConventionRepository>();
             services.AddScoped<IConventionFeeRepository, ConventionFeeRepository>();
             services.AddScoped<IParameterRepository, ParameterRepository>();
+            services.AddScoped<IPayementRepository, PayementRepository>();
+            services.AddScoped<IPayementEnrollementRepository, PayementEnrollementRepository>();
+            services.AddScoped<IPayementDatesRepository, PayementDatesRepository>();
+            services.AddScoped<IModaliteRepository, ModaliteRepository>();
             // Jwt Configuration
             var key = Encoding.UTF8.GetBytes(JwtLocalConstants.SecretKey);
             services.AddAuthentication(x =>

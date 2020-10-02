@@ -14,7 +14,7 @@ namespace KinderGartenManagment.Api.Helpers
         {
             CreateMap<UserViewModel, User>()
                 .ReverseMap();
-            CreateMap<User, SUserViewModel>()
+            CreateMap<User, UserViewModel>()
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.UserRoles.FirstOrDefault().Role.Name))
                 .ReverseMap();
             CreateMap<ClasseViewModel, Classe>()
@@ -36,6 +36,14 @@ namespace KinderGartenManagment.Api.Helpers
             CreateMap<ConventionFeeViewModel, ConventionFee>()
                 .ReverseMap();
             CreateMap<ParameterViewModel, Parameter >()
+                .ReverseMap();
+            CreateMap<PayementViewModel, Payement>()
+                .ReverseMap();
+            CreateMap<PayementDatesViewModel, PayementDates>()
+                .ReverseMap();
+            CreateMap<PayementEnrollementViewModel, PayementEnrollement>()
+                .ReverseMap();
+            CreateMap<ModaliteViewModel, Modalite>()
                 .ReverseMap();
         }
     }

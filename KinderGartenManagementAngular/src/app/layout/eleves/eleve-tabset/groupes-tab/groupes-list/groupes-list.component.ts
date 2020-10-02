@@ -34,7 +34,7 @@ export class GroupesListComponent implements OnInit {
       data=>{
         this.Years=data;
         this.parameterService.GetByCode('CurrentScholarYear').subscribe(
-          data=>{this.SelectedYear.CurrentYear=data.value},
+          data=>{this.SelectedYear.CurrentYear=data[0].value},
           err=>console.log(err)
         )
       },

@@ -29,13 +29,12 @@ export class AddParentComponent implements OnInit {
   Conventions:Convention[]=[];
   Years:Object[];
   CurrentYear:string;
-  today:string=formatDate(new Date(), 'yyyy/MM/dd', 'en');
   constructor(private router:Router,private parentService:ParentService, private parameterService:ParameterService, private toastrService: NbToastrService,private conventionService:ConventionService) {   }
   ngOnInit(): void {
     this.conventionService.GetYears().subscribe(
       data=>{this.Years=data;
         this.parameterService.GetByCode('CurrentScholarYear').subscribe(
-          data=>{this.CurrentYear=data.value;
+          data=>{this.CurrentYear=data[0].value;
           this.SearchConvention()
           },
           err=>console.log(err))

@@ -20,6 +20,10 @@ const routes: Routes = [
         path:':eleveid/groupes',
         loadChildren: () => import('./groupes-tab/groupes-tab.module').then(m=>m.GroupesTabModule)
       },
+      {
+        path:':eleveid/paiements',
+        loadChildren: () => import('./payements-tab/payements-tab.module').then(m=>m.PayementsTabModule)
+      },
     ]
   },
 ];

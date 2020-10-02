@@ -23,6 +23,7 @@ export class ParentsListComponent implements OnInit {
   parentid:number;
   conventionname:string;
   parenttuteur:number;
+  split:string;
   constructor(private router:Router,private _Activatedroute:ActivatedRoute,private parentService:ParentService, private toastrService: NbToastrService,private conventionService:ConventionService) { }
 
   ngOnInit(): void {
@@ -33,6 +34,7 @@ export class ParentsListComponent implements OnInit {
     this.parentService.GetParentByEleveId(this.eleveid).subscribe(data => {
       this.ParentsAndConventions=data;
       this.Parents=data.map(d=>d.p);
+      this.split="col-"+(12/(this.Parents.length+1));
       this.parentService.GetEleveParentByParentTuteur(this.eleveid).subscribe(
         data=>{this.parenttuteur=data.parentId},
         err=>console.log(err)

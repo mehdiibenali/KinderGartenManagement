@@ -19,7 +19,7 @@ namespace KinderGartenManagment.Api.Context
         public DbSet<Classe> Classes { get; set; }
         public DbSet<Convention> Conventions { get; set; }
         public DbSet<Eleve> Eleves { get; set; }
-        public virtual DbSet<ParentConvention> ParentConventions { get; set; }
+        public DbSet<ParentConvention> ParentConventions { get; set; }
         public DbSet<EleveParent> EleveParents { get; set; }
         public DbSet<EleveEnrollement> EleveEnrollements { get; set; }
         public DbSet<Enrollement> Enrollements { get; set; }
@@ -28,6 +28,10 @@ namespace KinderGartenManagment.Api.Context
         public DbSet<ConventionFee> ConventionFees { get; set; }
         public DbSet<Parameter> Parameters { get; set; }
         public DbSet<Payement> Payements { get; set; }
+        public DbSet<PayementEnrollement> PayementEnrollements { get; set; }
+        public DbSet<Modalite> Modalites { get; set; }
+        public DbSet<PayementDates> PayementDates { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

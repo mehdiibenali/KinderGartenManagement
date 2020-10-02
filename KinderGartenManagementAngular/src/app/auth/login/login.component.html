@@ -27,7 +27,7 @@
            name="username"
            id="input-username"
            placeholder="User-name"
-           autofocus >
+           autofocus required>
   </div>
 
   <div class="form-control-group">
@@ -44,7 +44,7 @@
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
            [maxlength]="getConfigValue('forms.validation.password.maxLength')"
-           [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+           [attr.aria-invalid]="password.invalid && password.touched && password!=null ? true : null">
     
   </div>  
 

@@ -20,9 +20,9 @@ namespace KinderGartenManagment.Api.Repositories
             return await _context. Parameters .ToListAsync(); 
         } 
  
-        public async Task< Parameter > GetByIdAsync(string code) 
+        public async Task< IEnumerable<Parameter> > GetByCodeAsync(string code) 
         { 
-            return await _context. Parameters .Where(p=>p.Code==code).FirstAsync(); 
+            return await _context. Parameters .Where(p=>p.Code==code).ToListAsync(); 
         } 
  
         public async Task InsertAsync( Parameter parameter ) 

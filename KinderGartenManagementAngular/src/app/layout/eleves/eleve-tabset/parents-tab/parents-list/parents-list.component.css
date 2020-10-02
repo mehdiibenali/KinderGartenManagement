@@ -37,3 +37,18 @@
   color: black; /* Add a black text color */
   display: block; /* Make it into a block element to fill the whole list */
 }
+nb-card{
+  background-color: ;
+  border-color: cornflowerblue;
+  border-width: 1px;
+  background-color: seashell;
+}
+nb-card nb-card-body table tbody tr{
+  font-size: 18px;
+  color: midnightblue;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif  ;
+  text-align: center;
+}
+table tbody div.row div.col-8{
+  margin-right: -25px;
+}

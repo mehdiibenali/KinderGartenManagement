@@ -17,10 +17,12 @@ namespace KinderGartenManagment.Api.Repositories
         {
             _context = context;
         }
+
         public async Task<IEnumerable<Object>> GetAll()
         {
             return from p in _context.Parents
-                   join ep in _context.EleveParents on p.Id equals ep.ParentId
+                   join ep in _context.EleveParents on p.Id equals ep.ParentId into epp
+                   from eleveparents in epp.DefaultIfEmpty()
                    join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = pc.DateDeFin > DateTime.Now } into ppc
                    from subparentconvention in ppc.DefaultIfEmpty()
                    select new { p, NameOfConvention = subparentconvention.Convention.Name ?? null };

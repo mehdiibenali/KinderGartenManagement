@@ -36,7 +36,7 @@ export class EditParentComponent implements OnInit {
     this.conventionService.GetYears().subscribe(
       data=>{this.Years=data;
         this.parameterService.GetByCode('CurrentScholarYear').subscribe(
-          data=>{this.CurrentYear=data.value;
+          data=>{this.CurrentYear=data[0].value;
           this.SearchConvention()},
           err=>console.log(err)
         );
