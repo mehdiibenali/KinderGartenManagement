@@ -153,8 +153,8 @@
           <div class="form-control-group">
             <label class="label" for="input-rubrique">Rubrique:</label>
             <br>
-            <select  class="selectoption" fullWidth (change)="GetExpected(i)" [(ngModel)]="payementenrollements[i].section" name="rubrique">
-                <option *ngFor="let section of sections" [value]="section.value">{{section.value}}</option>
+            <select  class="selectoption" fullWidth  (change)="GetExpected(i)" [(ngModel)]="payementenrollements[i].section" name="rubrique">
+                <option *ngFor="let section of sections"  [value]="section.value">{{section.value}}</option>
             </select>
             <br>
           </div>
