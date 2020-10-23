@@ -75,54 +75,54 @@
     </div>
 </div> -->
 <div class="row">
-<div class="col-10">
-<tr>
-    <td>
-        <input nbInput  type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche de l'éleve"[(ngModel)]="search.elevesearch">
-        <nb-select  name="groupes"  placeholder="Groupe" id="select-groupe" [(ngModel)]=search.groupeid>
-            <nb-option [value]=null (click)="Search()">Tout</nb-option>
-            <nb-option *ngFor="let Groupe of Groupes" [value]="Groupe.id" (click)="Search()">{{Groupe.name}}</nb-option>
-        </nb-select>
-    </td>
-    <td>
-        <input nbInput  type="text" id="myInput" autocomplete="off" (keyup)="CheckParentSearch()" placeholder="Recherche avec parent"[(ngModel)]="search.parentsearch">
-        <nb-select  name="clubs"  placeholder="Club" id="select-club" [(ngModel)]=search.clubid>
-            <nb-option [value]=null (click)="Search()">Tout</nb-option>
-            <nb-option *ngFor="let Club of Clubs" [value]="Club.id" (click)="Search()">{{Club.name}}</nb-option>
-        </nb-select>
-    </td>
-    <td>
-        <nb-select   name="sexes" placeholder="Sexe" id="select-sexe" [(ngModel)]="search.sexe">
-            <nb-option [value]=null (click)=Search()>Tous</nb-option>
-            <nb-option value="M" (click)="Search()">M</nb-option>
-            <nb-option value="F" (click)="Search()">F</nb-option>
-        </nb-select>
-        <div class="custom-control custom-checkbox checkbox-lg">
-            
-            <input type="checkbox" [(ngModel)]=search.hasconvention class="custom-control-input" id="checkbox-2" (change)="Search()">
-            <label class="custom-control-label" for="checkbox-2">Avec convention</label>
-          </div>
-      
-  
-    </td>
-    <td>
-        <nb-select   name="classes" placeholder="Classe" id="select-classe" [(ngModel)]="search.classeid" (ngModelChange)="SearchGroupe()">
-            <nb-option [value]=null (click)=Search()>Toutes</nb-option>
-            <nb-option *ngFor="let Classe of Classes" [value]="Classe.id" (click)="Search()">{{Classe.name}}</nb-option>
-        </nb-select>
-        <nb-select  name="conventions"  placeholder="Convention" id="select-convention" [(ngModel)]=search.conventionid>
-            <nb-option [value]=null (click)="Search()">Annuler</nb-option>
-            <nb-option *ngFor="let Convention of Conventions" [value]="Convention.id" (click)="Search()">{{Convention.name}}</nb-option>
-        </nb-select>
-    </td>
-</tr>
-</div>
-<div class="col-2">
-    <div class="row"><p></p></div>
-    <button nbButton rows=2 status="info" size="large" (click)='AddEleve()'>
-        Nouvel Eleve
-    </button>
-</div>
+    <div class="col-10">
+    <tr>
+        <td>
+            <input nbInput  type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche de l'éleve"[(ngModel)]="search.elevesearch">
+            <nb-select  name="groupes"  placeholder="Groupe" id="select-groupe" [(ngModel)]=search.groupeid>
+                <nb-option [value]=null (click)="Search()">Tout</nb-option>
+                <nb-option *ngFor="let Groupe of Groupes" [value]="Groupe.id" (click)="Search()">{{Groupe.name}}</nb-option>
+            </nb-select>
+        </td>
+        <td>
+            <input nbInput  type="text" id="myInput" autocomplete="off" (keyup)="CheckParentSearch()" placeholder="Recherche avec parent"[(ngModel)]="search.parentsearch">
+            <nb-select  name="clubs"  placeholder="Club" id="select-club" [(ngModel)]=search.clubid>
+                <nb-option [value]=null (click)="Search()">Tout</nb-option>
+                <nb-option *ngFor="let Club of Clubs" [value]="Club.id" (click)="Search()">{{Club.name}}</nb-option>
+            </nb-select>
+        </td>
+        <td>
+            <nb-select   name="sexes" placeholder="Sexe" id="select-sexe" [(ngModel)]="search.sexe">
+                <nb-option [value]=null (click)=Search()>Tous</nb-option>
+                <nb-option value="M" (click)="Search()">M</nb-option>
+                <nb-option value="F" (click)="Search()">F</nb-option>
+            </nb-select>
+            <div class="custom-control custom-checkbox checkbox-lg">
+                
+                <input type="checkbox" [(ngModel)]=search.hasconvention class="custom-control-input" id="checkbox-2" (change)="Search()">
+                <label class="custom-control-label" for="checkbox-2">Avec convention</label>
+            </div>
+        
+    
+        </td>
+        <td>
+            <nb-select   name="classes" placeholder="Classe" id="select-classe" [(ngModel)]="search.classeid" (ngModelChange)="SearchGroupe()">
+                <nb-option [value]=null (click)=Search()>Toutes</nb-option>
+                <nb-option *ngFor="let Classe of Classes" [value]="Classe.id" (click)="Search()">{{Classe.name}}</nb-option>
+            </nb-select>
+            <nb-select  name="conventions"  placeholder="Convention" id="select-convention" [(ngModel)]=search.conventionid>
+                <nb-option [value]=null (click)="Search()">Annuler</nb-option>
+                <nb-option *ngFor="let Convention of Conventions" [value]="Convention.id" (click)="Search()">{{Convention.name}}</nb-option>
+            </nb-select>
+        </td>
+    </tr>
+    </div>
+    <div class="col-2">
+        <div class="row"><p></p></div>
+        <button nbButton rows=2 status="info" size="large" (click)='AddEleve()'>
+            Nouvel Eleve
+        </button>
+    </div>
 </div>
 <div class="row"><p></p></div>
 <!-- <div id="accordion">

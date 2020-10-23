@@ -40,6 +40,7 @@ namespace KinderGartenManagment.Api.Controllers
         [Route("Register")]
         public async Task<Object> PostApplicationUser(UserViewModel model)
         {
+            if (model.ProfilePicture == null){ model.ProfilePicture = "assets/Default.jpg"; }
             var user = new User()
             {
                 UserName = model.UserName,
@@ -119,13 +120,13 @@ namespace KinderGartenManagment.Api.Controllers
             return result;
         }
         [HttpGet]
-        [Route("GetAll")]
+        [Route("GetAll/{username}")]
         //GET : /api/ApplicationUser/GetByUserName/UserName
-        public async Task<ActionResult<UserViewModel>> GetAll()
+        public async Task<ActionResult<UserViewModel>> GetAll(string username)
         {
             //var user = _userManager.Users.ToList();
             //var users = await _context.Users.ToListAsync();
-            var users = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
+            var users = _userManager.Users.Where(u => u.UserName != username).Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
             if (users == null)
             {
                 return NotFound();
@@ -212,7 +213,7 @@ namespace KinderGartenManagment.Api.Controllers
             try
             {
                 var file = Request.Form.Files[0];
-                var pathToSave = "C:/Users/ASUS/Desktop/Project/KinderGarten/KinderGartenManagementAngular/src/assets";
+                var pathToSave = "../../KinderGartenManagementAngular/src/assets";
                 //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
                 if (file.Length > 0)

@@ -13,18 +13,8 @@ export class SidebarComponent implements OnInit {
       link: '/'
     },
     {
-      title: 'Employers',
-      expanded : false,
-      children : [
-        {
-          title : 'EmployeeList',
-          link : '/employees'
-        },
-        {
-          title : 'Add',
-          link : '/employees/add'
-        }
-      ]
+      title: 'Employés',
+      link:"/employees",
     },
     {
       title: 'Eleves',

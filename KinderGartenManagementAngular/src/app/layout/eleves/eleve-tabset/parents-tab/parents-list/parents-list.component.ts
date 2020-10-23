@@ -65,7 +65,7 @@ export class ParentsListComponent implements OnInit {
         this.GetByEleveId();
       },
       (error) => {
-          this.toastrService.show('Server error', 'Suppression', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Suppression', { status: 'danger' });
           console.log(error);
       } 
     );
@@ -80,13 +80,13 @@ export class ParentsListComponent implements OnInit {
     this.eleveparent.ParentId=this.parentid
     this.parentService.AddEleveParent(this.eleveparent).subscribe(
       (success) => {
-        this.toastrService.show('Parent added successfully', 'Add', { status: 'success' });
+        this.toastrService.show('Parent ajouté à l\'éleve', 'Ajout', { status: 'success' });
         this.parentid=null;
         this.parentsearch=null;
         this.GetByEleveId();
       },
       (error) => {
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
           console.log(error);
       } 
     )
@@ -98,7 +98,10 @@ export class ParentsListComponent implements OnInit {
     this.parentService.UpdateEleveParent(this.eleveid,parentid).subscribe(
       data=>{
         this.parentService.GetEleveParentByParentTuteur(this.eleveid).subscribe(
-        data=>this.parenttuteur=data.parentId,
+        data=>{
+          this.parenttuteur=data.parentId;
+          this.toastrService.show('Parent Tuteur Changé', 'Mise à jour', { status: 'success' })
+        },
         err=>console.log(err)
       )
         },

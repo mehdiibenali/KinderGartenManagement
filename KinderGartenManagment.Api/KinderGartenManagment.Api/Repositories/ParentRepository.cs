@@ -21,8 +21,6 @@ namespace KinderGartenManagment.Api.Repositories
         public async Task<IEnumerable<Object>> GetAll()
         {
             return from p in _context.Parents
-                   join ep in _context.EleveParents on p.Id equals ep.ParentId into epp
-                   from eleveparents in epp.DefaultIfEmpty()
                    join pc in _context.ParentConventions on new { Id = p.Id, Active = true } equals new { Id = pc.ParentId, Active = pc.DateDeFin > DateTime.Now } into ppc
                    from subparentconvention in ppc.DefaultIfEmpty()
                    select new { p, NameOfConvention = subparentconvention.Convention.Name ?? null };
@@ -63,10 +61,11 @@ namespace KinderGartenManagment.Api.Repositories
             return await _context.Parents.Where(p => p.ParentConventions.Any(pc => pc.ConventionId == conventionid)).ToListAsync();
         }
         public async Task<IEnumerable<Parent>> SearchByName(string parentsearch)
-        {   
+        {
+            parentsearch = parentsearch.ToLower();
             return await _context.Parents
                 .Include(c => c.ParentConventions).ThenInclude(c => c.Convention)
-                .Where(x => x.Prenom.Contains(parentsearch) || x.NomDeFamille.Contains(parentsearch))
+                .Where(x => x.Prenom.Contains(parentsearch) || x.NomDeFamille.Contains(parentsearch) || (x.NomDeFamille+' '+x.Prenom).Contains(parentsearch) || (x.Prenom+' '+x.NomDeFamille).Contains(parentsearch))
                 .ToListAsync();
         }
         public async Task SaveAsync()

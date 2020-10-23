@@ -17,6 +17,6 @@ namespace KinderGartenManagment.Api.Models
         public string Sexe { get; set; }
         public virtual ICollection<EleveParent> EleveParents { get; set; }
         public virtual ICollection<EleveEnrollement> EleveEnrollements { get; set; }
-        public virtual ICollection<Payement> Payements { get; set; }
+        public virtual ICollection<PayementEnrollement> PayementEnrollements { get; set; }
     }
 }

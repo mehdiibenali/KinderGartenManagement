@@ -49,7 +49,7 @@ export class AddParentComponent implements OnInit {
           this.parentService.AddParentConvention(this.parentconvention).subscribe(
             (success) => { this.parentid.emit(data.id); },
             (error) => {
-                this.toastrService.show('Server error', 'Add', { status: 'danger' });
+                this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
                 console.log(error);
             }   
           )
@@ -59,7 +59,7 @@ export class AddParentComponent implements OnInit {
         }
       },
       (error) => {
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
           console.log(error);
       }   
     )

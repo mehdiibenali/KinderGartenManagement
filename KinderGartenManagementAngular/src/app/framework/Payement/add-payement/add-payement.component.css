@@ -5,71 +5,7 @@ button.plus{
     height:60px;
     font-size: 45px;
 }
-/*
-        } */
-/* select.input-lg {
-    -o-appearance: none;
-  }
-  
-  select + i.fa {
-    float: right;
-    margin-top: -30px;
-    margin-right: 5px;
-    pointer-events: none;
-    background-color: #fff;
-    padding-right: 5px;
-  }
-  body {
-    background: #f2f2f2;
-  }
-  
-  
-  .selectdiv {
-    position: relative;    
-    float: left;
-    margin: 50px 33%;
-  }
-  
-  .selectdiv:after {
-      content: '\f078';
-      font: normal normal normal 17px/1 FontAwesome;
-      color: #0ebeff;
-      right: 11px;
-      top: 6px;
-      height: 34px;
-      padding: 15px 0px 0px 8px;
-      border-left: 1px solid #0ebeff;
-      position: absolute;
-      pointer-events: none;
-  }
-  
-  select::-ms-expand {
-  display: none;
-  }
-  
-  .selectdiv select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    
-    display: block;
-    width: 100%;
-    max-width: 320px;
-    height: 50px;
-    float: right;
-    margin: 5px 0px;
-    padding: 0px 24px;
-    font-size: 16px;
-    line-height: 1.75;
-    color: #333;
-    background-color: #ffffff;
-    /* background-image: url(http://icocentre.com/Icons/g-arrow-down.png?size=16);
-    border: 1px solid #0ebeff;
-    -ms-word-break: normal;
-    word-break: normal;
-  } 
-  */
-  select.selectoption{
+  .selectoption{
     width: 75%;
     height: 50px;
     border:1px solid  #0ebeff;
@@ -82,14 +18,16 @@ button.plus{
     overflow: hidden;
     
   }
-label.methodes:hover{
-  color: blue;
+label.methods{
+  background-color: whitesmoke;
 }
-div.card-header:hover{
+label.methods:hover{
+  color: blue;
   background-color: lavender;
-} 
-/*
-  .caret.caret-up {
-    border-top-width: 0;
-    border-bottom: 4px solid #fff;
-  } */
+}
+div.payementenrollement{
+  background-color:  rgb(226, 228, 247);
+}
+div.row.payementdates{
+  background-color:  rgb(248, 248, 248);
+}

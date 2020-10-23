@@ -16,5 +16,8 @@ export class AddParentTpComponent implements OnInit {
   CancelAddParent(){
     this.router.navigate(["parents/list"])
   }
-  ParentAdded(event){}
+  ParentAdded(event){
+    this.toastrService.show('Parent Ajouté','Ajout',{status:"success"})
+    this.router.navigate(["parents/list"])
+  }
 }

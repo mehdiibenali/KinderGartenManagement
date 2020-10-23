@@ -12,10 +12,6 @@ const routes: Routes = [
         path:'convention',
         loadChildren: () => import('./convention-tab/convention-tab.module').then(m=>m.ConventionTabModule)
       },
-      {
-        path:':conventionid/parents',
-        loadChildren: () => import('./parents-tab/parents-tab.module').then(m=>m.ParentsTabModule)
-      }
     ]
   }
 ];

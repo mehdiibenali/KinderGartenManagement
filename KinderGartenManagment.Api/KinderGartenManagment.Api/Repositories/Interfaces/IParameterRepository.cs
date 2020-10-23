@@ -9,7 +9,8 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
     { 
         Task<IEnumerable< Parameter >> GetAll();
         Task<IEnumerable<Parameter>> GetByCodeAsync(string code);
-        Task InsertAsync( Parameter parameter ); 
+        Task InsertAsync( Parameter parameter );
+        Task<IEnumerable<Object>> GetDates(DateTime Start, DateTime End);
         Task DeleteAsync(int parameterId ); 
         void Update( Parameter parameter ); 
         Task SaveAsync(); 

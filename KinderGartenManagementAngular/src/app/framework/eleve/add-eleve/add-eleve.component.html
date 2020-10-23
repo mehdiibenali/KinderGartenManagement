@@ -13,7 +13,7 @@
             <div class="form-control-group">
                 <label class="label" for="input-nom">Nom:</label>
                 <input nbInput [(ngModel)]="eleve.nom" id="input-nom"
-                    name="nom" autofocus fullWidth fieldSize="large">
+                    required name="nom" autofocus fullWidth fieldSize="large">
             </div>
         </div>
     </div>
@@ -64,13 +64,13 @@
     <div class="col-6">
         <button nbButton fullWidth status="primary" size="large" [disabled]="submitted || !form.valid"
             [class.btn-pulse]="submitted" (click)='RegisterEleve()'>
-            Add Eleve
+            Ajouter Eleve
         </button>
     </div>
     <div class="col-6">
         <button nbButton status="danger" size="large"
          fullWidth (click)='CancelAddEleve()'>
-            Cancel
+            Annuler
         </button>
     </div>
 </div>

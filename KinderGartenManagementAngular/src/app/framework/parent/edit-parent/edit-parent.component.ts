@@ -66,27 +66,40 @@ export class EditParentComponent implements OnInit {
     this.GetActive.parentid=this.parentid;
     this.conventionService.GetActive(this.GetActive).subscribe(
       data=>{
-        if (data==null || data.id == this.Convention.id){
+        if (data==null){
           this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
             (success) => {
-              this.toastrService.show('Parent Updated successfully', 'Update', { status: 'success' });
+              this.toastrService.show('Parent mis à jour', 'Mise à jour', { status: 'success' });
               this.ParentConventionToAdd.parentid=this.Parent.id;
               if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
-              if (data.id != this.Convention.id){
-              this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(
-                data=>{this.updateeleve.emit()},
-                err=>console.log(err));
-              }
             },
             (error) => {
-              this.toastrService.show('Server error', 'Update', { status: 'danger' });
+              this.toastrService.show('Une erreur est survenue', 'Mise à jour', { status: 'danger' });
             }
           )
         }
         else{
-          console.log(data);
+          if( data.id == this.Convention.id){
+            this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
+              (success) => {
+                this.toastrService.show('Parent mis à jour', 'Mise à jour', { status: 'success' });
+                this.ParentConventionToAdd.parentid=this.Parent.id;
+                if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
+                if (data.id != this.Convention.id){
+                this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(
+                  data=>{this.updateeleve.emit()},
+                  err=>console.log(err));
+                }
+              },
+              (error) => {
+                this.toastrService.show('Une erreur est survenue', 'Mise à jour', { status: 'danger' });
+              }
+            )
+          }
+          else{
           if(confirm(this.Parent.prenom+" "+this.Parent.nomDeFamille+" a déja une convention à cette date \n Voulez vous y mettre fin ?")) {
             this.DisableConvention=true;
+          }
           }
         }
       },

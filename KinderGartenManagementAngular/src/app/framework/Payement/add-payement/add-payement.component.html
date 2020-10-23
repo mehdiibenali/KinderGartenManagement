@@ -1,212 +1,271 @@
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<select class="form-control"  class="control" id="exampleFormControlSelect1">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-  </select>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <select class="form-control input-lg">
-            <option value="option-1">Option 1</option>
-            <option value="option-2">Option 2</option>
-            <option value="option-3">Option 3</option>
-          </select>
-          <i class="fa fa-chevron-down"></i>
-          <select class="form-control input-lg">
-            <option value="option-1">Option 1</option>
-            <option value="option-2">Option 2</option>
-            <option value="option-3">Option 3</option>
-          </select>
-          <i class="fa fa-chevron-down"></i>
-          <select class="form-control input-lg">
-            <option value="option-1">Option 1</option>
-            <option value="option-2">Option 2</option>
-            <option value="option-3">Option 3</option>
-          </select>
-          <i class="fa fa-chevron-down"></i>
+<form #form="ngForm" aria-labelledby="title">
+  <div class="form-control-group" style="margin-left: 1%;text-align: center;">
+    <label for="input-receiptnumber" class="label ">Numéro de reçu:</label>
+    <br>
+    <input nbInput style="height: 50px;" [(ngModel)]="payement.receiptnumber" #receiptnumber="ngModel"
+      id="input-receiptnumber" name="receiptnumber" required>
+  </div>
+  <button id="method" style="display:none 0px;visibility: hidden;" type="button" (click)="CollapseMethode()">
+  </button>
+  <!-- Titre Methodes -->
+  <div class="card" style="margin-left: 1%;margin-right: 3%;">
+    <label class="methods card-header row" for="method">
+      <label for="method" class="col-10" style="font-size: x-large;margin-top: 10px;">Méthodes</label>
+      <label for="method"><span [class]="chevrondirection[0]"
+          style="font-size: 30px;color: blue;margin-top: 6px"></span><span class="caret"></span></label>
+    </label>
+  </div>
+  <!-- Liste Methodes de paiement -->
+  <div class="inner">
+    <div [@collapse]="state[0]" class="collapsing" style="margin-left: 2%;">
+      <div *ngFor="let n of payement.modalitemodels;let i = index">
+        <br>
+        <div class="row form-control-group">
+          <div class="col-2">
+            <label class="label" for="input-payementmethod">Méthode:</label>
+            <br>
+            <select class="selectoption" fullWidth [(ngModel)]="payement.modalitemodels[i].method" required
+              [name]="'method '+i">
+              <option value="Espece">Espèce</option>
+              <option value="Cheque">Chéque</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <label class="label" for="input-amount">Montant:</label>
+            <br>
+            <input nbInput style="height: 50px;" [(ngModel)]="payement.modalitemodels[i].amount" #montant="ngModel"
+              id="input-amount" [name]="'montant '+i" fullWidth required>
+          </div>
+          <div class="col-3 form-control-group" *ngIf="payement.modalitemodels[i].method=='Cheque'">
+            <label class="label">Banque:</label>
+            <br>
+            <input nbInput style="height: 50px;" [(ngModel)]="payement.modalitemodels[i].bank" #bank="ngModel"
+              [name]="'bank '+i" fullWidth required>
+          </div>
+          <div class="col-3" *ngIf="payement.modalitemodels[i].method=='Cheque'">
+            <label class="label">N° de chèque:</label>
+            <br>
+            <input nbInput style="height: 50px;" [(ngModel)]="payement.modalitemodels[i].checknumber"
+              #checknumber="ngModel" [name]="'checknumber '+i" fullWidth required>
+          </div>
+          <div class="col-1">
+            <div *ngIf="payement.modalitemodels.length>1">
+              <button style="margin-top: 27px;" type="button" (click)="DeleteMethod(i)" class="btn">
+                <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span class="caret"></span>
+              </button>
+            </div>
+            <div *ngIf="payement.modalitemodels.length==1 && payement.modalitemodels[i].method!=null">
+              <button style="margin-top: 29px;" type="button" (click)="AddMethodForm()" class="btn">
+                <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+              </button>
+            </div>
+          </div>
+          <div class="col-1"
+            *ngIf="i==payement.modalitemodels.length-1 && payement.modalitemodels.length!=1 && payement.modalitemodels[i].method!=null">
+            <button style="margin-top: 29px;" type="button" (click)="AddMethodForm()" class="btn">
+              <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="selectdiv">
-    <label>
-        <select>
-            <option selected> Select Box </option>
-            <option>Option 1</option>
-            <option>Option 2</option>
-            <option>Last long option</option>
-        </select>
+  <button id="rubrique" style="display:none 0px;visibility: hidden;" type="button" (click)="CollapseRubrique()">
+  </button>
+  <div class="card" style="margin-left: 1%;margin-right: 3%;">
+    <label class="methods card-header row" for="rubrique">
+      <label for="rubrique" class="col-10" style="font-size: x-large;margin-top: 10px;">Rubriques</label>
+      <label for="rubrique"><span [class]="chevrondirection[1]"
+          style="font-size: 30px;color: blue;margin-top: 6px"></span><span class="caret"></span>
+      </label>
     </label>
   </div>
-  <div class="container">
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a href="#">HTML</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">JavaScript</a></li>
-      </ul>
-    </div>
-  </div>
-        <div class="selectdiv">
-
-
-           <select fullWidth class="form-group">
-            <option value="option-1">Option 1</option>
-            <option value="option-2">Option 2</option>
-            <option value="option-3">Option 3</option>
-          </select>
-        </div>
-      </div>-->
-<button id="method" style="display:none 0px;visibility: hidden;" type="button" (click)="CollapseMethode()">
-</button>
-<div class="card" style="margin-left: -13px;">
-        <div class="card-header" for="method">
-            <div class="row">
-              <label for="method" class="methodes col-10" style="font-size: x-large;margin-top: 10px;">Méthodes</label>
-                <label for="method"><span [class]="chevrondirection[0]"  style="font-size: 30px;color: blue;margin-top: 6px"></span><span class="caret"></span>
-                </label>
-            </div>
-        </div>
-</div>
-<div class="inner">
-    <div [@collapse]="state[0]" class="collapsing">
-        <div *ngFor="let n of modalites;let i = index">
-            <form #form="ngForm" aria-labelledby="title">
-              <br>
-              <div class="row">
-                        <div class="col-2">
-                            <div class="form-control-group">
-                            <label class="label" for="input-method">Méthode:</label>
-                            <br>
-                            <select  class="selectoption" fullWidth [(ngModel)]="modalites[i].method" required name="method">
-                                <option value="Espece">Espèce</option>
-                                <option value="Cheque">Chéque</option>
-                            </select>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <label class="label" for="input-montant">Montant:</label>
-                            <br>
-                            <input nbInput style="height: 50px;" [(ngModel)]="modalites[i].amount" #montant="ngModel"
-                            id="input-montant" name="montant" fullWidth>
-                        </div>
-                        <div class="col-3" *ngIf="modalites[i].method=='Cheque'">
-                          <label class="label">Banque:</label>
-                          <br>
-                          <input nbInput style="height: 50px;" [(ngModel)]="modalites[i].bank" #bank="ngModel"
-                          name="bank" fullWidth>
-                        </div>
-                        <div class="col-3" *ngIf="modalites[i].method=='Cheque'">
-                          <label class="label">N° de chèque:</label>
-                          <br>
-                          <input nbInput style="height: 50px;" [(ngModel)]="modalites[i].checknumber" #bank="ngModel"
-                          name="bank" fullWidth>
-                        </div>
-                    <div class="col-1">
-                        <div *ngIf="modalites.length>1">
-                        <button style="margin-top: 27px;" type="button" (click)="DeleteMethod(i)" class="btn">
-                            <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span class="caret"></span>
-                        </button>
-                        </div>
-                        <div *ngIf="modalites.length==1 && form.valid">
-                            <button style="margin-top: 29px;" type="button" (click)="AddMethodForm()" class="btn">
-                                <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-1" *ngIf="i==modalites.length-1 && modalites.length!=1 && form.valid">
-                        <button style="margin-top: 29px;" type="button" (click)="AddMethodForm()" class="btn">
-                            <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
-                        </button>
-                    </div>
-            </div>
-          </form>
-        </div>
-    </div>
-</div>
-<button id="rubrique" style="display:none 0px;visibility: hidden;" type="button" (click)="CollapseRubrique()">
-</button>
-<div class="card" style="margin-left: -13px;">
-        <div class="card-header">
-            <div class="row">
-              <label for="rubrique" class="methodes col-10" style="font-size: x-large;margin-top: 10px;">Rubriques</label>
-                <label for="rubrique"><span [class]="chevrondirection[1]" style="font-size: 30px;color: blue;margin-top: 6px"></span><span class="caret"></span>
-                </label>
-            </div>
-        </div>
-</div>
-<div class="inner">
-  <div [@collapse]="state[1]" class="collapsing">
-    <div *ngFor="let n of payementenrollements;let i = index">
-      <form #form="ngForm" aria-labelledby="title">
-      <br>
-      <div class="row">
-        <div class="col-3">
-          <div class="form-control-group">
-            <label class="label" for="input-rubrique">Rubrique:</label>
+  <div class="inner">
+    <div [@collapse]="state[1]" class="collapsing" style="margin-left: 2%;">
+      <div  *ngFor="let n of payement.payementenrollementmodels;let i = index">
+        <br>
+        <div class="row payementenrollement">
+          <div class="col-3 form-control-group">
+            <label class="label" for="input-section">Rubrique:</label>
             <br>
-            <select  class="selectoption" fullWidth  (change)="GetExpected(i)" [(ngModel)]="payementenrollements[i].section" name="rubrique">
-                <option *ngFor="let section of sections"  [value]="section.value">{{section.value}}</option>
+            <select class="selectoption" (change)="GetExpected(i)"
+              [(ngModel)]="payement.payementenrollementmodels[i].section" [name]="'rubrique '+i" required>
+              <option *ngFor="let section of sections" [value]="section.value">{{section.value}}</option>
             </select>
             <br>
           </div>
-        </div>
-        <div class="col-9" style="margin-left: -30px;" >
-          <div *ngIf="payementenrollements[i].section==='Scholarité' || payementenrollements[i].section==='Club d\'été' || payementenrollements[i].section==='Club d\'hiver'  "  >
-            <div class="row">
-              <div class="col-4">
-                <label class="label" for="input-annee">Année:</label>
-                <br>
-                <select  class="selectoption" fullWidth (change)="ChangeMonth()" [(ngModel)]="annee" required name="rubrique">
-                  <option *ngFor="let annee of annees" [value]="annee">{{annee}}</option>
-                </select>
-              </div>
-              <div class="col-4">
-
+          <div class="col-9 form-control-group">
+            <!-- Sans rubrique -->
+            <div *ngIf="!payement.payementenrollementmodels[i].section">
+              <div class="row">
+                <div class="col-1">
+                  <div *ngIf="payement.payementenrollementmodels.length>1">
+                    <button style="margin-top: 27px;" type="button" (click)="DeletePayementEnrollement(i)" class="btn">
+                      <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span
+                        class="caret"></span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-        </div>
-          <div *ngIf="payementenrollements[i].section==='Frais d\'inscription'">
-            <div class="row">
-              <div class="col-3">
-                <label class="label">Montant:</label>
+            <!-- Frais d'inscription -->
+            <div *ngIf="payement.payementenrollementmodels[i].section==='Frais d\'inscription'">
+              <div class="row">
+                <div class="col-3">
+                  <label class="label">Montant:</label>
+                  <br>
+                  <input nbInput required style="height: 50px;" [(ngModel)]="payement.payementenrollementmodels[i].paid"
+                    disabled #paid="ngModel" [name]="'paid '+i" fullWidth>
+                </div>
+                <div class="col-1">
+                  <div *ngIf="payement.payementenrollementmodels.length>1">
+                    <button style="margin-top: 27px;" type="button" (click)="DeletePayementEnrollement(i)" class="btn">
+                      <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span
+                        class="caret"></span>
+                    </button>
+                  </div>
+                  <div *ngIf="payement.payementenrollementmodels.length==1">
+                    <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
+                      <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-1"
+                  *ngIf="i==payement.payementenrollementmodels.length-1 && payement.payementenrollementmodels.length!=1">
+                  <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
+                    <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                  </button>
+                </div>
+                <div class="col-8"></div>
+              </div>
+            </div>
+            <!-- Club hiver et été + Scolarité -->
+            <div
+              *ngIf="payement.payementenrollementmodels[i].section!='Frais d\'inscription' && payement.payementenrollementmodels[i].section!=null">
+              <div class="row">
+                <div class="col-2">
+                  <label class="label" for="input-enrollementpaid">Payé:</label>
+                  <br>
+                  <input nbInput style="height: 50px;" required [(ngModel)]="payement.payementenrollementmodels[i].paid"
+                    #enrollementpaid="ngModel" [name]="'enrollementpaid '+i" fullWidth>
+                </div>
+                <div class="col-3">
+                  <div *ngIf="payement.payementenrollementmodels[i].section=='Scolarité'">
+                    <label class="label" for="input-convention">Convention:</label>
+                    <br>
+                  </div>
+                  <div *ngIf="payement.payementenrollementmodels[i].section!='Scolarité'">
+                    <label class="label">Club:</label>
+                    <br>
+                    <select class="selectoption" fullWidth
+                      [(ngModel)]="payement.payementenrollementmodels[i].eleveenrollementid" required
+                      [name]="'enrollementid '+i">
+                      <option *ngFor="let e of clubs" [value]="e.id">{{</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4">
+                <label class="label" for="input-comment">Commentaire:</label>
                 <br>
-                <input nbInput style="height: 50px;"[(ngModel)]="payementenrollements[i].paid" disabled #paid="ngModel" name="paid" fullWidth>
+                <input nbInput style="height: 50px;" [(ngModel)]="payement.payementenrollementmodels[i].comment" #comment="ngModel" [name]="'comment '+i" fullWidth>
               </div>
               <div class="col-1">
-                <div *ngIf="payementenrollements.length>1">
+                <div *ngIf="payement.payementenrollementmodels.length>1">
                 <button style="margin-top: 27px;" type="button" (click)="DeletePayementEnrollement(i)" class="btn">
                     <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span class="caret"></span>
                 </button>
-                </div>
-                <div *ngIf="payementenrollements.length==1">
-                    <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
-                        <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
-                    </button>
-                </div>
               </div>
-              <div class="col-1" *ngIf="i==payementenrollements.length-1 && payementenrollements.length!=1">
+              <div *ngIf="payement.payementenrollementmodels.length==1">
+                  <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
+                      <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                  </button>
+              </div>
+              </div>
+              <div class="col-2" *ngIf="i==payement.payementenrollementmodels.length-1 && payement.payementenrollementmodels.length!=1">
                 <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
                     <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
                 </button>
               </div>
-              <div class="col-8"></div>
+            </div>
           </div>
-          </div>
-
-
         </div>
       </div>
-      </form>
-    </div>
+      <div class="row payementenrollement"><p></p></div>
+      <div *ngIf="payement.payementenrollementmodels[i].section!='Frais d\'inscription' && payement.payementenrollementmodels[i].section!=null">
+        <div class="row payementdates " *ngFor="let d of payement.payementenrollementmodels[i].payementdatesmodels;let j = index">
+                  <div class="col-2 form-control-group">
+            <label class="label" for="input-annee">Année:</label>
+            <br>
+            <select  fullWidth class="selectoption" (change)="ChangeMonths(i,j)" [(ngModel)]="payement.payementenrollementmodels[i].payementdatesmodels[j].year" [name]="'annee '+i+' '+j">
+              <option *ngFor="let y of scholaryears" [value]="y">{{y}}</option>
+                    </select>
+                  </div>
+                  <div class="col-2 form-control-group">
+                    <label class="label" for="input-mois">Mois:</label>
+                    <br>
+                    <select fullWidth class="selectoption" (change)="ChangeDates(i,j)" [(ngModel)]="
+            payement.payementenrollementmodels[i].payementdatesmodels[j].month" [name]="'mois '+i+' '+j">
+                      <option
+                        *ngFor="let m of payement.payementenrollementmodels[i].payementdatesmodels[j].ListOfMonths"
+                        [value]="m.month">{{m.month}}</option>
+                    </select>
+                  </div>
+                  <div class="col-3 form-control-group">
+                    <label class="label" for="input-datededebut">Date de début:</label>
+                    <br>
+                    <input nbInput fullWidth type="date" required
+                      [(ngModel)]="payement.payementenrollementmodels[i].payementdatesmodels[j].datededebut"
+                      #start="ngModel" [name]="'start '+i+' '+j" id="input-start">
+                  </div>
+                  <div class="col-3 form-control-group">
+                    <label class="label" for="input-datedefin">Date de fin:</label>
+                    <br>
+                    <input nbInput fullWidth type="date" required
+                      [(ngModel)]="payement.payementenrollementmodels[i].payementdatesmodels[j].datedefin"
+                      #end="ngModel" [name]="'end '+i+' '+j" id="input-end">
+                  </div>
+                  <div class="col-1">
+                    <div *ngIf="payement.payementenrollementmodels[i].payementdatesmodels.length>1">
+                      <button style="margin-top: 27px;" type="button" (click)="DeletePayementDates(i,j)" class="btn">
+                        <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span
+                          class="caret"></span>
+                      </button>
+                    </div>
+                    <div *ngIf="payement.payementenrollementmodels[i].payementdatesmodels.length==1">
+                      <button style="margin-top: 29px;" type="button" (click)="AddPayementDatesForm(i)" class="btn">
+                        <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-1"
+                    *ngIf="j==payement.payementenrollementmodels[i].payementdatesmodels.length-1 && payement.payementenrollementmodels[i].payementdatesmodels.length!=1">
+                    <button style="margin-top: 29px;" type="button" (click)="AddPayementDatesForm(i)" class="btn">
+                      <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+      </div>
+          </div>
+  </div>
+</form>
+<br>
+<!-- Bouton valider -->
+<div class="row">
+  <div class="col-6">
+    <button nbButton fullWidth status="primary" size="large" [disabled]="!form.valid" (click)='open(dialog)'>
+      Valider
+    </button>
+  </div>
+  <div class="col-6">
+    <button nbButton fullWidth status="danger" size="large" (click)='CancelAddPayement()'>
+      Annuler
+    </button>
   </div>
 </div>
-    <!-- <button type="button" (click)="CollapseMethod()" class="btn btn-danger p-2 m-2">Test</button> -->
+<ng-template #dialog let-data let-ref="dialogRef">
+  <app-payement-recap [payement]="data" (close)="close()"></app-payement-recap>
+
+</ng-template>
+<!-- <button type="button" (click)="CollapseMethod()" class="btn btn-danger p-2 m-2">Test</button> -->

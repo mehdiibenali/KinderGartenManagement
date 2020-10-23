@@ -40,7 +40,7 @@ export class AddConventionComponent implements OnInit {
         )
       },
       (error) => {
-          this.toastrService.show('Servor Error', 'Ajout', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
           console.log(error);
       }   
     ) 

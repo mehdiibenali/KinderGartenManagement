@@ -1,0 +1,96 @@
+<nb-card>
+<nb-card-header style="text-align: center;color: blue;font-size: xx-large;">Payement</nb-card-header>
+<nb-card-body>
+    <div style="margin-left: 1%;text-align: center;">
+        <label for="input-receiptnumber" style="font-size: x-large;color: rgb(121, 183, 197);font-weight: bold;">N° de reçu:</label>
+        <br>
+        <br>
+        <input nbInput  style="text-align: center;" disabled [value]="payement.receiptnumber">
+
+    </div>
+    <br>
+    <div style="margin-left: 1%;text-align: center;">
+            <label class="label" for="methods" style="font-size: x-large;text-align: center;color: rgb(121, 183, 197);font-weight: bold;">Méthodes:</label>
+            <br>
+    </div>
+    <div *ngFor="let n of payement.modalitemodels;let i = index" style="text-align: center;">
+        <div *ngIf="payement.modalitemodels[i].method=='Cheque'">
+            <div class="row">
+            <div class="col-3">
+                <label class="label" for="input-method" >Méthode:</label>
+                <br>
+                <input nbInput  style="text-align: center;" disabled [value]="payement.modalitemodels[i].method">
+            </div>
+            <div class="col-3">
+                <label class="label" for="input-amount" >Montant:</label>
+                <br>
+                <input nbInput  style="text-align: center;" disabled [value]="payement.modalitemodels[i].amount">
+                <br>
+            </div>
+            <div class="col-3">
+                <label class="label" for="input-bank" >Banque:</label>
+                <br>
+                <input nbInput  style="text-align: center;" disabled [value]="payement.modalitemodels[i].bank">
+                <br>
+            </div>
+            <div class="col-3">
+                <label class="label" for="input-checknumber">N° de chèque:</label>
+                <br>
+                <input nbInput  style="text-align: center;" disabled [value]="payement.modalitemodels[i].checknumber">
+                <br>
+            </div>    
+            </div>    
+        </div>
+        <div *ngIf="payement.modalitemodels[i].method=='Espece'">
+            <div class="row">
+                <div class="col-6">
+                    <label class="label" for="input-method" >Méthode:</label>
+                    <br>
+                    <input nbInput  style="text-align: center;" disabled [value]="payement.modalitemodels[i].method">
+                </div>
+                <div class="col-6">
+                    <label class="label" for="input-amount" >Montant:</label>
+                    <br>
+                    <input nbInput  style="text-align: center;" disabled [value]="payement.modalitemodels[i].amount">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row"><p></p></div>
+
+    </div>
+    <div style="margin-left: 1%;text-align: center;">
+        <label class="label" for="methods" style="font-size: x-large;text-align: center;color: rgb(121, 183, 197);font-weight: bold;">Rubriques:</label>
+        <br>
+    </div>
+    <div *ngFor="let n of payement.payementenrollementmodels;let i = index" style="text-align: center;">
+        <div *ngIf="payement.payementenrollementmodels[i].section==='Frais d\'inscription'">
+            <div class="row">
+                <div class="col-6">
+                    <label class="label" for="input-section" >Rubrique:</label>
+                    <br>
+                    <input nbInput  style="text-align: center;" disabled [value]="payement.payementenrollementmodels[i].section">
+                </div>
+                <div class="col-6">
+                    <label class="label">Montant:</label>
+                    <br>
+                    <input nbInput  style="text-align: center;" disabled [value]="payement.payementenrollementmodels[i].paid">
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</nb-card-body>
+<nb-card-footer>
+    <div class="row">
+        <div class="col-6">
+            <button nbButton fullWidth status="primary" size="large">
+                Valider
+            </button>
+        </div>
+        <div class="col-6">
+            <button nbButton (click)="CloseDialog()" fullWidth status="danger" size="large">Annuler</button>
+        </div>
+    </div>
+</nb-card-footer>
+</nb-card>

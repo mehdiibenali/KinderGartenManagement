@@ -6,13 +6,4 @@ export class User {
     profilepicture:string;
     role:string;
     password:string;
-    constructor() {
-        this.firstname='';
-        this.lastname='';
-        this.email='';
-        this.username='';
-        this.profilepicture='';
-        this.role='';
-        this.password='';
-    }
 }

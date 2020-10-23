@@ -12,4 +12,7 @@ export class ParameterService {
   GetByCode(Code:string){
     return this.apiService.get('/api/Parameters/'+Code);
   }
+  GetDates(annee){
+    return this.apiService.get('/api/Parameters/GetDates/'+annee)
+  }
 }  

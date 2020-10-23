@@ -39,8 +39,6 @@ namespace KinderGartenManagment.Api.Helpers
                 .ReverseMap();
             CreateMap<PayementViewModel, Payement>()
                 .ReverseMap();
-            CreateMap<PayementDatesViewModel, PayementDates>()
-                .ReverseMap();
             CreateMap<PayementEnrollementViewModel, PayementEnrollement>()
                 .ReverseMap();
             CreateMap<ModaliteViewModel, Modalite>()

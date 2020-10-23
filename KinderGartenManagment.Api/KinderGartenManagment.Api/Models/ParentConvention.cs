@@ -10,7 +10,9 @@ namespace KinderGartenManagment.Api.Models
     {
         public int ParentId { get; set; }
         public int ConventionId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateDeDebut { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? DateDeFin { get; set; }
         public Parent Parent { get; set; }
         public Convention Convention { get; set; }

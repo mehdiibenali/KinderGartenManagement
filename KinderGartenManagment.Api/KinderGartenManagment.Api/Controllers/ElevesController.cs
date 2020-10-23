@@ -24,7 +24,7 @@ namespace KinderGartenManagment.Api.Controllers
             _mapper = imapper;
         }
         [HttpGet]
-        public async Task<IEnumerable<Eleve>> GetEleves()
+        public async Task<IEnumerable<Object>> GetEleves()
         {
             var resultListe = await _eleveRepository.GetAll();
             return resultListe;

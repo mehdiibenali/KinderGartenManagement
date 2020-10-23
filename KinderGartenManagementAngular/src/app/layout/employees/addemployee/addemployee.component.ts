@@ -5,6 +5,7 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
 import { User } from 'src/app/_core/_models/user';
 import { async } from '@angular/core/testing';
 import { NbToastrService } from '@nebular/theme';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-addemployee',
   templateUrl: './addemployee.component.html',
@@ -16,12 +17,11 @@ export class AddemployeeComponent implements OnInit {
   message: string;
   user: User = new User();
   response: { dbPath: '' };
-  constructor(private employeeService: EmployeeService, private toastrService: NbToastrService) { }
+  constructor(private router:Router,private employeeService: EmployeeService, private toastrService: NbToastrService) { }
   FileToUpload: File = null;
   file: any;
   submitted = false;
   ngOnInit(): void {
-    this.user.profilepicture = "assets/Default.jpg";
   }
   AddEmployee() {
     if (this.file == null){this.registerEmployee();return};
@@ -49,18 +49,22 @@ export class AddemployeeComponent implements OnInit {
   registerEmployee() {
     this.employeeService.AddEmployee(this.user).subscribe(
       (success) => {
-        this.toastrService.show('User added successfully', 'Add', { status: 'success' });
+        this.toastrService.show('Utilisateur Ajouté', 'Ajout', { status: 'success' });
+        this.router.navigate(['/employees'])
       },
       (error) => {
         if (error == null){
-          this.toastrService.show('Not Allowed to Add User', 'Add', { status: 'danger' });
+          this.toastrService.show('Permission refusée', 'Ajout', { status: 'danger' });
         }
         else{
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
           console.log(error);
         }
       }   
     )
     this.submitted = true;
+  }
+  CancelAddEmployee(){
+    this.router.navigate(['/employees'])
   }
 }

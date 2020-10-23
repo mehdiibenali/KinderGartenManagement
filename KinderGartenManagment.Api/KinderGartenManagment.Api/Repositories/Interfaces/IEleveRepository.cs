@@ -7,7 +7,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
 {
     public interface IEleveRepository
     {
-        Task<IEnumerable<Eleve>> GetAll();
+        Task<IEnumerable<Object>> GetAll();
         Task<Eleve> GetByIdAsync(int eleveId);
         Task InsertAsync(Eleve eleve);
         Task<IEnumerable<Eleve>> Search(string elevesearch, string parentsearch, string sexe, bool? hasconvention, int? classeid, int? groupeid, int? clubid, int? conventionid);

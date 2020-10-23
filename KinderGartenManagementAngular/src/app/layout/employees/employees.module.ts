@@ -5,7 +5,7 @@ import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeelistComponent } from './employeelist/employeelist.component';
 import { EditemployeeComponent } from './editemployee/editemployee.component';
 import { AddemployeeComponent } from './addemployee/addemployee.component';
-import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonComponent, NbButtonModule, NbMenuComponent, NbMenuModule, NbSidebarModule } from '@nebular/theme';
+import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonComponent, NbButtonModule, NbMenuComponent, NbMenuModule, NbSidebarModule, NbDialogModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     NbButtonModule,
+    NbDialogModule.forRoot(),
   ]
 })
 export class EmployeesModule { }

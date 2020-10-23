@@ -12,6 +12,5 @@ namespace KinderGartenManagment.Api.ViewModels
         public string Bank { get; set; }
         public int? CheckNumber { get; set; }
         public string Comment { get; set; }
-        public int PayementId { get; set; }
     }
 }

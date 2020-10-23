@@ -6,7 +6,7 @@ import { Eleve } from 'src/app/_core/_models/eleve';
 import { SearchEleve } from 'src/app/_core/_models/search-eleve';
 import { GroupeService } from 'src/app/_core/_services/groupe.service';
 import { Groupe } from 'src/app/_core/_models/groupe';
-import { ClubService } from 'src/app/_core/_services/club.service';
+import { SummerClubService } from 'src/app/_core/_services/summer-club.service';
 import { Convention } from 'src/app/_core/_models/convention';
 import { ParentService } from 'src/app/_core/_services/parent.service';
 import { ParameterService } from 'src/app/_core/_services/parameter.service';
@@ -27,7 +27,7 @@ export class ElevelistComponent implements OnInit {
   Conventions:Convention[]=[];
   constructor(
     private groupeService:GroupeService,
-    private clubService:ClubService,
+    private summerClubService:SummerClubService,
     private eleveService:EleveService,
     private parentService:ParentService,
     private parameterService:ParameterService,
@@ -43,7 +43,7 @@ export class ElevelistComponent implements OnInit {
     this.GetAll();
     this.GetAllClasses();
     this.SearchGroupe();
-    this.GetAllClubs();
+    this.GetAllSummerClubs();
     this.GetAllConventions();
   }
   GetAll(){
@@ -61,8 +61,8 @@ export class ElevelistComponent implements OnInit {
       err=>console.log(err)
     )
   }
-  GetAllClubs(){
-    this.clubService.GetAll().subscribe(
+  GetAllSummerClubs(){
+    this.summerClubService.GetAll().subscribe(
       data=>this.Clubs=data,
       err=>console.log(err)
     )
@@ -76,11 +76,11 @@ export class ElevelistComponent implements OnInit {
   Delete(id){
     return this.eleveService.DeleteEleve(id).subscribe(
       (success)=>{
-        this.toastrService.show('User deleted successfully', 'Delete',{status: 'success'});
+        this.toastrService.show('Eleve supprimé', 'Suppression',{status: 'success'});
         this.GetAll();
       },
       (error)=>{
-        this.toastrService.show('Server error', 'Delete',{status: 'danger'});
+        this.toastrService.show('Une erreur est survenue', 'Suppression',{status: 'danger'});
       }
     )
   }
@@ -107,10 +107,4 @@ export class ElevelistComponent implements OnInit {
     if (this.search.parentsearch == ''){this.search.parentsearch=null};
     this.Search();
   }
-  // Collapse(){}
-  //   $('#collapseOne').collapse({
-  //     toggle: false
-  //   })
-    
-  // }
 }

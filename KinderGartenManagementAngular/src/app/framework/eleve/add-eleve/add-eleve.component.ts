@@ -27,11 +27,11 @@ export class AddEleveComponent implements OnInit {
   RegisterEleve(){
     this.eleveService.AddEleve(this.eleve).subscribe(
       (success) => {
-        this.toastrService.show('Eleve added successfully', 'Add', { status: 'success' });
+        this.toastrService.show('Eleve Ajouté', 'Ajout', { status: 'success' });
         this.Register.emit(success.id)
       },
       (error) => {
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
           console.log(error);
       }   
     ) 

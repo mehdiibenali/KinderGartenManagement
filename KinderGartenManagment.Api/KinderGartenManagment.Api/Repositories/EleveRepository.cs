@@ -17,8 +17,22 @@ namespace KinderGartenManagment.Api.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Eleve>> GetAll()
+        public async Task<IEnumerable<Object>> GetAll()
         {
+            return from e in _context.Eleves
+                   join ee in _context.EleveEnrollements on new { Id = e.Id, Active = true, Type = "Groupe" } equals new { Id = ee.EleveId, Active = ee.Enrollement.DateDeFin >= DateTime.Now, Type = ee.Enrollement.Type } into eeg
+                   from eleveenrollementgroupes in eeg.DefaultIfEmpty()
+                   select new   
+                   {
+                       Id = e.Id,
+                       Prenom = e.Prenom,
+                       Nom = e.Nom,
+                       LieuDeNaissance = e.LieuDeNaissance,
+                       Adresse = e.Adresse,
+                       Sexe = e.Sexe,
+                       EleveParents = e.EleveParents,
+                       Enrollement = eleveenrollementgroupes.Enrollement.Name,
+                   };
             return await _context.Eleves.Include(c => c.EleveParents).ToListAsync();
         }
 
@@ -68,7 +82,7 @@ namespace KinderGartenManagment.Api.Repositories
                 Eleves = Eleves.Where(e => e.EleveEnrollements.Any(ee => ee.EnrollementId == clubid));
             };
             if (conventionid != null)
-            {
+            {   
                 Eleves = Eleves.Where(e => e.EleveParents.Any(ep => ep?.ParentTuteur == true && ep?.Parent.ParentConventions?.Any(pc => pc?.DateDeFin > DateTime.Now && pc?.ConventionId == conventionid)==true));
             };
             Eleves = Eleves.ToList();

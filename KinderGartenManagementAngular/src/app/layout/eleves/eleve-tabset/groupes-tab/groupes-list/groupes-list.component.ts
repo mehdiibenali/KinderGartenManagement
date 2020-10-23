@@ -59,11 +59,11 @@ export class GroupesListComponent implements OnInit {
   DeleteEleveGroupe(groupeid:number){
     this.groupeService.DeleteEleveGroupe(this.eleveid,groupeid).subscribe(
       (success) => {
-        this.toastrService.show('Groupe Supprimé De L\'éleve', 'Delete', { status: 'success' });
+        this.toastrService.show('Groupe Supprimé De L\'éleve', 'Suppression', { status: 'success' });
         this.GetByEleveId();
       },
       (error) => {
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Suppression', { status: 'danger' });
           console.log(error);
       } 
     );
@@ -86,14 +86,14 @@ export class GroupesListComponent implements OnInit {
     this.elevegroupe.subscriptiontype="Groupe";
     this.groupeService.AddEleveGroupe(this.elevegroupe).subscribe(
       (success) => {
-        this.toastrService.show('Groupe added successfully', 'Add', { status: 'success' });
+        this.toastrService.show('Groupe ajouté à l\'éleve', 'Ajout', { status: 'success' });
         this.groupeid=null;
         this.search=new SearchGroupe();
         this.searchresult=[];
         this.GetByEleveId();
       },
       (error) => {
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
           console.log(error);
       } 
     )

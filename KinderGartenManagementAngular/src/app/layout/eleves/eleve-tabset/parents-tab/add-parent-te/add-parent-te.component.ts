@@ -22,11 +22,11 @@ export class AddParentTeComponent implements OnInit {
     this.eleveparent.ParentId = parentid;
     this.parentService.AddEleveParent(this.eleveparent).subscribe(
       (success) => {
-        this.toastrService.show('Parent added successfully', 'Add', { status: 'success' });
+        this.toastrService.show('Parent ajouté', 'Ajout', { status: 'success' });
         this.router.navigate(["eleves/fiche/"+this.eleveid+"/parents/list"]);
       },
       (error) => {
-          this.toastrService.show('Server error', 'Add', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
           console.log(error);
       } 
     )

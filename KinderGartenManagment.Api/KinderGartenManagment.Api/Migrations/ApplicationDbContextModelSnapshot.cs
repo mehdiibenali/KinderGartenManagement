@@ -110,11 +110,10 @@ namespace KinderGartenManagment.Api.Migrations
 
             modelBuilder.Entity("KinderGartenManagment.Api.Models.EleveEnrollement", b =>
                 {
-                    b.Property<int>("EleveId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EnrollementId")
-                        .HasColumnType("int");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateDeDebut")
                         .HasColumnType("datetime2");
@@ -122,12 +121,21 @@ namespace KinderGartenManagment.Api.Migrations
                     b.Property<DateTime?>("DateDeFin")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("EleveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnrollementId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SubscriptionType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EleveId", "EnrollementId");
+                    b.HasKey("Id");
 
                     b.HasIndex("EnrollementId");
+
+                    b.HasIndex("EleveId", "EnrollementId", "DateDeDebut")
+                        .IsUnique();
 
                     b.ToTable("EleveEnrollements");
                 });
@@ -299,40 +307,12 @@ namespace KinderGartenManagment.Api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EleveId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ReceiptNumber")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EleveId");
-
                     b.ToTable("Payements");
-                });
-
-            modelBuilder.Entity("KinderGartenManagment.Api.Models.PayementDates", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateDeDebut")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDeFin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PayementEnrollementId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PayementEnrollementId");
-
-                    b.ToTable("PayementDates");
                 });
 
             modelBuilder.Entity("KinderGartenManagment.Api.Models.PayementEnrollement", b =>
@@ -345,6 +325,18 @@ namespace KinderGartenManagment.Api.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateDeDebut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateDeFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EleveEnrollementId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EleveId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Paid")
                         .HasColumnType("int");
 
@@ -355,6 +347,10 @@ namespace KinderGartenManagment.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EleveEnrollementId");
+
+                    b.HasIndex("EleveId");
 
                     b.HasIndex("PayementId");
 
@@ -636,24 +632,16 @@ namespace KinderGartenManagment.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("KinderGartenManagment.Api.Models.Payement", b =>
-                {
-                    b.HasOne("KinderGartenManagment.Api.Models.Eleve", null)
-                        .WithMany("Payements")
-                        .HasForeignKey("EleveId");
-                });
-
-            modelBuilder.Entity("KinderGartenManagment.Api.Models.PayementDates", b =>
-                {
-                    b.HasOne("KinderGartenManagment.Api.Models.PayementEnrollement", "PayementEnrollement")
-                        .WithMany("PayementDates")
-                        .HasForeignKey("PayementEnrollementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("KinderGartenManagment.Api.Models.PayementEnrollement", b =>
                 {
+                    b.HasOne("KinderGartenManagment.Api.Models.EleveEnrollement", "EleveEnrollement")
+                        .WithMany("PayementEnrollements")
+                        .HasForeignKey("EleveEnrollementId");
+
+                    b.HasOne("KinderGartenManagment.Api.Models.Eleve", "Eleve")
+                        .WithMany("PayementEnrollements")
+                        .HasForeignKey("EleveId");
+
                     b.HasOne("KinderGartenManagment.Api.Models.Payement", "Payement")
                         .WithMany("PayementEnrollements")
                         .HasForeignKey("PayementId")

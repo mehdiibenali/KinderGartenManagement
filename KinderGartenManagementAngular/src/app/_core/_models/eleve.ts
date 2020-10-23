@@ -1,7 +1,7 @@
 export class Eleve {
     prenom:string;
     nom:string;
-    datedenaissance:Date;
+    datedenaissance:any;
     lieudenaissance:string;
     adresse:string;
     sexe:string;

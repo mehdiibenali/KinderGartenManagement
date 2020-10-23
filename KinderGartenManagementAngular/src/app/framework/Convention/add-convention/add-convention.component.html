@@ -24,14 +24,14 @@
             <div class="form-control-group">
                 <label class="label" for="input-datededebut">Date De Début:</label>
                 <input nbInput [(ngModel)]="convention.datededebut" id="input-datededebut" type="date"
-                    name="datededebut" type = "date" autofocus fullWidth fieldSize="large" required>
+                    name="datededebut" [max]="convention.datedefin" type = "date" autofocus fullWidth fieldSize="large" required>
             </div>
         </div>
         <div class="col-6">
             <div class="form-control-group">
                 <label class="label" for="input-datedefin">Date De Fin:</label>
                 <input nbInput [(ngModel)]="convention.datedefin" #datedefin="ngModel" id="input-datedefin"
-                    fullWidth fieldSize="large" type="date" name="datedefin" required>
+                    fullWidth [min]="convention.datededebut" fieldSize="large" type="date" name="datedefin" required>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 ﻿using KinderGartenManagment.Api.Models;
+using KinderGartenManagment.Api.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -30,20 +31,17 @@ namespace KinderGartenManagment.Api.Context
         public DbSet<Payement> Payements { get; set; }
         public DbSet<PayementEnrollement> PayementEnrollements { get; set; }
         public DbSet<Modalite> Modalites { get; set; }
-        public DbSet<PayementDates> PayementDates { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EleveParent>()
-            .HasKey(o => new { o.EleveId, o.ParentId });
-            modelBuilder.Entity<EleveEnrollement>()
-            .HasKey(o => new { o.EleveId, o.EnrollementId });
+            .HasKey(ep => new { ep.EleveId, ep.ParentId });
             modelBuilder.Entity<ParentConvention>()
-            .HasKey(o => new { o.ParentId, o.ConventionId, o.DateDeDebut });
-            //modelBuilder.Entity<BookCategory>()
-            //.HasKey(o => new { o.BookId, o.CategoryId });
+            .HasKey(pc => new { pc.ParentId, pc.ConventionId, pc.DateDeDebut });
+            modelBuilder.Entity<EleveEnrollement>()
+            .HasIndex(ee => new { ee.EleveId, ee.EnrollementId, ee.DateDeDebut }).IsUnique();
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<UserRole>(userRole =>
             {
@@ -59,6 +57,7 @@ namespace KinderGartenManagment.Api.Context
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
             });
+            modelBuilder.Query<UnpaidViewModel>();
             //modelBuilder.Entity<Classe>()   
             //    .HasMany(c => c.Enrollements)
             //    .WithOne(e => e.Classe);

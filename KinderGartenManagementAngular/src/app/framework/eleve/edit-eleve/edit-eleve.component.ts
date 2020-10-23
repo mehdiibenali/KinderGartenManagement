@@ -4,18 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { EleveService } from 'src/app/_core/_services/eleve.service';
 import { NbToastrService } from '@nebular/theme';
 import { EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-eleve',
   templateUrl: './edit-eleve.component.html',
-  styleUrls: ['./edit-eleve.component.css']
+  styleUrls: ['./edit-eleve.component.css'],
+  providers:[DatePipe]
 })
 export class EditEleveComponent implements OnInit {
   @Output("CancelEdit") CancelEdit:EventEmitter<String>=new EventEmitter<String>();
   @Input() FormEnabled:boolean;
   eleve:Eleve=new Eleve();
   eleveid:any;
-  constructor(private _Activatedroute:ActivatedRoute,private eleveService:EleveService, private toastrService: NbToastrService) {
+  constructor(private datePipe:DatePipe,private _Activatedroute:ActivatedRoute,private eleveService:EleveService, private toastrService: NbToastrService) {
    }
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class EditEleveComponent implements OnInit {
     .subscribe(data => {
       this.eleve.prenom= data.prenom;
       this.eleve.nom = data.nom;
-      this.eleve.datedenaissance = data.dateDeNaissance;
+      this.eleve.datedenaissance = this.datePipe.transform(data.dateDeNaissance,"yyyy-MM-dd");
       this.eleve.lieudenaissance = data.lieuDeNaissance;
       this.eleve.adresse = data.adresse;
       this.eleve.sexe = data.sexe;
@@ -47,11 +49,11 @@ export class EditEleveComponent implements OnInit {
   UpdateEleve(){
     this.eleveService.UpdateEleve(this.eleve,this.eleveid).subscribe(
       (success) => {
-        this.toastrService.show('User Updated successfully', 'Update', { status: 'success' })
+        this.toastrService.show('Eleve mis à jour', 'Mise à jour', { status: 'success' })
         this.CancelEdit.emit("Update completed");
       },
       (error) => {
-        this.toastrService.show('Server error', 'Update', { status: 'danger' });
+        this.toastrService.show('Une erreur est survenue', 'Mise à jour', { status: 'danger' });
       }
     )
   }

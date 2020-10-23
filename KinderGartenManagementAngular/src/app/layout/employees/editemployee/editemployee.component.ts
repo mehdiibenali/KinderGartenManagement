@@ -3,7 +3,7 @@ import { Userforedit } from 'src/app/_core/_models/userforedit';
 import { EmployeeService } from 'src/app/_core/_services/employee.service';
 import { NbToastrService } from '@nebular/theme';
 import { HttpEventType } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editemployee',
@@ -14,13 +14,12 @@ export class EditemployeeComponent implements OnInit {
   progress: number;
   message: string;
   user: Userforedit = new Userforedit() ;
-  imageUrl: string = "assets/Default.jpg";
   FileToUpload: File = null;
   file: any;
   username : string;
   submitted = false;
   response: { dbPath: '' };
-  constructor(private _Activatedroute:ActivatedRoute,private employeeService:EmployeeService, private toastrService: NbToastrService) { }
+  constructor(private router:Router,private _Activatedroute:ActivatedRoute,private employeeService:EmployeeService, private toastrService: NbToastrService) { }
   ngOnInit(): void {
     this.username=this._Activatedroute.snapshot.paramMap.get("username");
     this.employeeService.GetByUserName(this.username)
@@ -62,12 +61,15 @@ export class EditemployeeComponent implements OnInit {
   RefreshEmployee(){
     this.employeeService.UpdateEmployee(this.user,this.user.username).subscribe(
       (success) => {
-        this.toastrService.show('User Updated successfully', 'Update', { status: 'success' });
+        this.toastrService.show('Utilisateur mis à jour', 'Mise à jour', { status: 'success' });
+        this.router.navigate(['/employees'])
       },
       (error) => {
-        this.toastrService.show('Server error', 'Update', { status: 'danger' });
+        this.toastrService.show('Une erreur est survenue', 'Mise à jour', { status: 'danger' });
       }   
     )
   };
-
+  CancelEditEmployee(){
+    this.router.navigate(['/employees'])
+  }
 }

@@ -1,11 +1,11 @@
 <nb-tabset (changeTab)="changeTab($event.tabTitle)">
-    <nb-tab tabTitle="Eleve" >
+    <nb-tab [active]="activetab=='eleve'" tabTitle="Eleve" >
     </nb-tab>
-    <nb-tab [disabled] = "disabled" tabTitle="Parents">
+    <nb-tab [active]="activetab=='parents'" [disabled] = "disabled" tabTitle="Parents">
     </nb-tab>
-    <nb-tab [disabled] = "disabled" tabTitle="Groupes">
+    <nb-tab [active]="activetab=='groupes'" [disabled] = "disabled" tabTitle="Groupes">
     </nb-tab>
-    <nb-tab [disabled] = "disabled" tabTitle="Paiements">
+    <nb-tab [disabled] = "disabled" [active]="activetab=='paiements'" tabTitle="Paiements">
     </nb-tab>
 </nb-tabset>
 <router-outlet></router-outlet>

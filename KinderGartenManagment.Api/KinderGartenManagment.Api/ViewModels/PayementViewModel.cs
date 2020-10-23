@@ -8,5 +8,8 @@ namespace KinderGartenManagment.Api.ViewModels
     public class PayementViewModel
     {
         public int ReceiptNumber { get; set; }
+        public ICollection<PayementEnrollementViewModel> PayementEnrollementModels { get; set; }
+        public ICollection<ModaliteViewModel> ModaliteModels { get; set; }
+
     }
 }

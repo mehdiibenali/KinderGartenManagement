@@ -19,8 +19,8 @@ export class EmployeeService {
   AddPicture(formData){
     return this.api.postfile('/api/ApplicationUser/Upload', formData)
   }
-  GetAll(){
-    return this.api.get('/api/ApplicationUser/GetAll')
+  GetAll(username){
+    return this.api.get('/api/ApplicationUser/GetAll/'+username)
   }
   DeleteEmployee(username){
     return this.api.delete('/api/ApplicationUser/Delete/'+username)

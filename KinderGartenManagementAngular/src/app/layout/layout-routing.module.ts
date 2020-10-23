@@ -24,6 +24,14 @@ const routes: Routes = [
         path:'conventions',
         loadChildren: () => import('./conventions/conventions.module').then(m=>m.ConventionsModule)
       },
+      {
+        path:'summerclubs',
+        loadChildren: () => import('./summer-clubs/summer-clubs.module').then(m=>m.SummerClubsModule)
+      },
+      {
+        path:'winterclubs',
+        loadChildren: () => import('./winter-clubs/winter-clubs.module').then(m=>m.WinterClubsModule)
+      },
     ]
   }
 ];
