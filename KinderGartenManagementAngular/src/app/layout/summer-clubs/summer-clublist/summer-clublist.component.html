@@ -1,1 +1,35 @@
-<p>summer-clublist works!</p>
+<div class="row" style="margin-bottom:1%;margin-top: -1%;">
+    <div class="col-9"></div>
+    <div class="col-3">
+        <div class="row"><p></p></div>
+        <button nbButton status="info" size="large" (click)='AddClub()'>
+            Nouvel Club d'été
+        </button>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead class="thead-dark" >
+        <tr>
+            <th>Nom</th>
+            <th>Date De Debut</th>
+            <th>Date De Fin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody style="width:50%">
+        <tr *ngFor="let Club of Clubs" >
+            <td>{{Club.name}}</td>
+            <td>{{Club.dateDeDebut | date:'yyyy-MM-dd'}}</td>
+            <td>{{Club.dateDeFin | date:'yyyy-MM-dd'}}</td>
+            <td>
+                <div class="row">
+                    <button type ='button' class='btn btn-danger' [disabled]="CheckDisabled(Club.eleveEnrollements)"  (click)="Delete(Club.id)">
+                        Supprimer</button>
+
+                    <button type='button' class='btn btn-success' (click)="Edit(Club.id)">
+                    Fiche</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

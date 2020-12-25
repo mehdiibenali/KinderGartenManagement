@@ -11,9 +11,9 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task<IEnumerable< Payement >> GetAll(); 
         Task< Payement > GetByIdAsync(int payementId ); 
         Task InsertAsync( Payement payement ); 
-        Task DeleteAsync(int payementId ); 
+        Task DeleteAsync(int payementId );
+        Task<List<UnpaidViewModel>> GetUnpaid(string eleveids);
         void Update( Payement payement ); 
-        Task SaveAsync();
-        Task<List<UnpaidViewModel>> GetUnpaid(IEnumerable<int> eleves);
+        Task SaveAsync(); 
     } 
 } 

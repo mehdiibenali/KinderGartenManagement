@@ -7,7 +7,7 @@
         </div>
         <div class="col-4">
             <div class="form-control-group">
-                <label class="label" for="input-nom">Nom De Famille:</label>
+                <label class="label" for="input-nom">Nom de famille:</label>
                 <input nbInput [(ngModel)]="parent.nomdefamille" id="input-nom" name="nomdefamille" autofocus fullWidth
                     fieldSize="large" required>
             </div>
@@ -100,12 +100,19 @@
                 </div>
                 <div class="col-3"><p></p></div>
                 <div class="row"> 
-                    <nb-select name="convention" shape="round" fullWidth placeholder="Aucune Convention" id="select-convention"
+                    <nb-select name="convention" shape="round" (selectedChange)="CheckDate()" fullWidth placeholder="Aucune Convention" id="select-convention"
                         [(ngModel)]="conventionid">
                         <nb-option [value]=null>Aucune Convention</nb-option>
                         <nb-option *ngFor="let Convention of Conventions" [value]="Convention.id">{{Convention.name}}</nb-option>
                     </nb-select>
                 </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <label class="label" for="select-datededebut">Date de début:</label>
+                <input nbInput type="date"  [min]= 'mindatededebut' [max]='maxdatededebut'  [(ngModel)]="parentconvention.datededebut" #datededebut="ngModel" id="input-datededebut"
+                name="datededebut" fullWidth fieldSize="large">
             </div>
         </div>
     </div>

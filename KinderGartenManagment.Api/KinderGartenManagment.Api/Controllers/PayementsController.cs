@@ -42,14 +42,17 @@ namespace KinderGartenManagment.Api.Controllers
             {
                 return NotFound();
             }
-
+                    
             return payement;
         }
-        [HttpPost("GetUnpaid")]
-        public async Task<ActionResult<Object>> GetUnpaid(IEnumerable<int> payement)
+        [HttpGet("GetUnpaid/{eleveids}")]
+        public async Task<Object> GetUnpaid(string eleveids)
         {
-            return _payementRepository.GetUnpaid(payement);
-        }
+            
+            List<UnpaidViewModel> payementenrollements = await _payementRepository.GetUnpaid(eleveids);
+     
+            return payementenrollements.Where(pe=>pe.EnrollementPaid!="True").GroupBy(pe => new { pe.EleveId, pe.Prenom, pe.Nom }).Select(pe => new { eleve = pe.Key.Nom + ' ' + pe.Key.Prenom, payementenrollements =pe.ToList().GroupBy(pc => pc.EnrollementId).Select(pc => pc.ToList()) });
+        }   
  
         [HttpPost] 
         public async Task< Payement > PostPayement ( PayementViewModel payement ) 
@@ -81,9 +84,8 @@ namespace KinderGartenManagment.Api.Controllers
             { 
                 throw e; 
             } 
-        } 
-
- 
+        }
+        
         [HttpDelete("{id}")] 
         public async Task<Object> DeletePayement (int id) 
         { 

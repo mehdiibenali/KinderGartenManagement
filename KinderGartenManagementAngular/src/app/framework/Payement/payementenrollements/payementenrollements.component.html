@@ -1,0 +1,144 @@
+<div *ngFor="let u of unpaid;let i = index">
+    <div *ngIf="unpaid.length>1">
+        <label for="input-eleve" class="label ">{{u.eleve}}</label>
+    </div>
+    <div *ngFor="let payementenrollements of u.payementenrollements;let j=index">
+        <div class="row enrollements">
+            <div class="col-3 form-control-group">
+              <label class="label" for="input-section">Rubrique:</label>
+              <br>
+              <select class="selectoption"
+                [(ngModel)]="payementenrollements[0].section" [name]="'rubrique '+i+' '+j" required>
+                <option [value]="payementenrollements[0].section">{{payementenrollements[0].section}}</option>
+              </select>
+              <br>
+            </div>
+            <div class="col-9 form-control-group">
+              <div *ngIf="payementenrollements[0].section==='Frais d\'inscription'">
+                <div class="row">
+                  <div class="col-3">
+                    <label class="label">Montant:</label>
+                    <br>
+                    <input nbInput required style="height: 50px;" [(ngModel)]="payementenrollements[0].paid"
+                      #paid="ngModel" [name]="'paid '+i+' '+j" fullWidth>
+                  </div>
+                  <div class="col-4">
+                    <label class="label" for="input-datededebut">Date de début:</label>
+                    <br>
+                    <input nbInput fullWidth type="date" required
+                    [(ngModel)]="payementenrollements[0].dateDeDebut" disabled
+                    #start="ngModel" [name]="'start '+i+' '+j"   id="input-start">
+                  </div>
+                  <div class="col-4">
+                          <label class="label" for="input-datedefin">Date de fin:</label>
+                          <br>
+                          <input nbInput fullWidth type="date" required
+                            [(ngModel)]="payementenrollements[0].dateDeFin" [min]="payementenrollements[0].dateDeDebut" [max]="payementenrollements[0].max"
+                            #end="ngModel" [name]="'end '+i+' '+j" id="input-end">
+                  </div>
+                  <div class="col-1">
+                    <div *ngIf="u.payementenrollements.length>1">
+                      <button style="margin-top: 27px;margin-left:-0.5vw;" [disabled]="CheckDisabled(u.payementenrollements)" type="button" class="btn">
+                        <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span class="caret"></span>
+                    </button>
+                    </div>
+                    
+                    <!-- <div *ngIf="payementenrollements.length==1">
+                      <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
+                        <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                      </button>
+                    </div> -->
+                  </div>
+                  <!-- <div class="col-1"
+                    *ngIf="i==payementenrollementS.length-1 && payement.payementenrollementmodels.length!=1">
+                    <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
+                      <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                    </button>
+                  </div> -->
+                </div>
+              </div>
+              <div
+                *ngIf="payementenrollements[0].section!='Frais d\'inscription'">
+                <div class="row">
+                  <div class="col-2">
+                    <label class="label" for="input-enrollementpaid">Payé:</label>
+                    <br>
+                    <input nbInput style="height: 50px;" required [(ngModel)]="payementenrollements[0].paid"
+                      #enrollementpaid="ngModel" [name]="'enrollementpaid '+i + ' '+ j " fullWidth>
+                  </div>
+                  <div class="col-3">
+                    <div *ngIf="payementenrollements[0].section=='Scolarité'">
+                      <label class="label" for="input-convention">Convention:</label>
+                      <br>
+                      <input nbInput style="height: 50px;" required disabled [(ngModel)]="payementenrollements[0].conventionName"
+                      #conventionname="ngModel" [name]="'conventionname '+i + ' '+ j " fullWidth>
+                    </div>
+                    <div *ngIf="payementenrollements[0].section!='Scolarité'">
+                      <label class="label">Club:</label>
+                      <br>
+                      <select class="selectoption" fullWidth
+                        [(ngModel)]="payementenrollements[0].enrollementName" required
+                        [name]="'enrollementid '+i+ ' '+ j">
+                        <option selected [value]="payementenrollements[0].enrollementName">{{payementenrollements[0].enrollementName}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label class="label" for="input-comment">Commentaire:</label>
+                  <br>
+                  <input nbInput style="height: 50px;" [(ngModel)]="payementenrollements[0].comment" #comment="ngModel" [name]="'comment '+i+' '+j" fullWidth>
+                </div>
+                <div class="col-1">
+                  <div *ngIf="u.payementenrollements.length>1">
+                  <button style="margin-top: 27px;" type="button" class="btn">
+                      <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span class="caret"></span>
+                  </button>
+                </div>
+                <!-- <div *ngIf="u.payementenrollements.length==1">
+                    <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
+                        <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                    </button>
+                </div> -->
+                </div>
+                <!-- <div class="col-2" *ngIf="i==u.payementenrollements.length-1 && payement.payementenrollementmodels.length!=1">
+                  <button style="margin-top: 29px;" type="button" (click)="AddPayementEnrollementForm()" class="btn">
+                      <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                  </button>
+                </div> -->
+              </div>
+            </div>
+            </div>
+        </div>
+        <div *ngFor="let payementenrollement of payementenrollements;let z = index">
+          <div class="row dates" *ngIf="payementenrollement.section!='Frais d\'inscription'">
+          <div class="col-3 form-control-group">
+              <label class="label" for="input-datededebut">Date de début:</label>
+                  <br>
+                  <input nbInput fullWidth type="date" required
+                      [(ngModel)]="payementenrollement.dateDeDebut" disabled
+                      #start="ngModel" [name]="'start '+i+' '+j+' '+z"   id="input-start">
+          </div>
+          <div class="col-3 form-control-group">
+                    <label class="label" for="input-datedefin">Date de fin:</label>
+                    <br>
+                    <input nbInput fullWidth type="date" required
+                      [(ngModel)]="payementenrollement.dateDeFin" [min]="payementenrollement.dateDeDebut" [max]="payementenrollement.max"
+                      #end="ngModel" [name]="'end '+i+' '+j+' '+z" id="input-end">
+          </div>
+          <div class="col-1">
+                    <div *ngIf="payementenrollements.length>1">
+                      <button style="margin-top: 27px;" type="button" class="btn">
+                        <span class="fa fa-times-circle " style="font-size: 30px;color: red;"></span><span
+                          class="caret"></span>
+                      </button>
+                    </div>
+                    <!-- <div *ngIf="payement.payementenrollementmodels[i].payementdatesmodels.length==1">
+                      <button style="margin-top: 29px;" type="button" (click)="AddPayementDatesForm(i)" class="btn">
+                        <span class="fa fa-plus" style="font-size: 30px;color: blue;"></span><span class="caret"></span>
+                      </button>
+                    </div> -->
+          </div>
+          </div>
+        </div>
+    </div>
+</div>

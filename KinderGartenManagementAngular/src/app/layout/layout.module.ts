@@ -6,11 +6,12 @@ import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbContextMenuModule, N
 import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
 // import { EmployeelistComponent } from './employees/employeelist/employeelist.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, SidebarComponent, NavComponent,],
+  declarations: [LayoutComponent, SidebarComponent, NavComponent, HomeComponent,],
   imports: [
     CommonModule,
     LayoutRoutingModule,

@@ -3,4 +3,6 @@ export class Club {
     name:string;
     datededebut:string;
     datedefin:string;
+    fee:number;
+    eleveenrollements:any[];
 }

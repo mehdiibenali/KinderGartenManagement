@@ -43,6 +43,9 @@ namespace KinderGartenManagment.Api.Helpers
                 .ReverseMap();
             CreateMap<ModaliteViewModel, Modalite>()
                 .ReverseMap();
+            CreateMap<UnpaidViewModel, PayementEnrollementViewModel>()
+                .ReverseMap();
+
         }
     }
 }

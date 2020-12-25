@@ -174,6 +174,9 @@ namespace KinderGartenManagment.Api.Migrations
                     b.Property<DateTime>("DateDeFin")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("Fee")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -471,6 +474,50 @@ namespace KinderGartenManagment.Api.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("KinderGartenManagment.Api.ViewModels.UnpaidViewModel", b =>
+                {
+                    b.Property<string>("ConventionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateDeDebut")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateDeFin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EleveEnrollementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EleveId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EnrollementId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EnrollementName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnrollementPaid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Max")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Paid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Prenom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Section")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("UnpaidViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

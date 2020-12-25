@@ -10,4 +10,7 @@ export class PayementService {
   AddPayement(payement){
     return this.api.post('/api/Payements',payement);
   }
+  GetUnpaid(eleveids){
+    return this.api.get('/api/Payements/GetUnpaid/'+eleveids)
+  }
 }

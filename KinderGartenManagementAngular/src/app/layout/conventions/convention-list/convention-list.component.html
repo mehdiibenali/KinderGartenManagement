@@ -12,12 +12,12 @@
     <tbody > 
         <tr *ngFor="let Convention of Conventions,let i = index">
             <td>{{Convention.name}}</td>
-            <td>{{Convention.dateDeDebut}}</td>
-            <td>{{Convention.dateDeFin}}</td>
+            <td>{{Convention.dateDeDebut | date:'yyyy-MM-dd'}}</td>
+            <td>{{Convention.dateDeFin | date:'yyyy-MM-dd'}}</td>
             <td>{{ConventionFees[i][0]?.fee}}</td>
             <td>
                 <button type='button' class='btn btn-danger'>
-                    Delete</button>
+                    Supprimer</button>
                 <button type='button' class='btn btn-success' (click)="EditConvention(Convention.id)">
                 Voir</button>
             </td>

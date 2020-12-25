@@ -1,0 +1,63 @@
+<form (ngSubmit)="AddGroupe()" #form="ngForm" aria-labelledby="title">
+    <div class='row'>
+        <div class="col-1"></div>
+        <div class="col-4" >
+                <label class="label" for="input-name">Nom:</label>
+                <input nbInput
+                [(ngModel)]="Groupe.name"
+                #name="ngModel"
+                id="input-name"
+                name="name" autofocus fullWidth fieldSize="large" required>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-classeid">Classe:</label>
+                <br>
+                <nb-select name="classeid" placeholder="Chosissez une option" id="select-classeid"
+                [(ngModel)]="Groupe.classeid" fullWidth required>    
+                <nb-option *ngFor="let Classe of Classes" [value]="Classe.id">{{Classe.name}}</nb-option>
+                </nb-select>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class='row'>
+        <p></p>
+    </div>
+    <div class='row'>
+        <div class="col-1"></div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-datededebut">Date de début:</label>
+                <input nbInput [(ngModel)]="Groupe.datededebut" id="input-datededebut" type="date"
+                    name="datededebut" [max]="Groupe.datedefin" autofocus fullWidth fieldSize="large" required>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-4">
+            <div class="form-control-group">
+                <label class="label" for="input-datedefin">Date de fin:</label>
+                <input nbInput [(ngModel)]="Groupe.datedefin" #datedefin="ngModel" id="input-datedefin"
+                    fullWidth [min]="Groupe.datededebut" fieldSize="large" type="date" name="datedefin" required>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</form>
+<br>
+<div class="row"><p></p></div>
+<div class="row">
+    <div class="col-6">
+        <button nbButton fullWidth status="primary" size="large" [disabled]="!form.valid"
+            (click)='AddGroupe()'>
+            Ajouter Groupe
+        </button>
+    </div>
+    <div class="col-6">
+        <button nbButton status="danger" size="large"
+         fullWidth (click)='CancelAddGroupe()'>
+            Annuler
+        </button>
+    </div>
+</div>

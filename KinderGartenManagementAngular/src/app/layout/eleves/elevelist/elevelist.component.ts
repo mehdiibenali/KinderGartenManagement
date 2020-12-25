@@ -40,21 +40,22 @@ export class ElevelistComponent implements OnInit {
       data=>{this.searchgroupe.annees=data[0].value.split('-')},
       err=>console.log(err)
     )
-    this.GetAll();
+    this.Search();
     this.GetAllClasses();
     this.SearchGroupe();
     this.GetAllSummerClubs();
     this.GetAllConventions();
   }
-  GetAll(){
-    this.eleveService.GetAll()
-    .subscribe(data => {
-      this.Eleves = data;
-    },
-    error => {  
-      console.log(error);
-    })
-  }
+  // GetAll(){
+  //   this.eleveService.GetAll()
+  //   .subscribe(data => {
+  //     this.Eleves = data;
+  //     console.log(this.Eleves)
+  //   },
+  //   error => {  
+  //     console.log(error);
+  //   })
+  // }
   GetAllClasses(){
     this.groupeService.GetAllClasses().subscribe(
       data=>this.Classes=data,
@@ -77,7 +78,7 @@ export class ElevelistComponent implements OnInit {
     return this.eleveService.DeleteEleve(id).subscribe(
       (success)=>{
         this.toastrService.show('Eleve supprimé', 'Suppression',{status: 'success'});
-        this.GetAll();
+        this.Search();
       },
       (error)=>{
         this.toastrService.show('Une erreur est survenue', 'Suppression',{status: 'danger'});

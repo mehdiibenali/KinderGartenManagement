@@ -8,6 +8,10 @@ const routes: Routes = [
     path:'list',
     component: WinterClublistComponent,
   },
+  {
+    path:'fiche',
+    loadChildren: () => import('./winter-club-tabset/winter-club-tabset.module').then(m=>m.WinterClubTabsetModule)
+  }
 ];
 
 @NgModule({

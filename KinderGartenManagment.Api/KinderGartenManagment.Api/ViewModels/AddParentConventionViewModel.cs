@@ -12,6 +12,6 @@ namespace KinderGartenManagment.Api.ViewModels
         public int ParentId { get; set; }
         public int? NewConventionId { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DateDeDebut { get; set; }
+        public DateTime? DateDeDebut { get; set; }
     }
 }

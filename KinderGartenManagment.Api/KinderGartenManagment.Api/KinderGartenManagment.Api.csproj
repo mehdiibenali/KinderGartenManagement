@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200819200454_conventionparentfixed.Designer.cs" />
     <Compile Remove="Migrations\20200819215822_conventionparentfixed.cs" />
     <Compile Remove="Migrations\20200819215822_conventionparentfixed.Designer.cs" />
+    <Compile Remove="Models\Club.cs" />
+    <Compile Remove="Models\EleveClub.cs" />
   </ItemGroup>
 
   <ItemGroup>

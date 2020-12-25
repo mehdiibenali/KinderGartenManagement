@@ -82,7 +82,8 @@
   </div>
   <div class="inner">
     <div [@collapse]="state[1]" class="collapsing" style="margin-left: 2%;">
-      <div  *ngFor="let n of payement.payementenrollementmodels;let i = index">
+      <app-payementenrollements [eleveids]="eleveids"></app-payementenrollements>
+      <!-- <div  *ngFor="let n of payement.payementenrollementmodels;let i = index">
         <br>
         <div class="row payementenrollement">
           <div class="col-3 form-control-group">
@@ -95,7 +96,6 @@
             <br>
           </div>
           <div class="col-9 form-control-group">
-            <!-- Sans rubrique -->
             <div *ngIf="!payement.payementenrollementmodels[i].section">
               <div class="row">
                 <div class="col-1">
@@ -108,7 +108,6 @@
                 </div>
               </div>
             </div>
-            <!-- Frais d'inscription -->
             <div *ngIf="payement.payementenrollementmodels[i].section==='Frais d\'inscription'">
               <div class="row">
                 <div class="col-3">
@@ -139,7 +138,6 @@
                 <div class="col-8"></div>
               </div>
             </div>
-            <!-- Club hiver et été + Scolarité -->
             <div
               *ngIf="payement.payementenrollementmodels[i].section!='Frais d\'inscription' && payement.payementenrollementmodels[i].section!=null">
               <div class="row">
@@ -246,8 +244,8 @@
                 </div>
               </div>
             
-      </div>
-          </div>
+      </div> -->
+    </div>
   </div>
 </form>
 <br>

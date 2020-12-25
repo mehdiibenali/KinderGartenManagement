@@ -28,6 +28,18 @@ export class SidebarComponent implements OnInit {
       title:'Conventions',
       link:"/conventions/list"
     },
+    {
+      title:'Clubs d\'été',
+      link:'/summerclubs/list'
+    },
+    {
+      title:'Clubs d\'hiver',
+      link:'/winterclubs/list'
+    },
+    {
+      title:'Groupes',
+      link:'/groupes/list'
+    }
    ];
   constructor() { }
 

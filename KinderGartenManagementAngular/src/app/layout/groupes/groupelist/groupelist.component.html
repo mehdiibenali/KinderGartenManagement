@@ -1,1 +1,34 @@
-<p>groupelist works!</p>
+<div class="row" style="margin-bottom:1%;margin-top: -1%;">
+    <div class="col-9"></div>
+    <div class="col-3">
+        <div class="row"><p></p></div>
+        <button nbButton status="info" size="large" (click)='AddGroupe()'>
+            Nouvel Groupe
+        </button>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead class="thead-dark" >
+        <tr>
+            <th>Nom</th>
+            <th>Date De Debut</th>
+            <th>Date De Fin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody style="width:50%">
+        <tr *ngFor="let Groupe of Groupes" >
+            <td>{{Groupe.name}}</td>
+            <td>{{Groupe.dateDeDebut | date:'yyyy-MM-dd'}}</td>
+            <td>{{Groupe.dateDeFin | date:'yyyy-MM-dd'}}</td>
+            <td>
+                <div class="row">
+                    <button type ='button' class='btn btn-danger' [disabled]="CheckDisabled(Groupe.eleveEnrollements)"  (click)="Delete(Groupe.id)">
+                        Supprimer</button>
+                    <button type='button' class='btn btn-success' (click)="Edit(Groupe.id)">
+                    Fiche</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

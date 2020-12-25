@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { EmployeesModule } from './employees/employees.module';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path:'',
     component: LayoutComponent,
     children:[
+      {
+        path:'',
+        component:HomeComponent
+      },
       {
         path:'employees',
         loadChildren: () => import('./employees/employees.module').then(m=>m.EmployeesModule)
@@ -32,6 +37,10 @@ const routes: Routes = [
         path:'winterclubs',
         loadChildren: () => import('./winter-clubs/winter-clubs.module').then(m=>m.WinterClubsModule)
       },
+      {
+        path:'groupes',
+        loadChildren: () => import('./groupes/groupes.module').then(m=>m.GroupesModule)
+      }
     ]
   }
 ];

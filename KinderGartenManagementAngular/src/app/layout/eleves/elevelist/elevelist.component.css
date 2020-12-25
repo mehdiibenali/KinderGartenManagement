@@ -2,6 +2,7 @@
   table{
     table-layout:fixed;
   }
+  
   .checkbox-lg .custom-control-label::before, 
   .checkbox-lg .custom-control-label::after {
     margin-top: 0px;  
@@ -13,6 +14,6 @@
   .checkbox-lg .custom-control-label {
     font-size:19px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding-top: 9px;
+    padding-top: 12px;
     padding-left: 6px;
   }

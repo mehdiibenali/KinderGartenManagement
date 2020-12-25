@@ -15,7 +15,7 @@ export class GroupeService {
     return this.api.get('/api/EnrollementGroupes/'+id);
   };
   AddGroupe(groupe:Groupe){
-    return this.api.post('/api/EnrollementGroupes',parent);
+    return this.api.post('/api/EnrollementGroupes',groupe);
   }
   AddEleveGroupe(elevegroupe){
     return this.api.post('/api/EleveEnrollements',elevegroupe)

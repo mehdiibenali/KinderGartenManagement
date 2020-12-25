@@ -13,4 +13,7 @@ export class SummerClubService {
   ByEleveId(eleveid){
     return this.api.get('/api/EnrollementSummerClubs/ByEleveId/'+eleveid)
   }
+  AddClub(club){
+    return this.api.post('/api/EnrollementSummerClubs',club);
+  }
 }

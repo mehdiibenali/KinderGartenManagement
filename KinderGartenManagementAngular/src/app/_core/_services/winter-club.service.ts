@@ -13,4 +13,7 @@ export class WinterClubService {
   ByEleveId(eleveid){
     return this.api.get('/api/EnrollementWinterClubs/ByEleveId/'+eleveid)
   }
+  AddClub(club){
+    return this.api.post('/api/EnrollementWinterClubs',club);
+  }
 }

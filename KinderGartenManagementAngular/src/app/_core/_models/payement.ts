@@ -7,6 +7,5 @@ export class Payement {
     modalitemodels:Modalite[];
     constructor(){
         this.modalitemodels=[new Modalite()];
-        this.payementenrollementmodels=[new PayementEnrollement()]
     }
 }

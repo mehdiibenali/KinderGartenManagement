@@ -1,5 +1,3 @@
-import { PayementDates } from './payement-dates';
-
 export class PayementEnrollement {
     section:string;
     paid:number;
@@ -7,8 +5,6 @@ export class PayementEnrollement {
     comment:string;
     eleveid:number;
     eleveenrollementid:number;
-    payementdatesmodels:PayementDates[];
-    constructor(){
-        this.payementdatesmodels=[];
-    }
+    datededebut:Date;
+    datedefin:Date;
 }

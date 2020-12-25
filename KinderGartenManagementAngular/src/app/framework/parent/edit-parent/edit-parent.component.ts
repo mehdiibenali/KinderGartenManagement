@@ -66,26 +66,29 @@ export class EditParentComponent implements OnInit {
     this.GetActive.parentid=this.parentid;
     this.conventionService.GetActive(this.GetActive).subscribe(
       data=>{
+        console.log(data);
         if (data==null){
-          this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
-            (success) => {
-              this.toastrService.show('Parent mis à jour', 'Mise à jour', { status: 'success' });
-              this.ParentConventionToAdd.parentid=this.Parent.id;
-              if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
-            },
-            (error) => {
-              this.toastrService.show('Une erreur est survenue', 'Mise à jour', { status: 'danger' });
-            }
-          )
+          // this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
+          //   (success) => {
+          //     this.toastrService.show('Parent mis à jour', 'Mise à jour', { status: 'success' });
+          //     this.ParentConventionToAdd.parentid=this.Parent.id;
+          //     if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
+          //   },
+          //   (error) => {
+          //     this.toastrService.show('Une erreur est survenue', 'Mise à jour', { status: 'danger' });
+          //   }
+          // )
         }
         else{
           if( data.id == this.Convention.id){
+            console.log('1')
             this.parentService.UpdateParent(this.Parent,this.parentid).subscribe(
               (success) => {
                 this.toastrService.show('Parent mis à jour', 'Mise à jour', { status: 'success' });
                 this.ParentConventionToAdd.parentid=this.Parent.id;
                 if(this.Convention.id!=null){this.ParentConventionToAdd.newconventionid=this.Convention.id};
                 if (data.id != this.Convention.id){
+                console.log('doesnt make sense')
                 this.parentService.AddParentConvention(this.ParentConventionToAdd).subscribe(
                   data=>{this.updateeleve.emit()},
                   err=>console.log(err));

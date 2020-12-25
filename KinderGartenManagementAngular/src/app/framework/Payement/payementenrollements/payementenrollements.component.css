@@ -1,0 +1,14 @@
+.selectoption{
+    width: 75%;
+    height: 50px;
+    border:1px solid  #0ebeff;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  }
+div.enrollements{
+  margin-left: 0.5vw;
+}
+div.dates{
+  margin-left: 2vw;
+}

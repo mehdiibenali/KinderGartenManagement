@@ -18,8 +18,9 @@ namespace KinderGartenManagment.Api.Models
         [DataType(DataType.Date)]
         public DateTime DateDeFin { get; set; }
         public int? ClasseId { get; set; }
+        public int? Fee { get; set; }
 
-        public virtual Classe Classe { get; set; }
+        public virtual Classe Classe { get; set; }  
         public virtual ICollection<EleveEnrollement> EleveEnrollements { get; set; }
     }
 }

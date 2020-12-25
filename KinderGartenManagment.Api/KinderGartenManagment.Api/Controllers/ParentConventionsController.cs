@@ -75,20 +75,25 @@ namespace KinderGartenManagment.Api.Controllers
             return NoContent();
         }
         [HttpPost]
-        public async Task<IActionResult> AddParentConvention( AddParentConventionViewModel pcvm) 
+        public async Task<ActionResult<Object>> AddParentConvention( AddParentConventionViewModel pcvm) 
         {
             if (pcvm.NewConventionId != null)
             {
+                if (pcvm.DateDeDebut == null)
+                {
+                    pcvm.DateDeDebut = DateTime.Now;
+                }
                 try
                 {
                     ParentConvention pc = new ParentConvention
                     {
                         ParentId = pcvm.ParentId,
                         ConventionId = pcvm.NewConventionId.Value,
-                        DateDeDebut = pcvm.DateDeDebut,
+                        DateDeDebut = pcvm.DateDeDebut.Value,
                     };
                     await _parentConventionRepository.InsertAsync(pc);
                     await _parentConventionRepository.SaveAsync();
+                    return Ok(pc);
                 }
                 catch (Exception e)
                 {

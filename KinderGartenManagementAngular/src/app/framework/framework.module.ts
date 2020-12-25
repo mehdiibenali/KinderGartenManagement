@@ -13,11 +13,14 @@ import { AddConventionComponent } from './Convention/add-convention/add-conventi
 import { AddPayementComponent } from './Payement/add-payement/add-payement.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { PayementRecapComponent } from './Payement/payement-recap/payement-recap.component';
+import { PayementenrollementsComponent } from './Payement/payementenrollements/payementenrollements.component';
+import { AddClubComponent } from './club/add-club/add-club.component';
+import { AddGroupeComponent } from './groupe/add-groupe/add-groupe.component';
 
 
 
 @NgModule({
-  declarations: [AddEleveComponent, EditEleveComponent, AddParentComponent, EditParentComponent, AddConventionComponent, AddPayementComponent, PayementRecapComponent],
+  declarations: [AddEleveComponent, EditEleveComponent, AddParentComponent, EditParentComponent, AddConventionComponent, AddPayementComponent, PayementRecapComponent, PayementenrollementsComponent, AddClubComponent, AddGroupeComponent],
   imports: [
     CommonModule,
     FrameworkRoutingModule,
@@ -39,6 +42,6 @@ import { PayementRecapComponent } from './Payement/payement-recap/payement-recap
     NbEvaIconsModule,
     NbDialogModule.forRoot(),
   ],
-  exports:[AddEleveComponent, EditEleveComponent, AddParentComponent,EditParentComponent,AddConventionComponent,AddPayementComponent]
+  exports:[AddEleveComponent, EditEleveComponent, AddParentComponent,EditParentComponent,AddConventionComponent,AddPayementComponent,AddGroupeComponent,AddClubComponent]
 })
 export class FrameworkModule { }

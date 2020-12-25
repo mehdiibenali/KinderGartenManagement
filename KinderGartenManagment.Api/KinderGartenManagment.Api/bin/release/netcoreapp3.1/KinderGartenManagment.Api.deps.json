@@ -38,6 +38,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.4",
           "Newtonsoft.Json": "12.0.3",
           "Swashbuckle.AspNetCore": "5.5.1",
+          "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic": "1.8.16",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies.Reference": "3.1.0.0",
@@ -2738,6 +2739,17 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
+        }
+      },
+      "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic/1.8.16": {
+        "runtime": {
+          "lib/netstandard2.0/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.dll": {
+            "assemblyVersion": "1.8.16.0",
+            "fileVersion": "1.8.16.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -5787,6 +5799,13 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "Z.EntityFramework.Plus.QueryIncludeFilter.EFClassic/1.8.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EeqgADrnpW/pzekRuICfhoUfrQDerfasi7t6zwkLG27pmufIEP1PHRxdqnMYNmS//HtADXFGqx2j5YC+7I4Z0w==",
+      "path": "z.entityframework.plus.queryincludefilter.efclassic/1.8.16",
+      "hashPath": "z.entityframework.plus.queryincludefilter.efclassic.1.8.16.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
       "type": "referenceassembly",

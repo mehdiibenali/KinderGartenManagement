@@ -103,7 +103,7 @@ namespace KinderGartenManagment.Api.Controllers
             try
             {
                 var p = _mapper.Map<Enrollement>(Enrollement);
-                p.Type = "Club d'hivern";
+                p.Type = "Club d'hiver  ";
                 await _EnrollementRepository.InsertAsync(p);
                 await _EnrollementRepository.SaveAsync();
                 return await _EnrollementRepository.GetByIdAsync(p.Id);

@@ -7,7 +7,7 @@ import { filter } from 'rxjs/operators';
 import { ConventionService } from 'src/app/_core/_services/convention.service';
 import { Convention } from 'src/app/_core/_models/convention';
 import { ParentConvention } from 'src/app/_core/_models/parent-convention';
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { AddParentConvention } from 'src/app/_core/_models/add-parent-convention';
 import { SearchConvention } from 'src/app/_core/_models/search-convention';
 import { ParameterService } from 'src/app/_core/_services/parameter.service';
@@ -15,7 +15,8 @@ import { ParameterService } from 'src/app/_core/_services/parameter.service';
 @Component({
   selector: 'app-add-parent',
   templateUrl: './add-parent.component.html',
-  styleUrls: ['./add-parent.component.css']
+  styleUrls: ['./add-parent.component.css'],
+  providers: [DatePipe],
 })
 export class AddParentComponent implements OnInit {
   @Output("OnRegisterParent") parentid:EventEmitter<String>=new EventEmitter<String>();
@@ -24,13 +25,17 @@ export class AddParentComponent implements OnInit {
   test:any;
   parent:any = new Object();
   parentconvention:AddParentConvention=new AddParentConvention();
+  mindatededebut:any;
+  maxdatededebut:any;
   search:SearchConvention=new SearchConvention();
   conventionid:number;
   Conventions:Convention[]=[];
   Years:Object[];
   CurrentYear:string;
-  constructor(private router:Router,private parentService:ParentService, private parameterService:ParameterService, private toastrService: NbToastrService,private conventionService:ConventionService) {   }
+  constructor(private datePipe: DatePipe,private router:Router,private parentService:ParentService, private parameterService:ParameterService, private toastrService: NbToastrService,private conventionService:ConventionService) {   }
   ngOnInit(): void {
+    this.parentconvention.datededebut = this.datePipe.transform(this.parentconvention.datededebut , 'yyyy-MM-dd');
+    this.mindatededebut = this.parentconvention.datededebut;
     this.conventionService.GetYears().subscribe(
       data=>{this.Years=data;
         this.parameterService.GetByCode('CurrentScholarYear').subscribe(
@@ -47,7 +52,7 @@ export class AddParentComponent implements OnInit {
           this.parentconvention.newconventionid=this.conventionid;
           this.parentconvention.parentid=data.id;
           this.parentService.AddParentConvention(this.parentconvention).subscribe(
-            (success) => { this.parentid.emit(data.id); },
+            (success) => { this.parentid.emit(data.id);console.log(success) },
             (error) => {
                 this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
                 console.log(error);
@@ -59,7 +64,7 @@ export class AddParentComponent implements OnInit {
         }
       },
       (error) => {
-          this.toastrService.show('Une erreur est survenue', 'Ajout', { status: 'danger' });
+          this.toastrService.show('Une erreur est survenue', 'Ajout Du Parent', { status: 'danger' });
           console.log(error);
       }   
     )
@@ -76,4 +81,21 @@ export class AddParentComponent implements OnInit {
     );
   }
   conventionsnull(){this.Conventions=null;this.conventionid=null}
+  CheckDate(){
+    this.conventionService.GetById(this.conventionid).subscribe(
+      data=>{
+        var today:any = this.datePipe.transform(new Date(),'yyyy-MM-dd');
+        if (today > data.dateDeDebut){
+          this.parentconvention.datededebut = this.datePipe.transform(today,'yyyy-MM-dd')
+        }
+        else{
+          this.parentconvention.datededebut = this.datePipe.transform(data.dateDeDebut,'yyyy-MM-dd')
+        }
+        this.mindatededebut = this.parentconvention.datededebut;
+        this.maxdatededebut = this.datePipe.transform(data.dateDeFin,'yyyy-MM-dd');
+        console.log(this.mindatededebut,this.maxdatededebut);
+      },
+      err=>{console.log(err)}
+    )
+  }
 }
