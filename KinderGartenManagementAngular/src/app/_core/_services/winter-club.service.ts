@@ -16,4 +16,10 @@ export class WinterClubService {
   AddClub(club){
     return this.api.post('/api/EnrollementWinterClubs',club);
   }
+  Search(search){
+    return this.api.post('/api/EnrollementWinterClubs/Search',search)
+  }
+  GetYears(eleveid){
+    return this.api.get('/api/EnrollementWinterClubs/GetYears/'+eleveid)
+  }
 }

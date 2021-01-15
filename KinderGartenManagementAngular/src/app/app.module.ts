@@ -10,6 +10,8 @@ import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/a
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {NgxPrintModule} from 'ngx-print';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NbUserModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    NbToastrModule.forRoot()
+    NbToastrModule.forRoot(),
+    NgxPrintModule
   ],
   providers: [
   ],

@@ -15,31 +15,35 @@ const routes: Routes = [
       },
       {
         path:'employees',
-        loadChildren: () => import('./employees/employees.module').then(m=>m.EmployeesModule)
+        loadChildren: () => import('./employees/employees.module').then(e=>e.EmployeesModule)
       },
       {
         path:'eleves',
-        loadChildren: () => import('./eleves/eleves.module').then(m=>m.ElevesModule)
+        loadChildren: () => import('./eleves/eleves.module').then(e=>e.ElevesModule)
       },
       {
         path:'parents',
-        loadChildren: () => import('./parents/parents.module').then(m=>m.ParentsModule)
+        loadChildren: () => import('./parents/parents.module').then(p=>p.ParentsModule)
       },
       {
         path:'conventions',
-        loadChildren: () => import('./conventions/conventions.module').then(m=>m.ConventionsModule)
+        loadChildren: () => import('./conventions/conventions.module').then(c=>c.ConventionsModule)
       },
       {
         path:'summerclubs',
-        loadChildren: () => import('./summer-clubs/summer-clubs.module').then(m=>m.SummerClubsModule)
+        loadChildren: () => import('./summer-clubs/summer-clubs.module').then(s=>s.SummerClubsModule)
       },
       {
         path:'winterclubs',
-        loadChildren: () => import('./winter-clubs/winter-clubs.module').then(m=>m.WinterClubsModule)
+        loadChildren: () => import('./winter-clubs/winter-clubs.module').then(c=>c.WinterClubsModule)
       },
       {
         path:'groupes',
-        loadChildren: () => import('./groupes/groupes.module').then(m=>m.GroupesModule)
+        loadChildren: () => import('./groupes/groupes.module').then(g=>g.GroupesModule)
+      },
+      {
+        path:'print',
+        loadChildren: () => import('./print/print.module').then(p=>p.PrintModule)
       }
     ]
   }

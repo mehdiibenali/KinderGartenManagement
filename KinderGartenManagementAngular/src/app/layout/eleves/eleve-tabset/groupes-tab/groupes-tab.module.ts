@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { GroupesTabRoutingModule } from './groupes-tab-routing.module';
 import { GroupesListComponent } from './groupes-list/groupes-list.component';
-import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonModule, NbTabsetModule, NbSpinnerModule } from '@nebular/theme';
+import { NbCardModule, NbSelectModule, NbIconModule, NbAlertModule, NbInputModule, NbButtonModule, NbTabsetModule, NbSpinnerModule, NbDialogModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     NbButtonModule,
     NbTabsetModule,
     NbSpinnerModule,
+    NbDialogModule.forRoot(),
   ]
 })
 export class GroupesTabModule { }

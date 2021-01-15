@@ -14,10 +14,10 @@
                 <td>{{Groupe.name}}</td>
                 <td>{{Groupe.dateDeDebut}}</td>
                 <td>{{Groupe.dateDeFin}}</td>
-                <div *ngIf="Groupe.classeId!=null">
-                    <td>{{Groupe.classe.name}}</td>
+                <div *ngIf="Groupe.classe!=null">
+                    <td>{{Groupe.classe}}</td>
                 </div>
-                <div *ngIf="Groupe.classeId==null">
+                <div *ngIf="Groupe.classe==null">
                     <td></td>
                 </div>
                 <td>
@@ -30,7 +30,7 @@
 </div>
 <div class="row">
     <div class="col-3">
-        <input type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche Du Groupe"[(ngModel)]="search.enrollementsearch">
+        <input class="centered" type="text" id="myInput" autocomplete="off" (keyup)="Search()" placeholder="Recherche Du Groupe"[(ngModel)]="search.enrollementsearch">
             <ul id="myUL">
                 <div *ngFor="let result of searchresult">
                     <li><button (click)="AddEleveGroupe(result.id,result.name)" >{{result.name}}</button></li>
@@ -41,9 +41,6 @@
             <nb-select name="year" shape="round" appearance="filled"  placeholder="année" id="select-year"  [(ngModel)]="SelectedYear.CurrentYear">
                 <nb-option *ngFor="let Year of Years" [value]="Year.debut+'-'+Year.fin" (click)=Search()>{{Year.debut}}-{{Year.fin}}</nb-option>
             </nb-select>
-    </div>
-    <div class="col-2"><p></p></div>
-    <div class="col-1">
             <nb-select name="classe" shape="round" appearance="filled" placeholder="Classe" id="select-classe" [(ngModel)]="search.classeid">
                 <nb-option [value]=null (click)=Search()>Toutes les classes</nb-option>
                 <nb-option *ngFor="let Classe of Classes" [value]=Classe.id (click)=Search()>{{Classe.name}}</nb-option>
@@ -51,8 +48,31 @@
     </div>
     <div class="col-2"><p></p></div>
     <div class="col-3">
-        <button nbButton status="secondary" size="large" (click)='SubmitEleveGroupe()'>
+        <label class="label">Date de début:</label>
+        <input nbInput [(ngModel)]="elevegroupe.datededebut" type="date" id="input-datededebut"
+        required name="datededebut" autofocus fullWidth fieldSize="large"> 
+    </div>
+    <div class="col-2">
+        <button nbButton class="centered" status="secondary" size="large" (click)='open(dialog)'>
             Valider
         </button>
     </div>
 </div>
+<ng-template #dialog let-data let-ref="dialogRef">
+    <div class="row">
+        <div class="col-2"><p></p></div>
+        <div class="col-5">
+            <label class="label" id="datedefin">Date de fin:</label>
+            <input nbInput [min]="searcheleveenrollement.date" [(ngModel)]="elevegroupe.datedefin" type="date" id="input-datedefin"
+            required name="datedefin" autofocus fullWidth fieldSize="large"> 
+            {{elevegroupe.datedefin}}
+        </div>
+        <div class="col-3">
+            <button nbButton class="centered submitbutton" status="primary" size="large" (click)='SubmitEleveGroupe()'>
+                Valider
+            </button>
+        </div>
+        <div class="col-2"><p></p></div>
+    </div>
+    <!-- <app-payement-recap [payement]="data" (close)="close()"></app-payement-recap>   -->
+</ng-template>

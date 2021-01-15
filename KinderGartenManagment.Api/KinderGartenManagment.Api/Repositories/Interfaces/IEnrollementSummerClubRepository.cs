@@ -17,5 +17,6 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task<IEnumerable<Enrollement>> GetEnrollementsByEleveId(int eleveId);
         Task<IEnumerable<Enrollement>> SearchByName(string Enrollementsearch);
         Task SaveAsync();
+        Task<IEnumerable<Enrollement>> Search(string? Enrollementsearch, int? eleveId, int? classeid, int? year);
     }
 }

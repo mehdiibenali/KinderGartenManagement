@@ -82,7 +82,7 @@
   </div>
   <div class="inner">
     <div [@collapse]="state[1]" class="collapsing" style="margin-left: 2%;">
-      <app-payementenrollements [eleveids]="eleveids"></app-payementenrollements>
+      <app-payementenrollements [eleveids]="eleveids" (SendPayementEnrollements)="GetPayementEnrollement($event)" [getpayementenrollements]="getpayementenrollements"></app-payementenrollements>
       <!-- <div  *ngFor="let n of payement.payementenrollementmodels;let i = index">
         <br>
         <div class="row payementenrollement">
@@ -252,7 +252,7 @@
 <!-- Bouton valider -->
 <div class="row">
   <div class="col-6">
-    <button nbButton fullWidth status="primary" size="large" [disabled]="!form.valid" (click)='open(dialog)'>
+    <button nbButton fullWidth status="primary" size="large" [disabled]="!form.valid" (click)='AddPayement()'>
       Valider
     </button>
   </div>

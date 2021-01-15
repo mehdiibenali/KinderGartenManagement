@@ -52,8 +52,8 @@ namespace KinderGartenManagment.Api.Controllers
             List<UnpaidViewModel> payementenrollements = await _payementRepository.GetUnpaid(eleveids);
      
             return payementenrollements.Where(pe=>pe.EnrollementPaid!="True").GroupBy(pe => new { pe.EleveId, pe.Prenom, pe.Nom }).Select(pe => new { eleve = pe.Key.Nom + ' ' + pe.Key.Prenom, payementenrollements =pe.ToList().GroupBy(pc => pc.EnrollementId).Select(pc => pc.ToList()) });
-        }   
- 
+        }
+
         [HttpPost] 
         public async Task< Payement > PostPayement ( PayementViewModel payement ) 
         { 

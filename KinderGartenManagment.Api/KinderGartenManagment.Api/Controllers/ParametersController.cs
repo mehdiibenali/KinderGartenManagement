@@ -74,7 +74,14 @@ namespace KinderGartenManagment.Api.Controllers
 
             return Ok(dates);
         }
-
+        [HttpPost("GetMonthDates")]
+        public async Task<Object> GetMonthDates(MonthYearViewModel myvm)
+        {
+     
+                List<DatesViewModel> result = await _parameterRepository.GetMonthDates(myvm.Month, myvm.Year);
+                return result;
+            
+        }
         [HttpPost] 
         public async Task< Parameter > PostParameter ( ParameterViewModel parameter ) 
         { 

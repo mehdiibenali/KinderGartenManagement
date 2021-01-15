@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
+using Microsoft.Data.SqlClient;
+using KinderGartenManagment.Api.ViewModels;
 
 namespace KinderGartenManagment.Api.Repositories
 {
@@ -93,7 +95,16 @@ namespace KinderGartenManagment.Api.Repositories
             Eleve eleve = await _context.Eleves.FindAsync(eleveId);
             _context.Eleves.Remove(eleve);
         }
-
+        [System.Obsolete]
+        public async Task<List<EleveViewModel>> GetElevesByEnrollementIdAndMonth(int month, int year, int enrollementid)
+        {
+            SqlParameter monthparameter = new SqlParameter("@Month", month);
+            SqlParameter yearparameter = new SqlParameter("@Year", year);
+            SqlParameter enrollementidparameter = new SqlParameter("@EnrollementID", enrollementid);
+            string sqlQuery = "EXEC dbo.get_eleves_by_enrollement " + "@Month" + "," + "@Year" + "," + "@EnrollementID";
+            var result = await _context.Query<EleveViewModel>().FromSql(sqlQuery, monthparameter, yearparameter, enrollementidparameter).ToListAsync();
+            return result;
+        }
         public void Update(Eleve eleve)
         {
             _context.Entry(eleve).State = EntityState.Modified;

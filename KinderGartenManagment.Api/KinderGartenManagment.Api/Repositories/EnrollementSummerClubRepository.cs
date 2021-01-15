@@ -67,5 +67,28 @@ namespace KinderGartenManagment.Api.Repositories
                 .Where(p => p.EleveEnrollements.Select(ep => ep.EleveId).Contains(eleveId))
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Enrollement>> Search(string? Enrollementsearch, int? eleveId, int? classeid, int? year)
+        {
+            IEnumerable<Enrollement> Enrollements = _context.Enrollements.Include(e => e.EleveEnrollements).ThenInclude(ee => ee.Eleve).Where(e => e.Type == "Club d'été");
+            if (Enrollementsearch != null)
+            {
+                Enrollements = Enrollements.Where(e => e.Name.ToLower().Contains(Enrollementsearch.ToLower()));
+
+            }
+            if (classeid != null)
+            {
+                Enrollements = Enrollements.Where(e => e.ClasseId == classeid);
+            };
+            if (eleveId != null)
+            {
+                Enrollements = Enrollements.Where(e => e.EleveEnrollements.Any(ee => ee.EleveId == eleveId));
+            };
+            Enrollements = Enrollements.ToList();
+            if (year != null)
+            {
+                Enrollements = Enrollements.Where(e => e.DateDeDebut.Year <= year && e.DateDeFin.Year >= year);
+            }
+            return Enrollements;
+        }
     }
 }

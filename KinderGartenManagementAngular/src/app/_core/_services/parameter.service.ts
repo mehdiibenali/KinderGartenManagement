@@ -14,5 +14,8 @@ export class ParameterService {
   }
   GetDates(annee){
     return this.apiService.get('/api/Parameters/GetDates/'+annee)
+  } 
+  GetMonthDates(monthyear){
+    return this.apiService.post("/api/Parameters/GetMonthDates",monthyear)
   }
 }  

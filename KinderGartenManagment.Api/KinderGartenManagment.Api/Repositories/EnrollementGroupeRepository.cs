@@ -66,13 +66,11 @@ namespace KinderGartenManagment.Api.Repositories
         {
             await _context.SaveChangesAsync();
         }
-        public async Task<IEnumerable<Enrollement>> GetEnrollementsByEleveId(int eleveId)
+        public async Task<IEnumerable<EleveEnrollement>> GetEnrollementsByEleveId(int eleveId)
         {
-            return await _context.Enrollements
-                .Where(e => e.Type == "Groupe")
-                .Include(p => p.EleveEnrollements)
-                .Where(p => p.EleveEnrollements.Select(ep => ep.EleveId).Contains(eleveId))
-                .Include(p => p.Classe).ToListAsync();
-        }
+            return await _context.EleveEnrollements.Include(ee => ee.Enrollement).ThenInclude(e => e.Classe)
+                .Where(ee => ee.Enrollement.Type == "Groupe")
+                .Where(ee => ee.EleveId == eleveId).ToListAsync();
+        }   
     }
 }

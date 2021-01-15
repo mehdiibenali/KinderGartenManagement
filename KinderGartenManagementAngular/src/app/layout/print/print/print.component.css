@@ -1,0 +1,24 @@
+.selectoption{
+    width: 85%;
+    height: 50px;
+    border:1px solid  #0ebeff;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  }
+.printbutton{
+  margin-top:1vh;
+}
+td.tablecolumn, th.tablecolumn, tr.tablecolumn{
+  border: 1px solid black;
+  font-size: small;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+th.weekend, th.weekend{
+  background-color:rgb(100, 98, 98);
+  border: 1px solid black;
+  font-size: small;
+  padding-left: 1px;
+  padding-right: 1px;
+}

@@ -6,6 +6,9 @@ using KinderGartenManagment.Api.Interfaces.Repositories;
 using System.Threading.Tasks; 
 using System.Linq;
 using System;
+using Microsoft.Data.SqlClient;
+using System.Data;
+using KinderGartenManagment.Api.ViewModels;
 
 namespace KinderGartenManagment.Api.Repositories 
 { 
@@ -67,6 +70,28 @@ namespace KinderGartenManagment.Api.Repositories
                        + " " + end.ToString("yyyy"))
             };
             return diff;
+        }
+        [System.Obsolete]
+        public async Task<List<DatesViewModel>> GetMonthDates(int month, int year)
+        {
+            //SqlParameter monthparameter = new SqlParameter();
+            //monthparameter.ParameterName = "@Month";
+            //monthparameter.SqlDbType = SqlDbType.Int;
+            //monthparameter.Value = month;
+
+            SqlParameter monthparameter = new SqlParameter("@Month", month);
+            //monthparameter.SqlDbType = SqlDbType.Int;
+
+            //SqlParameter yearparameter = new SqlParameter();
+            //yearparameter.ParameterName = "@Year";
+            //yearparameter.SqlDbType = SqlDbType.Int;
+            //yearparameter.Value = year;
+
+            SqlParameter yearparameter = new SqlParameter("@Year", year);
+            //yearparameter.SqlDbType = SqlDbType.Int;
+            string sqlQuery = "EXEC dbo.get_dates " + "@Month"+","+"@Year";
+            var result = await _context.Query<DatesViewModel>().FromSql(sqlQuery, monthparameter, yearparameter).ToListAsync();
+            return result;
         }
         public async Task DeleteAsync(int parameterId ) 
         { 

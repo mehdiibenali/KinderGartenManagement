@@ -121,5 +121,11 @@ namespace KinderGartenManagment.Api.Controllers
 
             return Ok(new { message = "Deleted Successfully" });
         }
+        [HttpPost("Search")]
+        public async Task<IEnumerable<Enrollement>> Search(SearchEnrollementViewModel search)
+        {
+            var resultListe = await _EnrollementRepository.Search(search.EnrollementSearch?.ToLower(), search.EleveId,search.ClasseId,search.Year);
+            return resultListe;
+        }
     }
 }

@@ -58,6 +58,8 @@ namespace KinderGartenManagment.Api.Context
                     .IsRequired();
             });
             modelBuilder.Query<UnpaidViewModel>();
+            modelBuilder.Query<DatesViewModel>();
+            modelBuilder.Query<EleveViewModel>();
             //modelBuilder.Entity<Classe>()   
             //    .HasMany(c => c.Enrollements)
             //    .WithOne(e => e.Classe);

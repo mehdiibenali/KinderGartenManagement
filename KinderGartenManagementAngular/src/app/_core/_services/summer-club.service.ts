@@ -16,4 +16,10 @@ export class SummerClubService {
   AddClub(club){
     return this.api.post('/api/EnrollementSummerClubs',club);
   }
+  Search(search){
+    return this.api.post('/api/EnrollementSummerClubs/Search',search)
+  }
+  GetYears(eleveid){
+    return this.api.get('/api/EnrollementSummerClubs/GetYears/'+eleveid)
+  }
 }

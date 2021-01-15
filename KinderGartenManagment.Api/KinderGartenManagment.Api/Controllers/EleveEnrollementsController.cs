@@ -27,8 +27,28 @@ namespace KinderGartenManagment.Api.Controllers
         { 
             var resultListe = await _eleveEnrollementRepository .GetAll(); 
             return resultListe; 
-        } 
- 
+        }
+        [HttpPost("GetCurrentEleveEnrollement")]
+        public async Task<Object> GetCurrentEleveEnrollement(GetCurrentEleveEnrollementViewModel gcee)
+        {
+            try
+            {
+                var result = await _eleveEnrollementRepository.GetCurrentEleveEnrollement(gcee.Date, gcee.EleveId);
+                if (result != null)
+                {
+                    return result.DateDeFin;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         [HttpPost] 
         public async Task< EleveEnrollement > PostEleveEnrollement ( EleveEnrollementViewModel eleveEnrollement ) 
         { 
@@ -45,10 +65,10 @@ namespace KinderGartenManagment.Api.Controllers
             } 
         }
 
-        [HttpDelete("{eleveid}/{Enrollementid}")]
-        public async Task<Object> DeleteEleveParent(int eleveid, int Enrollementid)
+        [HttpDelete("{eleveid}/{Enrollementid}/{Datededebut}")]
+        public async Task<Object> DeleteEleveParent(int eleveid, int Enrollementid, DateTime Datededebut)
         {
-            await _eleveEnrollementRepository.DeleteAsync(eleveid, Enrollementid);
+            await _eleveEnrollementRepository.DeleteAsync(eleveid, Enrollementid, Datededebut);
             await _eleveEnrollementRepository.SaveAsync();
 
             return Ok(new { message = "Deleted Successfully" });

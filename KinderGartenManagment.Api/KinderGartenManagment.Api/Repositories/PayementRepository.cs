@@ -47,6 +47,7 @@ namespace KinderGartenManagment.Api.Repositories
             var result = await _context.Query<UnpaidViewModel>().FromSql(sqlQuery, eleveidsparameter).ToListAsync();
             return result;
         }
+
         public void Update( Payement payement ) 
         { 
             _context.Entry( payement ).State = EntityState.Modified; 

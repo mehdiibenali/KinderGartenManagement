@@ -4,6 +4,6 @@ export class Groupe {
     datededebut:string;
     datedefin:string;
     classeid:number;
-    classe:object;
+    classe:any;
     eleveenrollements:any[];
 }

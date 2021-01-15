@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { GroupeService } from 'src/app/_core/_services/groupe.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Groupe } from 'src/app/_core/_models/groupe';
 import { EleveGroupe } from 'src/app/_core/_models/eleve-groupe';
 import { SearchGroupe } from 'src/app/_core/_models/search-groupe';
 import { Classe } from 'src/app/_core/_models/classe';
 import { ParameterService } from 'src/app/_core/_services/parameter.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-groupes-list',
   templateUrl: './groupes-list.component.html',
-  styleUrls: ['./groupes-list.component.css']
+  styleUrls: ['./groupes-list.component.css'],
+  providers: [DatePipe],
 })
 export class GroupesListComponent implements OnInit {
   eleveid:number;
@@ -21,10 +23,12 @@ export class GroupesListComponent implements OnInit {
   groupeid:number;
   search:SearchGroupe=new SearchGroupe()
   Years:Object[];
+  dialog:any;
   SelectedYear:any=new Object();
+  searcheleveenrollement:any=new Object();
   Classes:Classe[]=[];
   elevegroupe:EleveGroupe = new EleveGroupe();
-  constructor(private router:Router,private parameterService:ParameterService,private _Activatedroute:ActivatedRoute,private groupeService:GroupeService, private toastrService: NbToastrService) { }
+  constructor(private datePipe:DatePipe,private router:Router,private dialogService: NbDialogService,private parameterService:ParameterService,private _Activatedroute:ActivatedRoute,private groupeService:GroupeService, private toastrService: NbToastrService) { }
 
   ngOnInit(): void {
     this.eleveId=this._Activatedroute.snapshot.paramMap.get("eleveid");
@@ -33,7 +37,7 @@ export class GroupesListComponent implements OnInit {
     this.groupeService.GetYears().subscribe(
       data=>{
         this.Years=data;
-        this.parameterService.GetByCode('CurrentScholarYear').subscribe(
+        this.parameterService.GetByCode('CurrentScolarYear').subscribe(
           data=>{this.SelectedYear.CurrentYear=data[0].value},
           err=>console.log(err)
         )
@@ -47,6 +51,7 @@ export class GroupesListComponent implements OnInit {
   };
   GetByEleveId(){
     this.groupeService.GetGroupesByEleveId(this.eleveid).subscribe(data => {
+      console.log(data);
       this.Groupes = data;
     },
     error => {  
@@ -83,8 +88,8 @@ export class GroupesListComponent implements OnInit {
     if (this.groupeid==null){return}
     this.elevegroupe.eleveid=this.eleveid;
     this.elevegroupe.enrollementid=this.groupeid;
-    this.elevegroupe.subscriptiontype="Groupe";
-    this.groupeService.AddEleveGroupe(this.elevegroupe).subscribe(
+    console.log(this.elevegroupe)
+      this.groupeService.AddEleveGroupe(this.elevegroupe).subscribe(
       (success) => {
         this.toastrService.show('Groupe ajouté à l\'éleve', 'Ajout', { status: 'success' });
         this.groupeid=null;
@@ -97,6 +102,21 @@ export class GroupesListComponent implements OnInit {
           console.log(error);
       } 
     )
+    this.close()
   }
-
+  open(dialog: TemplateRef<any>) {
+    this.searcheleveenrollement.date = this.elevegroupe.datededebut;
+    this.searcheleveenrollement.eleveid=this.eleveid
+    this.groupeService.GetCurrentEleveGroupe(this.searcheleveenrollement).subscribe(
+      data=>{if(data!=null){this.searcheleveenrollement.date=this.datePipe.transform(data,'yyyy-MM-dd')};console.log(data)},
+      err=>{console.log(err)}
+    )
+    this.dialog=this.dialogService.open(dialog,
+      {
+      closeOnBackdropClick:true,
+      })
+    }
+  close(){
+      this.dialog.close();
+    }
 }

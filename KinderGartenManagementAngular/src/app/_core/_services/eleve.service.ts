@@ -26,4 +26,7 @@ export class EleveService {
   GetById(id:number){
     return this.api.get('/api/Eleves/'+id)
   }
+  GetByMonthAndEnrollementId(monthenrollementid){
+    return this.api.post('/api/Eleves/GetByEnrollementIdAndMonth',monthenrollementid)
+  }
 }

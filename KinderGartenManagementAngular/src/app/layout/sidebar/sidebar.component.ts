@@ -39,6 +39,10 @@ export class SidebarComponent implements OnInit {
     {
       title:'Groupes',
       link:'/groupes/list'
+    },
+    {
+      title:'Imprimer',
+      link:'/print'
     }
    ];
   constructor() { }

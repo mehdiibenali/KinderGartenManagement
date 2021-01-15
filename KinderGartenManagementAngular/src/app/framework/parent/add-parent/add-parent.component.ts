@@ -38,7 +38,7 @@ export class AddParentComponent implements OnInit {
     this.mindatededebut = this.parentconvention.datededebut;
     this.conventionService.GetYears().subscribe(
       data=>{this.Years=data;
-        this.parameterService.GetByCode('CurrentScholarYear').subscribe(
+        this.parameterService.GetByCode('CurrentScolarYear').subscribe(
           data=>{this.CurrentYear=data[0].value;
           this.SearchConvention()
           },

@@ -14,7 +14,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task InsertAsync( Enrollement Enrollement ); 
         Task DeleteAsync(int EnrollementId ); 
         void Update( Enrollement Enrollement );
-        Task<IEnumerable<Enrollement>> GetEnrollementsByEleveId(int eleveId);
+        Task<IEnumerable<EleveEnrollement>> GetEnrollementsByEleveId(int eleveId);
         Task SaveAsync(); 
     } 
 } 

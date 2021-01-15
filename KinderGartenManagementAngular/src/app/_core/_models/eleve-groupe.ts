@@ -1,5 +1,6 @@
 export class EleveGroupe {
     eleveid:number;
     enrollementid:number;
-    subscriptiontype:string;
+    datededebut:Date;
+    datedefin:Date;    
 }

@@ -36,7 +36,7 @@ export class ElevelistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.parameterService.GetByCode('CurrentScholarYear').subscribe(
+    this.parameterService.GetByCode('CurrentScolarYear').subscribe(
       data=>{this.searchgroupe.annees=data[0].value.split('-')},
       err=>console.log(err)
     )

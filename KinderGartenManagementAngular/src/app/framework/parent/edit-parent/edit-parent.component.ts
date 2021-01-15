@@ -35,7 +35,7 @@ export class EditParentComponent implements OnInit {
   ngOnInit(): void {
     this.conventionService.GetYears().subscribe(
       data=>{this.Years=data;
-        this.parameterService.GetByCode('CurrentScholarYear').subscribe(
+        this.parameterService.GetByCode('CurrentScolarYear').subscribe(
           data=>{this.CurrentYear=data[0].value;
           this.SearchConvention()},
           err=>console.log(err)

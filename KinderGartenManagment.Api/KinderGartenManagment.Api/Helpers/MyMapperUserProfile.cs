@@ -45,7 +45,12 @@ namespace KinderGartenManagment.Api.Helpers
                 .ReverseMap();
             CreateMap<UnpaidViewModel, PayementEnrollementViewModel>()
                 .ReverseMap();
-
+            CreateMap<EleveEnrollement, ShowEleveEnrollementViewModel>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Enrollement.Name))
+                .ForMember(dest => dest.DateDeDebut, opt => opt.MapFrom(src => src.DateDeDebut))
+                .ForMember(dest => dest.DateDeFin, opt => opt.MapFrom(src => src.DateDeFin))
+                .ForMember(dest => dest.Classe, opt => opt.MapFrom(src => src.Enrollement.Classe.Name))
+                .ReverseMap();
         }
     }
 }

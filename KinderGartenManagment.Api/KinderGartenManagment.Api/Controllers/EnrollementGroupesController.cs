@@ -62,9 +62,10 @@ namespace KinderGartenManagment.Api.Controllers
             return Ok(Enrollement);
         }
         [HttpGet("ByEleveId/{eleveId}")]
-        public async Task<IEnumerable<Enrollement>> GetEnrollementsByEleveId(int eleveId)
+        public async Task<IEnumerable<ShowEleveEnrollementViewModel>> GetEnrollementsByEleveId(int eleveId)
         {
-            var resultListe = await _EnrollementRepository.GetEnrollementsByEleveId(eleveId);
+            var eleveenrollements = await _EnrollementRepository.GetEnrollementsByEleveId(eleveId);
+            List<ShowEleveEnrollementViewModel> resultListe = _mapper.Map<List<ShowEleveEnrollementViewModel>>(eleveenrollements);
             return resultListe;
         }
         [HttpPut("{id}")]

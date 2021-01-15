@@ -80,6 +80,13 @@ namespace KinderGartenManagment.Api.Controllers
                 throw e;
             }
         }
+        [HttpPost("GetByEnrollementIdAndMonth")]
+        public async Task<Object> Get(GetElevesByEnrollementIdAndMonthViewModel geteleve)
+        {
+
+            List<EleveViewModel> result = await _eleveRepository.GetElevesByEnrollementIdAndMonth(geteleve.Month, geteleve.Year, geteleve.EnrollementId);
+            return result;
+        }
         [HttpDelete("{id}")]
         public async Task<Object> DeleteEleve(int id)
         {

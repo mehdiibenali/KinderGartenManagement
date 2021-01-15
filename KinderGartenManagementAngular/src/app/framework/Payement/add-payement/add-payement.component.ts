@@ -38,6 +38,7 @@ export class AddPayementComponent implements OnInit {
   scholaryears: string[] = [];
   scholaryearbeginning:string;  
   scholaryearend:string;
+  getpayementenrollements=false;
   clubs:Club[] = [];
   dialog:any;
   constructor(private summerClubService: SummerClubService,private dialogService: NbDialogService,private toastrService: NbToastrService,private datePipe:DatePipe,private parameterService: ParameterService,private payementService:PayementService) { }
@@ -45,6 +46,8 @@ export class AddPayementComponent implements OnInit {
   ngOnInit(): void {
   }
   AddPayement() {
+    this.getpayementenrollements=true;
+    console.log(this.payement)
     this.payementService.AddPayement(this.payement).subscribe(
       data=>{
         console.log(data)
@@ -55,7 +58,11 @@ export class AddPayementComponent implements OnInit {
         this.toastrService.show('Une erreur est survenue',"Ajout",{status:"danger"})
       }
     )
-    this.close();
+   }
+   GetPayementEnrollement(event){
+     console.log(event);
+     this.payement.payementenrollementmodels = event[0].payementenrollements;
+     console.log(event[0].payementenrollements)
    }
    CancelAddPayement(){this.cancel.emit();}
   AddMethodForm() {this.payement.modalitemodels.push(new Modalite())}

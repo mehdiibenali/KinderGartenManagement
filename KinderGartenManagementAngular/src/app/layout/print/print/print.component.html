@@ -1,0 +1,57 @@
+<form (ngSubmit)="Print()" #form="ngForm" aria-labelledby="title">
+    <div class="row">
+        <div class="col-2">
+            <label class="label">Type</label>
+            <br>
+            <select class="selectoption" (change)="SearchEnrollement()" [(ngModel)]="EnrollementType"
+                id="input-enrollementype" name="enrollementtype" required>
+                <option *ngFor="let enrollementtype of enrollementtypes" [value]="enrollementtype">{{enrollementtype}}
+                </option>
+            </select>
+        </div>
+        <div class="col-10" *ngIf="EnrollementType!=null">
+            <div class="row">
+                <div class="col-3">
+                    <label class="label">{{EnrollementType}}:</label>
+                    <select class="selectoption" [(ngModel)]="monthenrollementid.enrollementid" id="input-enrollement"
+                        name="enrollement" required>
+                        <option *ngFor="let enrollement of Enrollements" [value]="enrollement.id">{{enrollement.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label class="label">Année:</label>
+                    <input nbInput [(ngModel)]="year" id="input-year" type="number" name="year" autofocus fullWidth
+                        fieldSize="large" required>
+                </div>
+                <div class="col-3">
+                    <label class="label">Mois:</label><br>
+                    <select class="selectoption" [(ngModel)]="month" id="input-month" name="month" required>
+                        <option *ngFor="let n of Array;let i=index" [value]="i+1">{{i+1}}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    
+                    <button nbButton class="printbutton" fullWidth status="primary" size="large"
+                        [disabled]="!form.valid" (click)="Print()">Générer</button>
+                    <button nbButton fullWidth status="success" size="large" [useExistingCss]="true" printSectionId="print-section" ngxPrint>Imprimer</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<br>
+
+<div *ngIf="show" id="print-section">
+    <table class="table">
+        <thead>
+            <th></th>
+            <th *ngFor="let Date of Dates" [class]="CheckClass(Date.day)"  >{{Date.date | date:'MM/dd'}}</th>
+        </thead>
+        <tbody>
+
+            <tr class="tablecolumn" *ngFor="let Eleve of Eleves">{{Eleve.nom}} {{Eleve.prenom}}</tr>
+        </tbody>
+    </table>
+</div>
