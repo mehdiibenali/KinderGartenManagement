@@ -35,9 +35,10 @@ import {NgxPrintModule} from 'ngx-print';
 
             key: 'auth_token'
           },
-          baseEndpoint: 'https://localhost:5001',
+          baseEndpoint: '',
           login: {
-            endpoint: '/api/ApplicationUser/Login',
+            //endpoint: '/api/ApplicationUser/Login',
+            endpoint: 'https://localhost:5001/api/ApplicationUser/Login',
             redirect: { success: '', failure: null}
           }
         }),

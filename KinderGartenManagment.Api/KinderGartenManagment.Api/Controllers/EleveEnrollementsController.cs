@@ -68,7 +68,7 @@ namespace KinderGartenManagment.Api.Controllers
         [HttpDelete("{eleveid}/{Enrollementid}/{Datededebut}")]
         public async Task<Object> DeleteEleveParent(int eleveid, int Enrollementid, DateTime Datededebut)
         {
-            await _eleveEnrollementRepository.DeleteAsync(eleveid, Enrollementid, Datededebut);
+             _eleveEnrollementRepository.Delete(eleveid, Enrollementid, Datededebut);
             await _eleveEnrollementRepository.SaveAsync();
 
             return Ok(new { message = "Deleted Successfully" });

@@ -2,11 +2,14 @@
 using KinderGartenManagment.Api.Interfaces.Repositories;
 using KinderGartenManagment.Api.Models;
 using KinderGartenManagment.Api.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace KinderGartenManagment.Api.Controllers
@@ -82,6 +85,39 @@ namespace KinderGartenManagment.Api.Controllers
             await _classeRepository .SaveAsync();
 
             return Ok(new { message = "Deleted Successfully" });
+        }
+        [HttpPost, DisableRequestSizeLimit]
+        [Route("Upload")]
+        public IActionResult Upload([FromForm] IFormFile file)
+        {
+            try
+            {
+                //var file = Request.Form.Files[0];
+                var pathToSave = "C:/Users/ASUS/Desktop/HexaApp/HexaApp.api/HexaApp.api/Resources";
+                //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                if (file.Length > 0)
+                {
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = pathToSave + "/" + fileName;
+                    var dbPath = "assets/" + fileName;
+
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    return Ok(new { dbPath });
+                    //return StatusCode(200, dbPath) ;
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
         }
     }
 }

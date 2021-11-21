@@ -36,6 +36,7 @@ export class GroupeService {
     return this.api.get('/api/Classes')
   }
   GetCurrentEleveGroupe(search){
+    console.log("search")
     console.log(search);
     return this.api.post('/api/EleveEnrollements/GetCurrentEleveEnrollement',search)
   }

@@ -10,7 +10,7 @@ namespace KinderGartenManagment.Api.Interfaces.Repositories
         Task<IEnumerable< EleveEnrollement >> GetAll(); 
         Task InsertAsync( EleveEnrollement eleveEnrollement );
         Task<PayementEnrollement> GetCurrentEleveEnrollement(DateTime Date, int EleveId);
-        Task DeleteAsync(int eleveid , int Enrollementid, DateTime Datededebut); 
+        void Delete(int eleveid , int Enrollementid, DateTime Datededebut); 
         void Update( EleveEnrollement eleveEnrollement ); 
         Task SaveAsync(); 
     } 

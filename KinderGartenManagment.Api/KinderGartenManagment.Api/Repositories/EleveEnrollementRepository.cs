@@ -89,7 +89,7 @@ namespace KinderGartenManagment.Api.Repositories
         { 
             _context.Entry( eleveEnrollement ).State = EntityState.Modified; 
         }
-        public async Task DeleteAsync(int eleveid, int Enrollementid, DateTime Datededebut)
+        public void Delete(int eleveid, int Enrollementid, DateTime Datededebut)
         {
             EleveEnrollement eleveEnrollement = _context.EleveEnrollements.Where(p => p.EleveId == eleveid && p.EnrollementId == Enrollementid).First();
             _context.EleveEnrollements.Remove(eleveEnrollement);

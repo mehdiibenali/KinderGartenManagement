@@ -17,6 +17,7 @@ using System.Net.Http.Headers;
 using KinderGartenManagment.Api.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace KinderGartenManagment.Api.Controllers
 {
@@ -36,7 +37,7 @@ namespace KinderGartenManagment.Api.Controllers
             _context = context;
         }
         [HttpPost]
-        [Authorize(Roles = Roles.Admin)]
+    
         [Route("Register")]
         public async Task<Object> PostApplicationUser(UserViewModel model)
         {
@@ -208,18 +209,18 @@ namespace KinderGartenManagment.Api.Controllers
         }
         [HttpPost, DisableRequestSizeLimit]
         [Route("Upload")]
-        public IActionResult Upload()
+        public IActionResult Upload([FromForm] IFormFile file)
         {
             try
-            {
-                var file = Request.Form.Files[0];
-                var pathToSave = "../../KinderGartenManagementAngular/src/assets";
+            {   
+                //var file = Request.Form.Files[0];
+                var pathToSave = "C:/Users/ASUS/Desktop/HexaApp/HexaApp.api/HexaApp.api/Resources";
                 //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
+                    
                 if (file.Length > 0)
-                {
+                {   
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = pathToSave+"/"+fileName;
+                    var fullPath = pathToSave+"/"+fileName; 
                     var dbPath = "assets/"+fileName;
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))

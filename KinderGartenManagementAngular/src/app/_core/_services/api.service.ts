@@ -12,6 +12,7 @@ export class ApiService {
 
   token;
   base:string='https://localhost:5001';
+  //base:string="";
   constructor(
     private http: HttpClient,
     private authService: NbAuthService

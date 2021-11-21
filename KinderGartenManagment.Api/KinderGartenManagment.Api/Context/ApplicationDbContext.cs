@@ -25,7 +25,6 @@ namespace KinderGartenManagment.Api.Context
         public DbSet<EleveEnrollement> EleveEnrollements { get; set; }
         public DbSet<Enrollement> Enrollements { get; set; }
         public DbSet<Parent> Parents { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<ConventionFee> ConventionFees { get; set; }
         public DbSet<Parameter> Parameters { get; set; }
         public DbSet<Payement> Payements { get; set; }

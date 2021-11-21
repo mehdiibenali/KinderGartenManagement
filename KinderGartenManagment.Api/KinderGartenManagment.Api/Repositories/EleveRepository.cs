@@ -72,7 +72,7 @@ namespace KinderGartenManagment.Api.Repositories
             };
             if (classeid != null)
             {
-                var T = Eleves.Select(e => e.EleveEnrollements);
+                //var T = Eleves.Select(e => e.EleveEnrollements);
                 Eleves = Eleves.Where(e => e.EleveEnrollements.Any(ee => ee.Enrollement.ClasseId == classeid));
             };
             if (groupeid != null)
